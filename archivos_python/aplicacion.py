@@ -1,6 +1,6 @@
 
 """
-🟪 ESTRUCTURA DEL ARCHIVO
+🞑 ESTRUCTURA DEL ARCHIVO
 
 • Descripción básica del programa
 • Bloque de importaciones
@@ -21,7 +21,7 @@
 • Tareas pendientes
 
 
-🟪 ORGANIZACIÓN GENERAL
+🞑 ORGANIZACIÓN GENERAL
 
         Existen otros marcos no detallados que ayudan a organizar los elementos. 
 -----------------------------------------------------------------------------------------
@@ -44,7 +44,7 @@
 -----------------------------------------------------------------------------------------
 
 
-🟪 FUNCIONES GENERALES
+🞑 FUNCIONES GENERALES
 
 • interface_usuario: contiene a los modulos.
 
@@ -76,11 +76,10 @@
              la configuración ingresada por el usuario
 """
 
-
+import csv, random, secrets
 import tkinter as tk
 from tkinter import filedialog, font
 from pathlib import Path
-import random, secrets
 
 
 
@@ -101,7 +100,7 @@ pack_modulo_ajustes:dict = {'side':'left',
 
 pack_modulo_vista:dict = {'side':'right',
                           'fill': 'x',
-                          'anchor':'nw',
+                          'anchor':'n',
                           'expand': True,
                           'padx': 5,
                           'pady': 5}
@@ -126,6 +125,12 @@ pack_eti_ingreso:dict = {'side':'top',
                          'expand': True,
                          'padx': 5,
                          'pady': 5}
+
+pack_eti_ingreso_fila:dict = {'side':'top',
+                              'anchor':'ne',                              
+                              'padx': 25,
+                              'pady': 5}
+
 pack_eti_error:dict = {'side':'top',
                          'anchor':'s',
                          'fill': 'x',
@@ -137,6 +142,13 @@ pack_entrada_texto:dict = {'side':'top',
                            'fill': 'x',
                            'expand': True,
                            'pady':2}
+
+pack_entrada_texto_fila:dict = {'side':'top',
+                                'anchor':'ne', 
+                                'expand': False,
+                                'pady':2,
+                                'padx':2,
+                                'ipadx':10}
 
 pack_entrada_opcion:dict = {'side':'bottom',
                             'anchor':'s',
@@ -167,19 +179,16 @@ estilo_raiz = {'bg':'black'}
 estilo_contenedores_externos = {'bg':'purple'}
 estilo_marco_modulo = {'bg':'#a34cb4'}
 estilo_contenedor_ingreso = {'bg':'#e04cb4'}
-estilo_vista_datos = { 'bg':'white', 'bd':2}
+estilo_texto_vista = { 'bg':'black', 'fg':'lightgreen'}
+
 estilo_boton_ok:dict = {'bg':'#15ffbd',
                         'activebackground':'#0a8c5c',
                         'activeforeground':'#15ffbd',
                         'highlightthickness':2,
                         'borderwidth':5,
                         'height':1}
+
 estilo_boton_opcion:dict = {'bg':'#b915ff',
-                            'activebackground':'#4d096a',
-                            'activeforeground':'#b915ff',
-                            'borderwidth':3,
-                            'height':1}
-estilo_boton_ruido_ok:dict = {'bg':'#b915ff',
                             'activebackground':'#4d096a',
                             'activeforeground':'#b915ff',
                             'borderwidth':3,
@@ -190,15 +199,18 @@ estilo_boton_ruido_no_ok:dict = {'bg':'#ff3a2c',
                            'activeforeground':'#ff3a2c',
                             'borderwidth':3,
                             'height':1}
+
 estilo_boton_no_ok:dict = {'bg':'#ff3a2c',
                            'activebackground':'#8c2018',
                            'activeforeground':'#ff3a2c',
                            'highlightthickness':2,
                            'borderwidth':5}
+
 estilo_alerta:dict = {'bg':'#e36b02',
                          'activebackground':'#713501',
                          'activeforeground':'#e36b02',
                          'borderwidth':5}
+
 estilo_:dict = {'bg':'#e36b02',
                          'activebackground':'#713501',
                          'activeforeground':'#e36b02',
@@ -219,11 +231,13 @@ raiz.title('Generador')
 x_pantalla = raiz.winfo_screenwidth()
 y_pantalla = raiz.winfo_screenheight()
 raiz.maxsize(x_pantalla,y_pantalla)
-raiz.minsize(1248,632)
+raiz.minsize(500,500)
+
 
 class InterfaceUsuario:
-    def __init__(self):        
-      
+    def __init__(self):
+
+     
         # Marco raiz, contiene a todos loS widgets
         self.marco_raiz = tk.Frame(raiz, **estilo_marco_modulo)
         self.marco_raiz.pack(**pack_marco_modulo)
@@ -241,19 +255,19 @@ class InterfaceUsuario:
                                           FUENTE_BOTON_SALIR,
                                           pack_boton_salir,
                                           lambda event=None: raiz.destroy())
- 
-        # Etiqueta titulo de aplicacion
-        self._eti_titulo_apliacion = tk.Label(self.modulo_salir,
-                                               text=TX_TITULO,
-                                               **estilo_etiqueta)
-        self._eti_titulo_apliacion.config(font=FUENTE_PRINCIPAL)
-        self._eti_titulo_apliacion.pack(**pack_eti_ingreso)
+        
+##        # Etiqueta titulo de aplicacion
+##        self._eti_titulo_apliacion = tk.Label(self.modulo_salir,
+##                                               text=TX_TITULO,
+##                                               **estilo_etiqueta)
+##        self._eti_titulo_apliacion.config(font=FUENTE_PRINCIPAL)
+##        self._eti_titulo_apliacion.pack(**pack_eti_ingreso)
 
         # Contenedor de modulos Ajustes y Datos
         self.contenedor_ajustes_datos = tk.Frame(self.marco_raiz,
                                                  **estilo_contenedores_externos)
         self.contenedor_ajustes_datos.pack(**pack_marco_modulo)
-        
+
         # Modulo ajustes
         self.modulo_ajustes = tk.Frame(self.contenedor_ajustes_datos,
                                        **estilo_contenedores_externos)
@@ -285,45 +299,70 @@ class InterfaceUsuario:
         self.modulo_vista = tk.Frame(self.contenedor_ajustes_datos,
                                      **estilo_contenedores_externos)
         self.modulo_vista.pack(**pack_modulo_vista)
-        self.modulo_ver_datos = ModuloVerDatos(self.modulo_vista)
+
+##        # Etiqueta modulo Vista
+##        self._eti_datos_ingresados = tk.Label(self.modulo_vista,
+##                                              text=TX_VISTA,
+##                                              **estilo_etiqueta)
+##        self._eti_datos_ingresados.config(font=FUENTE_ETIQUETA)
+##        self._eti_datos_ingresados.pack(**pack_eti_ingreso)
+
+        # Modulo ver datos
+        self.modulo_ver_datos = ModuloVerDatos(self.modulo_vista, raiz)
 
         # Modulo Exportar
-        self.modulo_exportar = ModuloExportar(self.modulo_vista)
-        #aca tmb va el modulo_exportar_datos =  Modulo...()
+        self.modulo_exportar = ModuloExportar(self.modulo_ajustes)
 
 
 
 class ModuloVerDatos:
     
-    def __init__(self,ubicacion):
+    def __init__(self,ubicacion, m_raiz):
+
+        # Se utiliza para gestionar la visibilidad del módulo (oculto al inicio)
+        self._estado_modulo:bool = False
 
         # Marco de todo el módulo Vista
         self.marco_modulo = tk.Frame(ubicacion,
                                       **estilo_marco_modulo)
-        self.marco_modulo.pack(**pack_marco_modulo)
-        # Etiqueta modulo Vista
-        self._eti_datos_ingresados = tk.Label(self.marco_modulo,
-                                              text='DATOS INGRESADOS', #hacerlo constante
-                                              **estilo_etiqueta)
-        self._eti_datos_ingresados.config(font=FUENTE_ETIQUETA)
-        self._eti_datos_ingresados.pack(**pack_eti_ingreso)
-        
+
+        # Barra de desplazamiento vertical
+        self._b_vertical = tk.Scrollbar(self.marco_modulo,
+                                       command=self.desplazar)
+        self._b_vertical.pack(side="right", fill="y")
+
         # Cuadro texto donde se verán los datos ingresados
         self._contenedor_texto = tk.Text(self.marco_modulo,
-                                         **estilo_vista_datos) 
-        self._contenedor_texto.pack(**pack_marco_modulo)
+                                         wrap="word",
+                                         yscrollcommand=self._b_vertical.set,
+                                         width=60,
+                                         height=40)
+        self._contenedor_texto.pack(side="left", fill="both", expand=True)
+        self._contenedor_texto.configure(**estilo_texto_vista)
 
-## ACA DEBE IR UN SCROLL PARA LA VISTA CUANDO ESTE LLENO EL CUADRO
-                
+        # Para que no se pierda la barra vertical
+        m_raiz.bind("<Configure>", self.barra_visible)
+                    
     # Muestra al usuario los datos que se van ingresando  
     def insertar_datos(self, datos):
-        # Aca probar con el color del texto
-        self._contenedor_texto.config(state=tk.NORMAL)
+        self._contenedor_texto.configure(state=tk.NORMAL)
         self._contenedor_texto.delete("1.0", "end")
         self._contenedor_texto.insert("1.0", datos)
-        self._contenedor_texto.config(state=tk.DISABLED)
+        self._contenedor_texto.configure(state=tk.DISABLED)
+        
+    def desplazar(self, *args):
+        self._contenedor_texto.yview(*args)
+        
+    def barra_visible(self, event):
+        # Permite que sete visible la barra aunque cambien las dimensiones
+        self._contenedor_texto.pack_configure(side="left", fill="both", expand=True)
 
-       
+    def cambiar_estado_modulo(self, estado_modulo:bool):
+        self._estado_modulo = estado_modulo
+        if not estado_modulo:
+            self.marco_modulo.pack_forget()            
+        else:
+            self.marco_modulo.pack(side="left", fill="both", expand=True)
 
 
    
@@ -340,7 +379,7 @@ class ModuloRuta:
         self._submodulo_entrada_ruta = SubmoduloEntradaTexto(self.marco_modulo,
                                                              TX_RUTA,
                                                              "/ruta_a_archivo.csv",
-                                                             lambda event=None: self._confirmar_ruta())#hacerlo constante
+                                                             lambda event=None: self._confirmar_ruta())
         # Contenedor boton modulo Ruta
         self._contenedor_boton_ruta = tk.Frame(self.marco_modulo,
                                                **estilo_contenedor_boton)
@@ -383,10 +422,10 @@ class ModuloRuta:
 
 class ModuloEncabezados:
 
-    # Se utiliza para gestionar la visibilidad del módulo
-    _estado_modulo:bool = False
-       
     def __init__(self,ubicacion):
+
+        # Se utiliza para gestionar la visibilidad del módulo (oculto al inicio)
+        self._estado_modulo:bool = False
 
         # Marco de todo el módulo Encabezados
         self.marco_modulo = tk.Frame(ubicacion,
@@ -394,7 +433,7 @@ class ModuloEncabezados:
 
         # Etiqueta del modulo OpcionesTabla
         self._eti_modulo_opciones = tk.Label(self.marco_modulo,
-                                             text=TX_OPCIONES_TABLA,#hacerlo constante
+                                             text=TX_OPCIONES_TABLA,
                                              **estilo_etiqueta)
         self._eti_modulo_opciones.config(font=FUENTE_TITULO)
         self._eti_modulo_opciones.pack(**pack_eti_ingreso)        
@@ -421,8 +460,6 @@ class ModuloEncabezados:
                                                   self._confirmar_encabezados,
                                                   estilo_boton_ok,
                                                   lambda event=None: self._confirmar_encabezados())
-        # Oculta el modulo al inicio
-        self.cambiar_estado_modulo(False)
 
     def _confirmar_encabezados(self):
         respuesta = gestor.recibir("m_encabezados",
@@ -433,7 +470,7 @@ class ModuloEncabezados:
     
     # Vacia el widget de entrada y llama al Gestor
     # para que actulize los encabezados y se preserve
-    # la consistencia de la tabla final
+    # la consistencia de la tabla final """
     def _borrar_encabezados_ingresados(self):
         self.limpiar_entrada()
         gestor.recibir("m_encabezados","actualizar_encabezados")
@@ -460,10 +497,10 @@ class ModuloEncabezados:
 
 class ModuloOpcionesTabla:
     
-    # Se utiliza para gestionar la visibilidad del módulo    
-    _estado_modulo:bool = False
-    
     def __init__(self,ubicacion):
+        
+        # Se utiliza para gestionar la visibilidad del módulo (oculto al inicio)
+        self._estado_modulo:bool = False
      
         # Marco de todo el módulo OpcionesTabla
         self.marco_modulo = tk.Frame(ubicacion,
@@ -488,7 +525,13 @@ class ModuloOpcionesTabla:
         self._opc_modo_base = ["random", "secrets"]
         self._submodulo_opcion_modo = SubmoduloEntradaOpciones(self.marco_modulo,
                                                                TX_MODO,
-                                                               self._opc_modo_base)
+                                                               self._opc_modo_base,
+                                                               self._rastrear_opcion_aleatoriedad)
+        # Submodulo entrada semilla
+        self._submodulo_entrada_semilla = SubmoduloEntradaTexto(self.marco_modulo,
+                                                                    TX_SEMILLA,
+                                                                    "Sin semilla",
+                                                                    lambda event=None: self._confirmar_opciones())
         # Contenedor boton modulo OpcionesTabla
         self._contenedor_boton_opciones_tabla = tk.Frame(self.marco_modulo,
                                                          **estilo_contenedor_boton)
@@ -500,8 +543,15 @@ class ModuloOpcionesTabla:
                                                self._confirmar_opciones,
                                                estilo_boton_ok,
                                                lambda event=None: self._confirmar_opciones())
-        # Oculta el modulo al inicio
-        self.cambiar_estado_modulo(False) 
+
+
+    def _rastrear_opcion_aleatoriedad(self, *args):
+        modo = self._submodulo_opcion_modo.obtener_valor()
+        if modo == "random":
+            self._submodulo_entrada_semilla.mostrar_submodulo()
+        else:
+            self._submodulo_entrada_semilla.ocultar_submodulo()
+        return None
         
     def _confirmar_opciones(self):
         aux_opc:list = []
@@ -509,9 +559,11 @@ class ModuloOpcionesTabla:
         aux_opc.append(self._submodulo_opcion_orden.obtener_valor())
         aux_opc.append(self._submodulo_opcion_segun.obtener_valor())
         aux_opc.append(self._submodulo_opcion_modo.obtener_valor())
+        aux_opc.append(self._submodulo_entrada_semilla.obtener_valor())
         respuesta = gestor.recibir("m_opciones_tabla", aux_opc)
         if respuesta:
             interface_usuario.modulo_campo.enfocar()
+            gestor.mostrar_modulo("ver_datos")
         return
 
     # Vacía el texto del widget de entrada
@@ -521,8 +573,6 @@ class ModuloOpcionesTabla:
     def enfocar(self):
         self._submodulo_entrada_delimitador.enfocar_entrada()
         
-    def ver_estado_modulo(self):
-        return self._estado_modulo
 
     def actualizar_opciones_segun(self):
         self._submodulo_opcion_segun.actualizar_opciones(gestor.ver_encabezados())
@@ -541,11 +591,13 @@ class ModuloOpcionesTabla:
 
 class ModuloCampo:
     
-    # Se utiliza para gestionar la visibilidad del módulo
-    _estado_modulo:bool = False
-    _tipo_de_dato_activado: str = ""
-
     def __init__(self, ubicacion):
+
+        # Se utiliza para gestionar la visibilidad del módulo (oculto al inicio)
+        self._estado_modulo:bool = False
+        # Se utiliza para comunicar a los modulos texto y numerico
+        # que estan seleccionados
+        self._tipo_de_dato_activado: str = ""
 
         # Marco de todo el módulo Campos
         self.marco_modulo = tk.Frame(ubicacion,
@@ -575,7 +627,7 @@ class ModuloCampo:
                                                               self._opc_tipo_campo_base,
                                                               self._rastrear_opcion_tipo_de_dato)
         # Submodulo elegir Logica
-        self._opc_logica_base = ["True|False", "True|False|None"]
+        self._opc_logica_base = ["True, False", "True, False, None"]
         self._submodulo_elegir_logica = SubmoduloEntradaOpciones(self._contenedor_opciones_campo,
                                                                  TX_LOGICA,
                                                                  self._opc_logica_base)
@@ -590,9 +642,7 @@ class ModuloCampo:
                                                      self._confirmar_campo_booleano,
                                                      estilo_boton_ok,
                                                      lambda event=None: self._confirmar_campo_booleano())
-        # Oculta el modulo al inicio
-        self.cambiar_estado_modulo(False)
-        
+
     def _rastrear_campo_elegido(self, *args):
         campo_actual = self._submodulo_elegir_campo.obtener_valor()
         if self._tipo_de_dato_activado == "Texto":
@@ -615,6 +665,8 @@ class ModuloCampo:
             # Vuelve visible el modulo para definir los posibles valores del campo actual
             gestor.ocultar_modulo("campo_numerico")
             gestor.mostrar_modulo("campo_texto")
+            # Vacia el widget de entrada del modulo no activo
+            interface_usuario.modulo_campo_numerico.limpiar_entrada()
             interface_usuario.modulo_campo_texto.enfocar()
             
         elif self._tipo_de_dato_activado == "Numérico":
@@ -623,6 +675,8 @@ class ModuloCampo:
             interface_usuario.modulo_campo_numerico.activar_campo(campo_actual)
             gestor.ocultar_modulo("campo_texto")
             gestor.mostrar_modulo("campo_numerico")
+            # Vacia el widget de entrada del modulo no activo
+            interface_usuario.modulo_campo_texto.limpiar_entrada()
             interface_usuario.modulo_campo_numerico.enfocar()
 
         elif self._tipo_de_dato_activado == "Booleano":
@@ -637,6 +691,9 @@ class ModuloCampo:
             # Oculta los módulos que no estan en uso
             gestor.ocultar_modulo("campo_texto")
             gestor.ocultar_modulo("campo_numerico")
+            # Vacia el widget de entrada de los modulos no activos
+            interface_usuario.modulo_campo_texto.limpiar_entrada()
+            interface_usuario.modulo_campo_numerico.limpiar_entrada()
         return None
 
     def _confirmar_campo_booleano(self):
@@ -645,9 +702,9 @@ class ModuloCampo:
         mensaje.append(self._submodulo_elegir_logica.obtener_valor())
         respuesta = gestor.recibir("m_campo_booleano", mensaje)
         if respuesta:
-            gestor.mostrar_modulo("exportar")
             gestor.mostrar_modulo("borrar_campo")
-            interface_usuario.modulo_borrar_campo.actualizar_campos_definidos()
+            gestor.mostrar_modulo("exportar")            
+            interface_usuario.modulo_borrar_campo.actualizar_opciones_borrado()
             interface_usuario.modulo_exportar.enfocar()
         return None
     
@@ -656,18 +713,12 @@ class ModuloCampo:
 
     def enfocar(self):
         self._boton_confirmar_campo_booleano.enfocar_boton()
-    
-    def ver_estado_modulo(self):
-        return self._estado_modulo
 
     # Actualiza las opciones de campos con los encabezados existentes
     def actualizar_opciones_campo(self):
         self._submodulo_elegir_campo.actualizar_opciones(gestor.ver_encabezados())
         return
 
-    def ver_estado_modulo(self):
-        return self._estado_modulo
-    
     # Solo cuando se reinicia recibe un False
     def cambiar_estado_modulo(self, estado_modulo:bool): 
         self._estado_modulo = estado_modulo
@@ -681,13 +732,15 @@ class ModuloCampo:
     
 
 
-# Permite borrar los campos definidos y restablecer la tabla
-class ModuloBorrarCampo:
 
-    # Se utiliza para gestionar la visibilidad del módulo
-    _estado_modulo:bool = False  
+class ModuloBorrarCampo:
+    # Permite borrar los campos definidos y restablecer la tabla
     
     def __init__(self,ubicacion):
+
+        # Se utiliza para gestionar la visibilidad del módulo (oculto al inicio)
+        self._estado_modulo:bool = False
+        self._campo_a_eliminar:str = ""
 
         # Marco de todo el módulo Borrar campos
         self.marco_modulo = tk.Frame(ubicacion,
@@ -702,8 +755,9 @@ class ModuloBorrarCampo:
         self._submodulo_borrar_campo = SubmoduloEntradaOpciones(self._contenedor_boton_borrar_campo,
                                                                 TX_CAMPO_BORRAR,
                                                                 self._opc_campos,
-                                                                self.actualizar_campos_definidos,
+                                                                self._campo_borrable,
                                                                 estilo_alerta)
+
         # Boton borrar campoa seleccionado
         self._boton_borrar_campo = Boton(self._contenedor_boton_borrar_campo,
                                                "Eliminar datos del campo",
@@ -722,43 +776,45 @@ class ModuloBorrarCampo:
                                                self._restablecer_todo,
                                                estilo_boton_no_ok,
                                                lambda event=None: self._restablecer_todo())
-        # Oculta el modulo al iniciar
-        self.cambiar_estado_modulo(False)
 
     def _eliminar_valores(self):
-        campo_a_eliminar = self._submodulo_borrar_campo.obtener_valor()
-        gestor.borrar_campo(campo_a_eliminar)
-        self.actualizar_campos_definidos()
+        gestor.borrar_campo(self._campo_a_eliminar)
+        self.actualizar_opciones_borrado()
         
     # Restablece los valores de Tabla
     def _restablecer_todo(self):
         gestor.vaciar_tabla()
         gestor.restablecer_aplicacion()
 
-    def actualizar_campos_definidos(self, *args):
+    def _campo_borrable(self, *args):
+        self._campo_a_eliminar = self._submodulo_borrar_campo.obtener_valor()    
+
+    def actualizar_opciones_borrado(self, *args):        
         nuevos_campos:list = gestor.ver_campos_definidos()
         if len(nuevos_campos) == 0:
             nuevos_campos = ['No hay campos definidos']
             gestor.ocultar_modulo("exportar")
         self._submodulo_borrar_campo.actualizar_opciones(nuevos_campos)
     
-    # Comunicacion con Gestor
-    def ver_estado_modulo(self):
-        return self._estado_modulo
-    
+   
     def cambiar_estado_modulo(self, estado_modulo:bool):
         self._estado_modulo = estado_modulo
         if not estado_modulo:
             self.marco_modulo.pack_forget()
         else:
-            self.actualizar_campos_definidos()
+            self.actualizar_opciones_borrado()
             self.marco_modulo.pack(**pack_marco_modulo)
 
+
 class ModuloCampoTexto:
-    _estado_modulo:bool = False
-    _campo_activo:str = ""
         
     def __init__(self,ubicacion):
+        
+        # Se utiliza para gestionar la visibilidad del módulo (oculto al inicio)
+        self._estado_modulo:bool = False
+        # Registra el campo seleccionado en el modulo Campo
+        # cuando este modulo estaba oculto
+        self._campo_activo:str = ""
              
         # Marco de todo el módulo CampoTexto
         self.marco_modulo = tk.Frame(ubicacion,
@@ -784,18 +840,16 @@ class ModuloCampoTexto:
                                             self._confirmar_campo_texto,
                                             estilo_boton_ok,
                                             lambda event=None: self._confirmar_campo_texto())
-        # Oculta el modulo al iniciar
-        self.cambiar_estado_modulo(False)        
-                
+
     def _confirmar_campo_texto(self):
         mensaje:list = []
         mensaje.append(self._campo_activo)
         mensaje.append(self._submodulo_entrada_valores_texto.obtener_valor())
         respuesta = gestor.recibir("m_campo_texto", mensaje)
         if respuesta:
-            gestor.mostrar_modulo("exportar")
             gestor.mostrar_modulo("borrar_campo")
-            interface_usuario.modulo_borrar_campo.actualizar_campos_definidos()
+            gestor.mostrar_modulo("exportar")            
+            interface_usuario.modulo_borrar_campo.actualizar_opciones_borrado()
             interface_usuario.modulo_exportar.enfocar()
         return 
 
@@ -825,11 +879,13 @@ class ModuloCampoTexto:
 
 class ModuloCampoNumerico:
     
-    # Se utiliza para gestionar la visibilidad del módulo    
-    _estado_modulo:bool = False
-    _campo_activo:str = ""
-    
     def __init__(self,ubicacion):
+        
+        # Se utiliza para gestionar la visibilidad del módulo (oculto al inicio)
+        self._estado_modulo:bool = False
+        # Registra el campo seleccionado en el modulo Campo
+        # cuando este modulo estaba oculto
+        self._campo_activo:str = ""
      
         # Marco de todo el módulo Campo numerico
         self.marco_modulo = tk.Frame(ubicacion,
@@ -856,12 +912,10 @@ class ModuloCampoNumerico:
         self._contenedor_boton_campo_numerico.pack(**pack_contenedor_boton)   
         # Boton confirmar rango
         self._boton_confirmar_rango = Boton(self._contenedor_boton_campo_numerico,
-                                            "Caonfirmar campo numérico",
+                                            "Confirmar campo numérico",
                                             self._confirmar_rango,
                                             estilo_boton_ok,
                                             lambda event=None: self._confirmar_rango())
-        # Oculta el modulo al inicio
-        self.cambiar_estado_modulo(False) 
            
     def _confirmar_rango(self):
         mensaje:list = []
@@ -871,9 +925,9 @@ class ModuloCampoNumerico:
         mensaje.append(self._submodulo_opcion_tipo.obtener_valor())
         respuesta = gestor.recibir("m_campo_numerico", mensaje)
         if respuesta:
-            gestor.mostrar_modulo("exportar")
             gestor.mostrar_modulo("borrar_campo")
-            interface_usuario.modulo_borrar_campo.actualizar_campos_definidos()
+            gestor.mostrar_modulo("exportar")
+            interface_usuario.modulo_borrar_campo.actualizar_opciones_borrado()
             interface_usuario.modulo_exportar.enfocar()
         return    
 
@@ -902,85 +956,54 @@ class ModuloCampoNumerico:
 
 
 class ModuloExportar:
-
-    # Se utiliza para gestionar la visibilidad del módulo
-    _estado_modulo:bool = False
-    _contador_ruido:int = 0
-       
+      
     def __init__(self,ubicacion):
+        
+        # Se utiliza para gestionar la visibilidad del módulo (oculto al inicio)
+        self._estado_modulo:bool = False
 
         # Marco de todo el módulo Encabezados
         self.marco_modulo = tk.Frame(ubicacion,
                                       **estilo_marco_modulo)     
-        # Submodulo entrada numero de filar
+        # Submodulo entrada numero de filas
         self._submodulo_entrada_num_filas = SubmoduloEntradaTexto(self.marco_modulo,
                                                                   TX_NUM_FILAS,
                                                                   "100",
-                                                                  lambda event=None: self._confirmar_exportar())      
+                                                                  lambda event=None: self._exportar(),
+                                                                  pack_entrada_texto_fila,
+                                                                  pack_eti_ingreso_fila)       
         # Contenedor botones modulo Exportar
         self._contenedor_botones_exportar = tk.Frame(self.marco_modulo,
                                                      **estilo_contenedor_boton)
         self._contenedor_botones_exportar.pack(**pack_contenedor_boton)
-        
-        # Boton agregar ruido
-        self._boton_agregar_ruido = Boton(self._contenedor_botones_exportar,
-                                                  "Agregar ruido",
-                                                  self._agregar_ruido,
-                                                  estilo_boton_ruido_ok,
-                                                  lambda event=None: self._agregar_ruido())      
-        
-        # Boton eliminar ruido
-        self._boton_eliminar_ruido = Boton(self._contenedor_botones_exportar,
-                                           "Eliminar ruido",
-                                           self._eliminar_ruido,
-                                           estilo_boton_ruido_no_ok,
-                                           lambda event=None: self._eliminar_ruido())       
+           
         # Boton confirmar Exportar
         self._boton_exportar = Boton(self._contenedor_botones_exportar,
                                      "Exportar tabla",
                                      self._exportar,
                                      estilo_boton_ok,
                                      lambda event=None: self._exportar())
-        # Oculta el modulo al inicio
-        self.cambiar_estado_modulo(False)
 
     def _exportar(self):
-        t_aux:tuple = (self._submodulo_entrada_num_filas.obtener_valor(),
-                       self._contador_ruido)
-        respuesta = gestor.recibir("m_exportar", t_aux)
+        respuesta = gestor.recibir("m_exportar",
+                                   self._submodulo_entrada_num_filas.obtener_valor())
         if respuesta:
             interface_usuario.modulo_ruta.enfocar()
         return None
-    
-    #5% de errores en los ingresos
-    def _agregar_ruido(self):
-        if self._contador_ruido < 20:
-            self._contador_ruido += 1
-        return None
-        
-    def _eliminar_ruido(self):
-        self._contador_ruido = 0
-        return None
-
+           
     # Vacía el texto del widget de entrada
     def limpiar_entrada(self):
         self._submodulo_entrada_num_filas.borrar_valor()
-        self._eliminar_ruido()
         return None
 
     def enfocar(self):
         self._submodulo_entrada_num_filas.enfocar_entrada()
         return None
-        
-    # Métodos de comunicacion con el Gestor
-    def ver_estado_modulo(self):
-        return self._estado_modulo
-    
+   
     def cambiar_estado_modulo(self, estado_modulo:bool):
         self._estado_modulo = estado_modulo
         if not estado_modulo:
             self.limpiar_entrada()
-            self._eliminar_ruido()
             self.marco_modulo.pack_forget()            
         else:
             self.marco_modulo.pack(**pack_marco_modulo)
@@ -1021,6 +1044,10 @@ class Gestor:
             gestion = self._gestion_modulo_exportar(mensaje)                 
         # Cada vez que el mensaje se gestionó bien
         # actualiza la vista de Datos Ingresados
+        elif origen == "generador" and mensaje == "Error ruta de salida":
+            m_error = "Por favor revise la ruta de salida y asegúrese de contar con permisos de escritura."
+            self._mostrar_error(m_error, "Error en ruta de salida")
+            
         if gestion:
             self.actualizar_vista()
             
@@ -1091,7 +1118,6 @@ class Gestor:
             tabla.borrar_campo_complejo(nombre_campo)
         return None
 
-
     # Gestion mensajes de módulo Ruta
     def _gestion_modulo_ruta(self, mensaje:str) -> bool:
         res:bool = False
@@ -1156,7 +1182,7 @@ class Gestor:
                 tabla.borrar_campo_complejo(campo)
                 
         # Actualiza las opciones de campos a borrar
-        interface_usuario.modulo_borrar_campo.actualizar_campos_definidos()
+        interface_usuario.modulo_borrar_campo.actualizar_opciones_borrado()
         # Gestión de estados del modulos: habilita opciones de tabla
         if res:
             self.mostrar_modulo("opciones_tabla")
@@ -1178,7 +1204,7 @@ class Gestor:
     def _actualizar_encabezados(self):
         tabla.borrar_encabezados()        
         tabla.borrar_todos_los_campos()
-        interface_usuario.modulo_borrar_campo.actualizar_campos_definidos()
+        interface_usuario.modulo_borrar_campo.actualizar_opciones_borrado()
         interface_usuario.modulo_opciones_tabla.actualizar_opciones_segun()
         interface_usuario.modulo_campo.actualizar_opciones_campo()
         gestor.actualizar_vista()
@@ -1198,6 +1224,10 @@ class Gestor:
             tabla.establecer_orden(mensaje[1])
             tabla.establecer_segun(mensaje[2])
             tabla.establecer_modo(mensaje[3])
+            if mensaje[4] == "":
+                tabla.establecer_semilla("Sin semilla")
+            else:
+                tabla.establecer_semilla(mensaje[4])
             # Gestión de estados del modulos: habilita opciones de tabla
             self.mostrar_modulo("campo")
             res = True           
@@ -1242,7 +1272,7 @@ class Gestor:
             self._mostrar_error(m_error, "Error de campo inexistente")     
         elif nombre_campo in campos_definidos:
             m_error = f'El campo "{nombre_campo}" ya tiene definidos sus posibles valores.\n'
-            m_error += f'Para reemplazarlos borre "{nombre_campo}" presionando el botón correspondiente.'
+            m_error += f'Para reemplazarlos seleccione a "{nombre_campo}" en Vaciar campo y elimine los datos ingresados.'
             self._mostrar_error(m_error, "Error de campo repetido")
         else:
             res = True
@@ -1268,7 +1298,7 @@ class Gestor:
                     m_error:str = "El rango de inicio debe ser menor que el final"
                     self._mostrar_error(m_error, "Error de rango")
                 if rango_inicio < rango_fin:
-                    rango:range = range(rango_inicio, rango_fin)
+                    rango:tuple = (rango_inicio, rango_fin)
                     if tipo_numerico == "Enteros":
                         tabla.establecer_campo_entero(nombre_campo, rango)
                         res = True
@@ -1294,20 +1324,34 @@ class Gestor:
 
     def _gestion_modulo_exportar(self, mensaje):
         res:bool = False
-        num_filas:int = mensaje[0]
-        cant_ruido:int = mensaje[1]
+        if tabla.obtener_orden() != "Ninguno":
+            if tabla.obtener_segun() not in tabla.campos_definidos():
+                m_error:str = f"El campo {tabla.obtener_segun()} no tiene valores definidos.\n"
+                m_error += 'Por favor seleccione un campo definido para ordenar la tabla, o "Ninguno".'
+                self._mostrar_error(m_error, "Error de orden")
+                return res
+        if tabla.obtener_modo() == "secrets":
+            if tabla.obtener_campos_reales() or tabla.obtener_campos_complejos():
+                m_error = "El modulo secrets no genera números de coma flotante.\n"
+                m_error += 'Si los necesita para reales o complejos, puede seleccionar "random"'
+                self._mostrar_error(m_error, "Error de librería")
+                return res
+        num_filas:int = mensaje
         if num_filas.isdigit():
-            print('Se activa el generador')
-            pass
-            res = True
+            d_aux = vars(tabla)
+            d_aux["_filas"] = int(num_filas)
+            res = generador.crear_tabla(d_aux)
         else:
             m_error:str = "Por favor ingrese un número de filas válido"
             self._mostrar_error(m_error, "Error de número de filas")
+        if res:
+            m_ok:str = "¡La tabla se generó correctamente!"
+            self._mostrar_error(m_ok, "Operación exitosa", estilo_boton_ok,"OK")
         return res
 
 
     # Genera la ventana que muestra el aviso de error
-    def _mostrar_error(self, mensaje_error, titulo_ventana):
+    def _mostrar_error(self, mensaje_error, titulo_ventana, estilo_boton=estilo_boton_no_ok, texto_boton="Cerrar"):
         #agregar icnono ventana
         self._ventana_error = tk.Toplevel(raiz, **estilo_raiz)
         self._ventana_error.title(titulo_ventana)
@@ -1319,12 +1363,11 @@ class Gestor:
         self._etiqueta_mensaje.pack(**pack_eti_error)
 
         self._boton_cerrar = tk.Button(self._ventana_error,
-                                       text="Cerrar",
+                                       text=texto_boton,
                                        command=self._ventana_error.destroy,
-                                       **estilo_boton_no_ok)
+                                       **estilo_boton)
         self._boton_cerrar.pack(side='top', pady=20)
-        self._boton_cerrar.focus_set()
-        
+        self._boton_cerrar.focus_set()        
         # Llama a establecer_opciones cada vez que el usuario
         # presione enter dentro del delimitador
         self._boton_cerrar.bind("<Return>",
@@ -1333,20 +1376,20 @@ class Gestor:
 
 #Almacen de datos
 class Tabla:
-    _ruta_salida_csv:str = ""
-    _encabezados_tabla:list = []
-    _delimitador:str = ""
-    _orden:str = ""
-    _segun:str = ""
-    _modo:str = ""
-    _campos_booleanos:dict = dict()
-    _campos_texto:dict = dict()
-    _campos_enteros:dict = dict()
-    _campos_reales:dict = dict()
-    _campos_complejos:dict = dict()
-    
+   
     def __init__(self):
-        pass
+        self._ruta_salida_csv:str = ""
+        self._encabezados_tabla:list = []
+        self._delimitador:str = ""
+        self._orden:str = ""
+        self._segun:str = ""
+        self._modo:str = ""
+        self._semilla:str = ""
+        self._campos_booleanos:dict = dict()
+        self._campos_texto:dict = dict()
+        self._campos_enteros:dict = dict()
+        self._campos_reales:dict = dict()
+        self._campos_complejos:dict = dict()
     
     # MÉTODOS RUTA    
     def establecer_ruta(self, ruta:str):
@@ -1395,6 +1438,13 @@ class Tabla:
 
     def obtener_modo(self) -> str:
         return self._modo
+    
+    # MÉTODOS SEMILLA    
+    def establecer_semilla(self, semilla:str):
+        self._semilla = semilla
+
+    def obtener_semilla(self) -> str:
+        return self._semilla 
     
     # MÉTODOS CAMPOS BOOLEANOS
     def establecer_campo_booleano(self, nombre_campo:str, tipo_logica:str):
@@ -1453,7 +1503,6 @@ class Tabla:
 
 
     # MÉTODOS GENERALES
-
     def campos_definidos(self) -> list:
         lista_aux:list = list(self._campos_booleanos.keys())
         lista_aux += list(self._campos_texto.keys())
@@ -1472,29 +1521,29 @@ class Tabla:
         gestor.actualizar_vista()
         
     def obtener_datos(self) -> str:
-        cadena_aux:str = "\n-------------------------------------------------------------------------------------\n"
-        cadena_aux += "  Los futuros campos calculados no reciben valores ni se les asigna un tipo de dato\n"
-        cadena_aux += "-------------------------------------------------------------------------------------\n\n"
-        cadena_aux += f'🟪 RUTA: {self.obtener_ruta()}\n'
-        cadena_aux += f'\n🟪 Encabezados de la tabla: {self.obtener_encabezados()}\n'
-        cadena_aux += f'\n🟪 Delimitador: "{self.obtener_delimitador()}"\n'
-        cadena_aux += f'\n🟪 Tipo de orden: {self.obtener_orden()}\n'
-        cadena_aux += f'\n🟪 Registros ordenados según el campo: {self.obtener_segun()}\n'
-        cadena_aux += f'\n🟪 Módulo de aleatoriedad: {self.obtener_modo()}\n'
-        cadena_aux += f'\n🟪 Campos con valores booleanos: {self.obtener_campos_booleanos()}\n'
-        cadena_aux += f'\n🟪 Campos con valores de texto: {self.obtener_campos_texto()}\n'
-        cadena_aux += f'\n🟪 Campos con números enteros: {self.obtener_campos_enteros()}\n'
-        cadena_aux += f'\n🟪 Campos con números reales: {self.obtener_campos_reales()}\n'
-        cadena_aux += f'\n🟪 Campos con números complejos: {self.obtener_campos_complejos()}\n'
+        cadena_aux:str = "Los encabezados designados como campos calculados no requieren valores ni asignación de tipos de datos.\n\n"      
+        cadena_aux += f' • RUTA: {self.obtener_ruta()}\n'
+        cadena_aux += f'\n • Encabezados de la tabla: {self.obtener_encabezados()}\n'
+        cadena_aux += f'\n • Delimitador: "{self.obtener_delimitador()}"\n'
+        cadena_aux += f'\n • Tipo de orden: {self.obtener_orden()}\n'
+        cadena_aux += f'\n • Registros ordenados según el campo: {self.obtener_segun()}\n'
+        cadena_aux += f'\n • Módulo de aleatoriedad: {self.obtener_modo()}\n'
+        cadena_aux += f'\n • Semilla: "{self.obtener_semilla()}"\n'
+        cadena_aux += f'\n • Campos con valores booleanos: {self.obtener_campos_booleanos()}\n'
+        cadena_aux += f'\n • Campos con valores de texto: {self.obtener_campos_texto()}\n'
+        cadena_aux += f'\n • Campos con números enteros: {self.obtener_campos_enteros()}\n'
+        cadena_aux += f'\n • Campos con números reales: {self.obtener_campos_reales()}\n'
+        cadena_aux += f'\n • Campos con números complejos: {self.obtener_campos_complejos()}\n'
         return cadena_aux
     
     def restablecer_tabla(self):
-        self._ruta_salida_csv:str = ""
-        self._encabezados_tabla:list = []
-        self._delimitador:str = ""
-        self._orden:str = ""
-        self._segun:str = ""
-        self._modo:str = ""
+        self._ruta_salida_csv = ""
+        self._encabezados_tabla = []
+        self._delimitador = ""
+        self._orden = ""
+        self._segun = ""
+        self._modo = ""
+        self._semilla = ""
         self._campos_booleanos.clear()
         self._campos_texto.clear()
         self._campos_enteros.clear()
@@ -1505,8 +1554,135 @@ class Tabla:
 
 
 class Generador:
-    pass
+    _ruta_salida_csv:str = ""
+    _encabezados_tabla = []
+    _delimitador:str = ""
+    _orden:str = ""
+    _segun:str = ""
+    _modo:str = ""
+    _semilla:str = ""
+    _campos_booleanos:dict = dict()
+    _campos_texto:dict = dict()
+    _campos_enteros:dict = dict()
+    _campos_reales:dict = dict()
+    _campos_complejos:dict = dict()
+    _filas:int= 0
 
+    def crear_tabla(self, datos:dict) -> bool:
+        res:bool = False
+        registros:list = []
+    # Asigna valores automáticamente a las variables de clase
+        for clave, valor in datos.items():
+            if hasattr(self, clave):
+                setattr(self, clave, valor)
+        if self._modo == "random":
+            registros = self._registros_random()
+        elif self._modo == "secrets":
+            registros = self._registros_secrets()
+        res = self._grabar_datos(registros)
+        return res
+        
+
+
+    def _registros_random(self) -> list:
+        # Estado inicial para generar datos pseudoaleatorios
+        if self._semilla == "Sin semilla":
+            random.seed()
+        else:
+            random.seed(self._semilla)
+        # Crea los registros
+        booleanos = [True,False,"None"]
+        t_aux:list = []
+        for i in range(self._filas):
+            registro:list = []
+            for campo in self._encabezados_tabla:
+                # Booleanos
+                if campo in self._campos_booleanos:
+                    if self._campos_booleanos[campo] == "True, False":
+                        registro.append(booleanos[random.randint(0, 1)])
+                    else:
+                        registro.append(booleanos[random.randint(0, 2)])
+                # Texto
+                elif campo in self._campos_texto:
+                    registro.append(self._campos_texto[campo][random.randint(0,
+                                        len(self._campos_texto[campo])-1)])
+                # Enteros
+                elif campo in self._campos_enteros:
+                    rango = self._campos_enteros[campo]
+                    registro.append(random.randint(rango[0], rango[1]))
+                # Reales
+                elif campo in self._campos_reales:
+                    rango = self._campos_reales[campo]
+                    registro.append(random.uniform(rango[0], rango[1]))                    
+                # Complejos
+                elif campo in self._campos_complejos:
+                    rango = self._campos_complejos[campo]
+                    a = random.uniform(rango[0], rango[1])
+                    b = random.uniform(rango[0], rango[1])
+                    registro.append(complex(a,b))
+                # Campos sin definir
+                else:
+                    registro.append("")
+            t_aux.append(registro)
+            registros = t_aux
+        indice_orden:int = self._encabezados_tabla.index(self._segun)
+        if self._orden == "Ascendente":
+            registros = sorted(registros, key=lambda x: x[indice_orden])
+        elif self._orden == "Descendente":
+            registros = sorted(registros, key=lambda x: x[indice_orden], reverse=True)      
+        return registros
+
+    def _registros_secrets(self) -> list:
+        # Crea los registros
+        booleanos = [True,False,"None"]
+        t_aux:list = []
+        for i in range(self._filas):
+            registro:list = []
+            for campo in self._encabezados_tabla:
+                # Booleanos
+                if campo in self._campos_booleanos:
+                    if self._campos_booleanos[campo] == "True, False":
+                        registro.append(booleanos[secrets.randbelow(2)])
+                    else:
+                        registro.append(booleanos[secrets.randbelow(3)])
+                # Texto
+                elif campo in self._campos_texto:
+                    registro.append(self._campos_texto[campo][secrets.randbelow(len(self._campos_texto[campo]))])
+                # Enteros
+                elif campo in self._campos_enteros:
+                    rango = self._campos_enteros[campo]
+                    registro.append(secrets.randbelow(rango[1]-rango[0]+1)+rango[0])
+                elif campo in self._campos_reales:
+                    registro.append("")                    
+                elif campo in self._campos_complejos:
+                    registro.append("")
+                # Campos sin definir
+                else:
+                    registro.append("")
+            t_aux.append(registro)
+            registros = t_aux
+        indice_orden:int = self._encabezados_tabla.index(self._segun)
+        if self._orden == "Ascendente":
+            registros = sorted(registros, key=lambda x: x[indice_orden])
+        elif self._orden == "Descendente":
+            registros = sorted(registros, key=lambda x: x[indice_orden], reverse=True)      
+        return registros
+    
+
+    def _grabar_datos(self, registros:list) -> bool:
+        res:bool = False
+        try:
+            with open(self._ruta_salida_csv, "w", newline="", encoding="utf-8") as archivo:
+                tabla_final = csv.writer(archivo, delimiter=self._delimitador)
+                tabla_final.writerow(self._encabezados_tabla)
+                tabla_final.writerows(registros)
+                res = True
+        except:
+            gestor.recibir("generador","Error ruta de salida")
+        return res              
+
+            
+    
 
 # Clases de submodulos
 class SubmoduloEntradaTexto:   
@@ -1515,7 +1691,14 @@ class SubmoduloEntradaTexto:
                  ubicacion,
                  texto_etiqueta:str,
                  texto_base_entrada:str="",
-                 evento_enter = lambda event=None: lambda *args: None):
+                 evento_enter = lambda event=None: lambda *args: None,
+                 pack_entrada=pack_entrada_texto,
+                 pack_etiqueta=pack_eti_ingreso):
+        
+        # Configuración pack
+        self.pack_eti_base = pack_etiqueta
+        self.pack_entrada_base = pack_entrada
+        
         # Contenedor ingreso
         self._contenedor_ingreso = tk.Frame(ubicacion,
                                             **estilo_contenedor_ingreso)
@@ -1526,7 +1709,7 @@ class SubmoduloEntradaTexto:
                                      text=texto_etiqueta,
                                      **estilo_etiqueta)
         self._eti_ingreso.config(font=FUENTE_ETIQUETA)
-        self._eti_ingreso.pack(**pack_eti_ingreso)
+        self._eti_ingreso.pack(**self.pack_eti_base)
 
         # Entrada
         self._valor_ingresado = tk.StringVar()
@@ -1535,11 +1718,13 @@ class SubmoduloEntradaTexto:
                                  textvariable=self._valor_ingresado)
         self._entrada.config(font=FUENTE_ENTRADA)
         self._entrada.insert(0, texto_base_entrada)
-        self._entrada.pack(**pack_entrada_texto)
+        self._entrada.pack(**self.pack_entrada_base)
         self._entrada.bind("<Return>", evento_enter)
-
+        
+        
     def borrar_valor(self):
         self._entrada.delete(0, "end")
+        return None
 
     def obtener_valor(self) -> str:
         return self._valor_ingresado.get()
@@ -1552,8 +1737,8 @@ class SubmoduloEntradaTexto:
 
     def mostrar_submodulo(self):
         self._contenedor_ingreso.pack(**pack_contenedor_ingreso)
-        self._eti_ingreso.pack(**pack_eti_ingreso)
-        self._entrada.pack(**pack_entrada_texto)
+        self._eti_ingreso.pack(**self.pack_eti_base)
+        self._entrada.pack(**self.pack_entrada_base)
         return None
 
     def ocultar_submodulo(self):
@@ -1691,6 +1876,7 @@ FUENTE_BOTON_SALIR = tk.font.Font(family="Monospace",
 
 # CONSTANTES Y TITULOS DE ETIQUETAS
 TX_TITULO = "CONFIGURACIÓN DE LA TABLA"
+TX_VISTA = "DATOS INGRESADOS"
 TX_RUTA = "Ruta de salida"
 TX_ENCABEZADOS = "Encabezados"
 TX_OPCIONES_TABLA = "FORMATO DE TABLA"
@@ -1698,6 +1884,7 @@ TX_DELIMITADOR = "Delimitador"
 TX_ORDEN = "Orden"
 TX_SEGUN = "Según"
 TX_MODO = "Aleatoriedad"
+TX_SEMILLA = "Semilla"
 TX_VALORES_CAMPO = "OPCIONES DE CAMPO"
 TX_SELECC_CAMPO = "Nombre"
 TX_TIPO_CAMPO = "Tipo de campo"
@@ -1724,7 +1911,8 @@ tabla = Tabla()
 # CONSTRUYE Y EXPORTA LA TABLA CON DATOS (PSEUDO)ALEATORIOS
 generador = Generador()
 
-
+### Para que no se pierda la barra vertical
+##raiz.bind("<Configure>", interface_usuario.modulo_ver_datos.on_configure)
 raiz.mainloop()
 ##def main():
 ##    aplicacion = Aplicacion()
@@ -1738,9 +1926,9 @@ raiz.mainloop()
 
 # COSAS POR HACER
 #------------------
-# Sumar el generador
 # Chequear que no hayan cosas borradas dando vueltas
 # Revisar el ciclo de la aplicacion
 # Modificar el estilo
+# Revisar los mensajes de error y como se van ocultando los modulos
 
 
