@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>logica.gestor &mdash; documentación de GDA - 1.0.0</title>
+  <title>logica.gestor &mdash; documentación de GDA - 1.1.0</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
 
@@ -14,7 +14,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=36c4ab74"></script>
+        <script src="../../_static/documentation_options.js?v=4711e12d"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=efdbd0b9"></script>
@@ -400,6 +400,14 @@
             <span class="k">return</span> <span class="n">res</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">lista_encabezado</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_limpiar_lista</span><span class="p">(</span><span class="n">mensaje</span><span class="p">)</span>
+            <span class="c1"># Limita el maximo de caracteres de un campo </span>
+            <span class="k">for</span> <span class="n">campo</span> <span class="ow">in</span> <span class="n">lista_encabezado</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">campo</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span> <span class="c1"># Umbral</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_dialogo</span><span class="p">(</span>
+                        <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_long_encabezado&#39;</span><span class="p">],</span>
+                        <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_vt_long_encabezado&#39;</span><span class="p">]</span>
+                    <span class="p">)</span>
+                    <span class="k">return</span> <span class="n">res</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">establecer_encabezado</span><span class="p">(</span><span class="n">lista_encabezado</span><span class="p">)</span>
             <span class="n">res</span> <span class="o">=</span> <span class="kc">True</span>
             
@@ -494,6 +502,12 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">establecer_orden</span><span class="p">(</span><span class="n">orden</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">establecer_criterio</span><span class="p">(</span><span class="n">criterio_campo</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">establecer_modo</span><span class="p">(</span><span class="n">modo</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">semilla</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span> <span class="c1"># Umbral</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_dialogo</span><span class="p">(</span>
+                    <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_semilla&#39;</span><span class="p">],</span>
+                    <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_vt_semilla&#39;</span><span class="p">]</span>
+                <span class="p">)</span>
+                <span class="k">return</span> <span class="n">res</span>
             <span class="k">if</span> <span class="n">semilla</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">establecer_semilla</span><span class="p">(</span><span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;semilla_def&#39;</span><span class="p">])</span>
             <span class="k">else</span><span class="p">:</span>
@@ -545,6 +559,13 @@
         <span class="k">if</span> <span class="n">condiciones</span><span class="p">:</span>
             <span class="n">valores</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_limpiar_lista</span><span class="p">(</span><span class="n">valores_posibles</span><span class="p">)</span>
             <span class="n">valores</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">valores</span> <span class="k">if</span> <span class="n">item</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">alternativa</span> <span class="ow">in</span> <span class="n">valores</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">alternativa</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">500</span><span class="p">:</span> <span class="c1"># Umbral</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_dialogo</span><span class="p">(</span>
+                        <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_long_alter_tex&#39;</span><span class="p">],</span>
+                        <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_vt_long_alter_tex&#39;</span><span class="p">]</span>
+                    <span class="p">)</span>
+                    <span class="k">return</span> <span class="n">res</span>                 
             <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">valor</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span> <span class="k">for</span> <span class="n">valor</span> <span class="ow">in</span> <span class="n">valores</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">establecer_campo_texto</span><span class="p">(</span><span class="n">nombre_campo</span><span class="p">,</span> <span class="n">valores</span><span class="p">)</span>
                 <span class="n">res</span> <span class="o">=</span> <span class="kc">True</span>

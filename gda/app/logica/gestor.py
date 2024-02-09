@@ -275,7 +275,7 @@ class Gestor:
             lista_encabezado = self._limpiar_lista(mensaje)
             # Limita el maximo de caracteres de un campo 
             for campo in lista_encabezado:
-                if len(campo) > 101:
+                if len(campo) > 100: # Umbral
                     self._ventana_dialogo(
                         leng.tex['err_long_encabezado'],
                         leng.tex['err_vt_long_encabezado']
@@ -369,6 +369,12 @@ class Gestor:
             self.tabla.establecer_orden(orden)
             self.tabla.establecer_criterio(criterio_campo)
             self.tabla.establecer_modo(modo)
+            if len(semilla) > 100: # Umbral
+                self._ventana_dialogo(
+                    leng.tex['err_semilla'],
+                    leng.tex['err_vt_semilla']
+                )
+                return res
             if semilla == "":
                 self.tabla.establecer_semilla(leng.tex['semilla_def'])
             else:
@@ -414,6 +420,13 @@ class Gestor:
         if condiciones:
             valores:list = self._limpiar_lista(valores_posibles)
             valores = [item for item in valores if item != ""]
+            for alternativa in valores:
+                if len(alternativa) > 500: # Umbral
+                    self._ventana_dialogo(
+                        leng.tex['err_long_alter_tex'],
+                        leng.tex['err_vt_long_alter_tex']
+                    )
+                    return res                 
             if any(valor != "" for valor in valores):
                 self.tabla.establecer_campo_texto(nombre_campo, valores)
                 res = True

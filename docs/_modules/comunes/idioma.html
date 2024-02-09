@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>comunes.idioma &mdash; documentación de GDA - 1.0.0</title>
+  <title>comunes.idioma &mdash; documentación de GDA - 1.1.0</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
 
@@ -14,7 +14,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=36c4ab74"></script>
+        <script src="../../_static/documentation_options.js?v=4711e12d"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=efdbd0b9"></script>
@@ -86,6 +86,8 @@
     <span class="s2">&quot;_acl_2&quot;</span> <span class="p">:</span> <span class="s2">&quot;no se requiere asignar valores ni tipos de datos.</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">,</span>
     <span class="s2">&quot;_err_enc_1&quot;</span> <span class="p">:</span> <span class="s2">&quot;Por favor, ingrese los campos de &quot;</span><span class="p">,</span>
     <span class="s2">&quot;_err_enc_2&quot;</span> <span class="p">:</span> <span class="s2">&quot;su tabla separados por comas.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_err_long_enc_1&quot;</span> <span class="p">:</span> <span class="s2">&quot;El límite de caracteres por cada campo es 100. &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_err_long_enc_2&quot;</span> <span class="p">:</span> <span class="s2">&quot;Por favor, revise el encabezado ingresado.&quot;</span><span class="p">,</span>
     <span class="s2">&quot;_err_criterio_1&quot;</span> <span class="p">:</span> <span class="s2">&quot;La tabla no pudo ser ordenada según el campo especificado. &quot;</span><span class="p">,</span>
     <span class="s2">&quot;_err_criterio_2&quot;</span> <span class="p">:</span> <span class="s2">&quot;Por favor, verifique su selección.&quot;</span><span class="p">,</span>
     <span class="s2">&quot;_err_no_val_1&quot;</span> <span class="p">:</span> <span class="s2">&quot;El campo seleccionado no ha recibido ningún valor. &quot;</span><span class="p">,</span>
@@ -176,6 +178,8 @@
     <span class="c1"># Gestion encabezado</span>
     <span class="s2">&quot;err_encabezado&quot;</span> <span class="p">:</span> <span class="n">TEX_ES_AUX</span><span class="p">[</span><span class="s1">&#39;_err_enc_1&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">TEX_ES_AUX</span><span class="p">[</span><span class="s1">&#39;_err_enc_2&#39;</span><span class="p">],</span>
     <span class="s2">&quot;err_vt_encabezado&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: campos no ingresados&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_long_encabezado&quot;</span> <span class="p">:</span> <span class="n">TEX_ES_AUX</span><span class="p">[</span><span class="s1">&#39;_err_long_enc_1&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">TEX_ES_AUX</span><span class="p">[</span><span class="s1">&#39;_err_long_enc_2&#39;</span><span class="p">],</span>
+    <span class="s2">&quot;err_vt_long_encabezado&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: nombres de campos&quot;</span><span class="p">,</span>
     <span class="c1"># Gestion opciones tabla</span>
     <span class="s2">&quot;err_delimitador&quot;</span> <span class="p">:</span> <span class="s2">&quot;Solo se permite un único carácter como delimitador.&quot;</span><span class="p">,</span>
     <span class="s2">&quot;err_vt_delimitador&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: delimitador no válido&quot;</span><span class="p">,</span>
@@ -185,9 +189,13 @@
     <span class="s2">&quot;err_vt_import&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: importación de librería&quot;</span><span class="p">,</span>
     <span class="s2">&quot;err_criterio&quot;</span> <span class="p">:</span> <span class="n">TEX_ES_AUX</span><span class="p">[</span><span class="s1">&#39;_err_criterio_1&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">TEX_ES_AUX</span><span class="p">[</span><span class="s1">&#39;_err_criterio_2&#39;</span><span class="p">],</span>
     <span class="s2">&quot;err_vt_criterio&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: campo de ordenación&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_semilla&quot;</span> <span class="p">:</span> <span class="s2">&quot;El límite de caracteres por semilla es 100.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_vt_semilla&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: semilla&quot;</span><span class="p">,</span>
     <span class="c1"># Gestion campo texto</span>
     <span class="s2">&quot;err_no_valores_tex&quot;</span> <span class="p">:</span> <span class="n">TEX_ES_AUX</span><span class="p">[</span><span class="s2">&quot;_err_no_val_1&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">TEX_ES_AUX</span><span class="p">[</span><span class="s2">&quot;_err_no_val_2&quot;</span><span class="p">],</span>
     <span class="s2">&quot;err_vt_no_valores_tex&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: valores no ingresados&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_long_alter_tex&quot;</span> <span class="p">:</span> <span class="s2">&quot;El límite de caracteres por cada alternativa es 500.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_vt_long_alter_tex&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: alternativas de texto&quot;</span><span class="p">,</span>
     <span class="c1"># Gestion condiciones basicas</span>
     <span class="s2">&quot;err_campo_def&quot;</span> <span class="p">:</span> <span class="s2">&quot;Por favor seleccione un campo que no haya sido definido.&quot;</span><span class="p">,</span>
     <span class="s2">&quot;err_vt_campo_def&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: campo ya definido&quot;</span><span class="p">,</span>
@@ -236,6 +244,8 @@
     <span class="s2">&quot;_acl_0&quot;</span> <span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> ENTERED DATA</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">,</span>
     <span class="s2">&quot;_acl_1&quot;</span> <span class="p">:</span> <span class="s2">&quot;For fields envisioned as calculated, &quot;</span><span class="p">,</span>
     <span class="s2">&quot;_acl_2&quot;</span> <span class="p">:</span> <span class="s2">&quot;assigning values or data types is not required.</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_err_long_enc_1&quot;</span> <span class="p">:</span> <span class="s2">&quot;The character limit per field is 100. &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_err_long_enc_2&quot;</span> <span class="p">:</span> <span class="s2">&quot;Please review the entered header.&quot;</span><span class="p">,</span>
     <span class="s2">&quot;_err_criterio_1&quot;</span> <span class="p">:</span> <span class="s2">&quot;The table could not be sorted according &quot;</span><span class="p">,</span>
     <span class="s2">&quot;_err_criterio_2&quot;</span> <span class="p">:</span> <span class="s2">&quot;to the specified field. Please review your choice.&quot;</span><span class="p">,</span>
     <span class="s2">&quot;_err_no_val_1&quot;</span> <span class="p">:</span> <span class="s2">&quot;The selected field has not received any value. &quot;</span><span class="p">,</span>
@@ -326,6 +336,8 @@
     <span class="c1"># Gestion encabezado</span>
     <span class="s2">&quot;err_encabezado&quot;</span> <span class="p">:</span> <span class="s2">&quot;Please enter your table headers separated by commas.&quot;</span><span class="p">,</span>
     <span class="s2">&quot;err_vt_encabezado&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: Unentered fields&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_long_encabezado&quot;</span> <span class="p">:</span> <span class="n">TEX_EN_AUX</span><span class="p">[</span><span class="s1">&#39;_err_long_enc_1&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">TEX_EN_AUX</span><span class="p">[</span><span class="s1">&#39;_err_long_enc_2&#39;</span><span class="p">],</span>
+    <span class="s2">&quot;err_vt_long_encabezado&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: fields names&quot;</span><span class="p">,</span>
     <span class="c1"># Gestion opciones tabla</span>
     <span class="s2">&quot;err_delimitador&quot;</span> <span class="p">:</span> <span class="s2">&quot;Only a single character is allowed as a delimiter.&quot;</span><span class="p">,</span>
     <span class="s2">&quot;err_vt_delimitador&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: Invalid delimiter&quot;</span><span class="p">,</span>
@@ -335,9 +347,13 @@
     <span class="s2">&quot;err_vt_import&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: library import&quot;</span><span class="p">,</span>
     <span class="s2">&quot;err_criterio&quot;</span> <span class="p">:</span> <span class="n">TEX_EN_AUX</span><span class="p">[</span><span class="s1">&#39;_err_criterio_1&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">TEX_EN_AUX</span><span class="p">[</span><span class="s1">&#39;_err_criterio_2&#39;</span><span class="p">],</span>
     <span class="s2">&quot;err_vt_criterio&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: Sorting field&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_semilla&quot;</span> <span class="p">:</span> <span class="s2">&quot;The character limit per seed is 100.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_vt_semilla&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: seed&quot;</span><span class="p">,</span>
     <span class="c1"># Gestion campo texto</span>
     <span class="s2">&quot;err_no_valores_tex&quot;</span> <span class="p">:</span> <span class="n">TEX_EN_AUX</span><span class="p">[</span><span class="s2">&quot;_err_no_val_1&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">TEX_EN_AUX</span><span class="p">[</span><span class="s2">&quot;_err_no_val_2&quot;</span><span class="p">],</span>
     <span class="s2">&quot;err_vt_no_valores_tex&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: Unentered values&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_long_alter_tex&quot;</span> <span class="p">:</span> <span class="s2">&quot;The character limit for each alternative is 500.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_vt_long_alter_tex&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: text alternatives&quot;</span><span class="p">,</span>
     <span class="c1"># Gestion condiciones basicas</span>
     <span class="s2">&quot;err_campo_def&quot;</span> <span class="p">:</span> <span class="s2">&quot;Please select a field that has not been defined.&quot;</span><span class="p">,</span>
     <span class="s2">&quot;err_vt_campo_def&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: Field already defined.&quot;</span><span class="p">,</span>
