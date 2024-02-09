@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paquete logica &mdash; documentación de GDA - 1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=36c4ab74"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=efdbd0b9"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="Paquete comunes" href="comunes.html" />
+    <link rel="prev" title="Paquete gui" href="gui.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            GDA
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenido:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="dependencias.html">Dependencias</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Paquetes y módulos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="main.html">Módulo main</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gui.html">Paquete gui</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Paquete logica</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodulos">Submódulos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-logica.gestor">Módulo logica.gestor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#logica.gestor.Gestor"><code class="docutils literal notranslate"><span class="pre">Gestor</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-logica.tabla">Módulo logica.tabla</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#logica.tabla.Tabla"><code class="docutils literal notranslate"><span class="pre">Tabla</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-logica.generador">Módulo logica.generador</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#logica.generador.Generador"><code class="docutils literal notranslate"><span class="pre">Generador</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="comunes.html">Paquete comunes</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GDA</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">Paquetes y módulos</a></li>
+      <li class="breadcrumb-item active">Paquete logica</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/logica.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="paquete-logica">
+<h1>Paquete logica<a class="headerlink" href="#paquete-logica" title="Link to this heading"></a></h1>
+<section id="submodulos">
+<h2>Submódulos<a class="headerlink" href="#submodulos" title="Link to this heading"></a></h2>
+</section>
+<section id="module-logica.gestor">
+<span id="modulo-logica-gestor"></span><h2>Módulo logica.gestor<a class="headerlink" href="#module-logica.gestor" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="logica.gestor.Gestor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">logica.gestor.</span></span><span class="sig-name descname"><span class="pre">Gestor</span></span><a class="reference internal" href="_modules/logica/gestor.html#Gestor"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.gestor.Gestor" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Clase encargada de coordinar los componentes y facilitar la comunicación
+entre la tabla, los componentes y el generador.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.gestor.Gestor._condiciones_basicas">
+<span class="sig-name descname"><span class="pre">_condiciones_basicas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nombre_campo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/logica/gestor.html#Gestor._condiciones_basicas"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.gestor.Gestor._condiciones_basicas" title="Link to this definition"></a></dt>
+<dd><p>Verifica las condiciones mínimas que debe cumplir un campo
+para ser registrado en la tabla.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>nombre_campo</strong> (<em>str</em>) – Campo a evaluar.</p>
+</dd>
+<dt class="field-even">Return res<span class="colon">:</span></dt>
+<dd class="field-even"><p>True si la verificación fue exitosa, de lo contrario False.</p>
+</dd>
+<dt class="field-odd">Rtype res<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool»</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.gestor.Gestor._es_ruta_valida">
+<span class="sig-name descname"><span class="pre">_es_ruta_valida</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ruta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/logica/gestor.html#Gestor._es_ruta_valida"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.gestor.Gestor._es_ruta_valida" title="Link to this definition"></a></dt>
+<dd><p>Verifica la validez de la ruta ingresada o la existencia
+del directorio de salida. Si la verificación es positiva,
+registra la ruta en la tabla.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ruta</strong> (<em>str</em>) – Ruta de salida ingresada.</p>
+</dd>
+<dt class="field-even">Return res<span class="colon">:</span></dt>
+<dd class="field-even"><p>True si la verificación fue exitosa, de lo contrario False.</p>
+</dd>
+<dt class="field-odd">Rtype res<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.gestor.Gestor._gestion_campo_booleano">
+<span class="sig-name descname"><span class="pre">_gestion_campo_booleano</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mensaje</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/logica/gestor.html#Gestor._gestion_campo_booleano"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.gestor.Gestor._gestion_campo_booleano" title="Link to this definition"></a></dt>
+<dd><p>Verifica las condiciones mínimas para registrar el campo.
+Si la validación es exitosa lo registra en la tabla;
+caso contrario, notifica el error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mensaje</strong> (<em>list</em>) – Campo y opción seleccionada.</p>
+</dd>
+<dt class="field-even">Return res<span class="colon">:</span></dt>
+<dd class="field-even"><p>True si la gestión fue exitosa, de lo contrario False.</p>
+</dd>
+<dt class="field-odd">Rtype res<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.gestor.Gestor._gestion_campo_numerico">
+<span class="sig-name descname"><span class="pre">_gestion_campo_numerico</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mensaje</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/logica/gestor.html#Gestor._gestion_campo_numerico"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.gestor.Gestor._gestion_campo_numerico" title="Link to this definition"></a></dt>
+<dd><p>Verifica las condiciones mínimas para registrar el campo y valida
+el rango y el valor de redondeo. Si la operación es exitosa
+lo registra en la tabla; caso contrario, notifica el error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mensaje</strong> (<em>list</em>) – Campo, rango, tipo numérico y valor de redondeo.</p>
+</dd>
+<dt class="field-even">Return res<span class="colon">:</span></dt>
+<dd class="field-even"><p>True si la gestión fue exitosa, de lo contrario False.</p>
+</dd>
+<dt class="field-odd">Rtype res<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.gestor.Gestor._gestion_campo_texto">
+<span class="sig-name descname"><span class="pre">_gestion_campo_texto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mensaje</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/logica/gestor.html#Gestor._gestion_campo_texto"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.gestor.Gestor._gestion_campo_texto" title="Link to this definition"></a></dt>
+<dd><p>Verifica las condiciones mínimas para registrar el campo y procesa
+las alternativas de texto ingresadas. Si la operación es exitosa
+lo registra en la tabla; caso contrario, notifica el error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mensaje</strong> (<em>list</em>) – Campo y alternativas de texto.</p>
+</dd>
+<dt class="field-even">Return res<span class="colon">:</span></dt>
+<dd class="field-even"><p>True si la gestión fue exitosa, de lo contrario False.</p>
+</dd>
+<dt class="field-odd">Rtype res<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.gestor.Gestor._gestion_encabezado">
+<span class="sig-name descname"><span class="pre">_gestion_encabezado</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mensaje</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/logica/gestor.html#Gestor._gestion_encabezado"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.gestor.Gestor._gestion_encabezado" title="Link to this definition"></a></dt>
+<dd><p>Notifica si el encabezado ingresado está vacío. Si no lo está,
+lo procesa y registra en la tabla. Elimina aquellos campos
+definidos que no estén en el nuevo encabezado y actualiza
+las opciones de los componentes correspondientes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mensaje</strong> (<em>str</em>) – Encabezado ingresado.</p>
+</dd>
+<dt class="field-even">Return res<span class="colon">:</span></dt>
+<dd class="field-even"><p>True si la gestión fue exitosa, de lo contrario False.</p>
+</dd>
+<dt class="field-odd">Rtype res<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.gestor.Gestor._gestion_exportar">
+<span class="sig-name descname"><span class="pre">_gestion_exportar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mensaje</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/logica/gestor.html#Gestor._gestion_exportar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.gestor.Gestor._gestion_exportar" title="Link to this definition"></a></dt>
+<dd><p>Envía al generador los datos registrados en la tabla si se cumplen
+las condiciones de exportación. Notifica si la operación fue existosa.
+En caso de que alguna condición no se cumpla, notifica el error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mensaje</strong> (<em>str</em>) – Número de filas ingresado.</p>
+</dd>
+<dt class="field-even">Return res<span class="colon">:</span></dt>
+<dd class="field-even"><p>True si la gestión fue exitosa, de lo contrario False.</p>
+</dd>
+<dt class="field-odd">Rtype res<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.gestor.Gestor._gestion_opciones_tabla">
+<span class="sig-name descname"><span class="pre">_gestion_opciones_tabla</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mensaje</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/logica/gestor.html#Gestor._gestion_opciones_tabla"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.gestor.Gestor._gestion_opciones_tabla" title="Link to this definition"></a></dt>
+<dd><p>Valida los valores definidos. Si la validación es exitosa
+los registra en la tabla; caso contrario, notifica el error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mensaje</strong> (<em>list</em>) – Opciones seleccionadas.</p>
+</dd>
+<dt class="field-even">Return res<span class="colon">:</span></dt>
+<dd class="field-even"><p>True si la gestión fue exitosa, de lo contrario False.</p>
+</dd>
+<dt class="field-odd">Rtype res<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.gestor.Gestor._gestion_ruta">
+<span class="sig-name descname"><span class="pre">_gestion_ruta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mensaje</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/logica/gestor.html#Gestor._gestion_ruta"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.gestor.Gestor._gestion_ruta" title="Link to this definition"></a></dt>
+<dd><p>Gestiona la validación de la ruta ingresada. Si fue exitosa
+retorna True, caso contrario notifica el error y retorna False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mensaje</strong> (<em>str</em>) – Ruta de salida ingresada.</p>
+</dd>
+<dt class="field-even">Return res<span class="colon">:</span></dt>
+<dd class="field-even"><p>True si la gestión fue exitosa, de lo contrario False.</p>
+</dd>
+<dt class="field-odd">Rtype res<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.gestor.Gestor._limpiar_lista">
+<span class="sig-name descname"><span class="pre">_limpiar_lista</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cadena</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/logica/gestor.html#Gestor._limpiar_lista"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.gestor.Gestor._limpiar_lista" title="Link to this definition"></a></dt>
+<dd><p>Produce una lista de items únicos y no vacíos a partir de una cadena.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cadena</strong> – Cadena con valores separados por coma.</p></li>
+<li><p><strong>cadena</strong> – str</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return lista_salida<span class="colon">:</span></dt>
+<dd class="field-even"><p>Lista de items únicos.</p>
+</dd>
+<dt class="field-odd">Rtype lista_salida<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.gestor.Gestor._preservar_signo">
+<span class="sig-name descname"><span class="pre">_preservar_signo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">numero</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/gestor.html#Gestor._preservar_signo"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.gestor.Gestor._preservar_signo" title="Link to this definition"></a></dt>
+<dd><p>Evalúa y convierte una cadena a entero si es un número válido;
+de lo contrario, retorna la cadena original.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>numero</strong> (<em>str</em>) – Cadena a evaluar.</p>
+</dd>
+<dt class="field-even">Return res<span class="colon">:</span></dt>
+<dd class="field-even"><p>Resultado de la operación.</p>
+</dd>
+<dt class="field-odd">Rtype res<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int, str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.gestor.Gestor._ventana_dialogo">
+<span class="sig-name descname"><span class="pre">_ventana_dialogo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">notificacion</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">titulo_ventana</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">estilo_boton</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'activebackground':</span> <span class="pre">'#100303',</span> <span class="pre">'activeforeground':</span> <span class="pre">'#d52b2b',</span> <span class="pre">'background':</span> <span class="pre">'#d52b2b',</span> <span class="pre">'bd':</span> <span class="pre">2,</span> <span class="pre">'highlightbackground':</span> <span class="pre">'#0d0d0d',</span> <span class="pre">'highlightcolor':</span> <span class="pre">'#ff3333',</span> <span class="pre">'highlightthickness':</span> <span class="pre">2}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/gestor.html#Gestor._ventana_dialogo"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.gestor.Gestor._ventana_dialogo" title="Link to this definition"></a></dt>
+<dd><p>Produce la ventana de notificación.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>notificacion</strong> (<em>str</em>) – Mensaje a notificar.</p></li>
+<li><p><strong>titulo_ventana</strong> (<em>str</em>) – Título de la ventana.</p></li>
+<li><p><strong>estilo_boton</strong> (<em>dict</em>) – Aspecto visual del boton.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.gestor.Gestor.actualizar_opciones">
+<span class="sig-name descname"><span class="pre">actualizar_opciones</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/gestor.html#Gestor.actualizar_opciones"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.gestor.Gestor.actualizar_opciones" title="Link to this definition"></a></dt>
+<dd><p>Actualiza todos los componentes que utilizan los campos ingresados
+en la tabla.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.gestor.Gestor.actualizar_vista">
+<span class="sig-name descname"><span class="pre">actualizar_vista</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/gestor.html#Gestor.actualizar_vista"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.gestor.Gestor.actualizar_vista" title="Link to this definition"></a></dt>
+<dd><p>Envía a la vista los datos almacenados en la tabla.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.gestor.Gestor.borrar_encabezado">
+<span class="sig-name descname"><span class="pre">borrar_encabezado</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/gestor.html#Gestor.borrar_encabezado"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.gestor.Gestor.borrar_encabezado" title="Link to this definition"></a></dt>
+<dd><p>Vacía la lista de campos, las opciones que la utilizan y luego
+actualiza la vista.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.gestor.Gestor.enlazar_generador">
+<span class="sig-name descname"><span class="pre">enlazar_generador</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">generador_activo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/gestor.html#Gestor.enlazar_generador"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.gestor.Gestor.enlazar_generador" title="Link to this definition"></a></dt>
+<dd><p>Almacena la instancia del generador.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>generador_activo</strong> (<a class="reference internal" href="#logica.generador.Generador" title="logica.generador.Generador"><em>Generador</em></a>) – Componente que produce y exporta la tabla.</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.gestor.Gestor.enlazar_interface">
+<span class="sig-name descname"><span class="pre">enlazar_interface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interface_activa</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/gestor.html#Gestor.enlazar_interface"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.gestor.Gestor.enlazar_interface" title="Link to this definition"></a></dt>
+<dd><p>Almacena la instancia de la interface.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>interface_activa</strong> (<a class="reference internal" href="gui.html#gui.interface.Interface" title="gui.interface.Interface"><em>Interface</em></a>) – Componente que contiene los widgets de ingreso de datos.</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.gestor.Gestor.enlazar_raiz">
+<span class="sig-name descname"><span class="pre">enlazar_raiz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raiz_activa</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/gestor.html#Gestor.enlazar_raiz"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.gestor.Gestor.enlazar_raiz" title="Link to this definition"></a></dt>
+<dd><p>Almacena la instancia de la ventana raiz.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>raiz</strong> (<em>Tk</em>) – Ventana principal de la aplicación.</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.gestor.Gestor.enlazar_tabla">
+<span class="sig-name descname"><span class="pre">enlazar_tabla</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tabla_activa</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/gestor.html#Gestor.enlazar_tabla"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.gestor.Gestor.enlazar_tabla" title="Link to this definition"></a></dt>
+<dd><p>Almacena la instancia de la tabla.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tabla</strong> (<a class="reference internal" href="#logica.tabla.Tabla" title="logica.tabla.Tabla"><em>Tabla</em></a>) – Componente que almacena los datos ingresados.</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.gestor.Gestor.recibir">
+<span class="sig-name descname"><span class="pre">recibir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mensaje</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/logica/gestor.html#Gestor.recibir"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.gestor.Gestor.recibir" title="Link to this definition"></a></dt>
+<dd><p>Enruta los mensajes al método correspondiente. Si la gestión fue exitosa
+(se logró almacenar los datos en la tabla), actualiza la vista.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>origen</strong> (<em>str</em>) – Módulo que efectúa la llamada.</p></li>
+<li><p><strong>mensaje</strong> (<em>str</em><em>, </em><em>list</em>) – Contenido a gestionar.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return gestion<span class="colon">:</span></dt>
+<dd class="field-even"><p>True si fue exitosa, False en caso contrario.</p>
+</dd>
+<dt class="field-odd">Rtype gestion<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.gestor.Gestor.restablecer_aplicacion">
+<span class="sig-name descname"><span class="pre">restablecer_aplicacion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/gestor.html#Gestor.restablecer_aplicacion"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.gestor.Gestor.restablecer_aplicacion" title="Link to this definition"></a></dt>
+<dd><p>Limpia el texto de las entradas, actualiza las opciones y
+establece el enfoque del teclado en el widget principal
+del módulo ruta.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.gestor.Gestor.vaciar_campo">
+<span class="sig-name descname"><span class="pre">vaciar_campo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nombre_campo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/gestor.html#Gestor.vaciar_campo"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.gestor.Gestor.vaciar_campo" title="Link to this definition"></a></dt>
+<dd><p>Borra los valores registrados en la tabla del campo especificado.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>nombre_campo</strong> (<em>str</em>) – Campo especificado.</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.gestor.Gestor.vaciar_tabla">
+<span class="sig-name descname"><span class="pre">vaciar_tabla</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/gestor.html#Gestor.vaciar_tabla"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.gestor.Gestor.vaciar_tabla" title="Link to this definition"></a></dt>
+<dd><p>Vacia todos los datos ingresados a la tabla.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.gestor.Gestor.ver_campos_definidos">
+<span class="sig-name descname"><span class="pre">ver_campos_definidos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/logica/gestor.html#Gestor.ver_campos_definidos"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.gestor.Gestor.ver_campos_definidos" title="Link to this definition"></a></dt>
+<dd><p>Retorna una lista con los nombres de los campos almacenados en la tabla.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Lista de los nombres de los campos almacenados.</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.gestor.Gestor.ver_campos_sin_definir">
+<span class="sig-name descname"><span class="pre">ver_campos_sin_definir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/logica/gestor.html#Gestor.ver_campos_sin_definir"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.gestor.Gestor.ver_campos_sin_definir" title="Link to this definition"></a></dt>
+<dd><p>Retorna una lista con los nombres de los campos sin definir.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Lista de los nombres de los campos sin definir.</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.gestor.Gestor.ver_encabezado">
+<span class="sig-name descname"><span class="pre">ver_encabezado</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/logica/gestor.html#Gestor.ver_encabezado"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.gestor.Gestor.ver_encabezado" title="Link to this definition"></a></dt>
+<dd><p>Retorna los campos almacenados en la tabla.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return encabezado<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Campos ingresados.</p>
+</dd>
+<dt class="field-even">Rtype encabezado<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-logica.tabla">
+<span id="modulo-logica-tabla"></span><h2>Módulo logica.tabla<a class="headerlink" href="#module-logica.tabla" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="logica.tabla.Tabla">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">logica.tabla.</span></span><span class="sig-name descname"><span class="pre">Tabla</span></span><a class="reference internal" href="_modules/logica/tabla.html#Tabla"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Clase encargada de almacenar los datos y opciones ingresadas.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.borrar_campo_booleano">
+<span class="sig-name descname"><span class="pre">borrar_campo_booleano</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nombre_campo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.borrar_campo_booleano"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.borrar_campo_booleano" title="Link to this definition"></a></dt>
+<dd><p>Si está registrado en la tabla, elimina el campo recibido y
+actualiza la vista.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>nombre_campo</strong> (<em>str</em>) – Nombre del campo recibido.</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.borrar_campo_entero">
+<span class="sig-name descname"><span class="pre">borrar_campo_entero</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">campo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.borrar_campo_entero"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.borrar_campo_entero" title="Link to this definition"></a></dt>
+<dd><p>Ver Tabla.borrar_campo_booleano()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.borrar_campo_real">
+<span class="sig-name descname"><span class="pre">borrar_campo_real</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">campo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.borrar_campo_real"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.borrar_campo_real" title="Link to this definition"></a></dt>
+<dd><p>Ver Tabla.borrar_campo_booleano()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.borrar_campo_texto">
+<span class="sig-name descname"><span class="pre">borrar_campo_texto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nombre_campo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.borrar_campo_texto"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.borrar_campo_texto" title="Link to this definition"></a></dt>
+<dd><p>Ver Tabla.borrar_campo_booleano()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.borrar_campos_decimales">
+<span class="sig-name descname"><span class="pre">borrar_campos_decimales</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.borrar_campos_decimales"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.borrar_campos_decimales" title="Link to this definition"></a></dt>
+<dd><p>Elimina los campos definidos como decimales cuando se elige
+el modo de aleatoriedad “secrets”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.borrar_encabezado">
+<span class="sig-name descname"><span class="pre">borrar_encabezado</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.borrar_encabezado"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.borrar_encabezado" title="Link to this definition"></a></dt>
+<dd><p>Vacía el encabezado de la tabla y actualiza la vista</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.borrar_todos_los_campos">
+<span class="sig-name descname"><span class="pre">borrar_todos_los_campos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.borrar_todos_los_campos"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.borrar_todos_los_campos" title="Link to this definition"></a></dt>
+<dd><p>Elimina todos los campos registrados en la tabla y actualiza la vista.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.campos_definidos">
+<span class="sig-name descname"><span class="pre">campos_definidos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.campos_definidos"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.campos_definidos" title="Link to this definition"></a></dt>
+<dd><p>Retorna una lista con los campos definidos.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Lista con los campos definidos.</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.enlazar_gestor">
+<span class="sig-name descname"><span class="pre">enlazar_gestor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gestor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.enlazar_gestor"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.enlazar_gestor" title="Link to this definition"></a></dt>
+<dd><p>Almacena la instancia del gestor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>gestor</strong> (<a class="reference internal" href="#logica.gestor.Gestor" title="logica.gestor.Gestor"><em>Gestor</em></a>) – Componente que coordina y comunica los módulos.</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.establecer_campo_booleano">
+<span class="sig-name descname"><span class="pre">establecer_campo_booleano</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nombre_campo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valores_bool</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.establecer_campo_booleano"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.establecer_campo_booleano" title="Link to this definition"></a></dt>
+<dd><p>Establece un campo como booleano.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nombre_campo</strong> (<em>str</em>) – Nombre del campo.</p></li>
+<li><p><strong>valores_bool</strong> (<em>str</em>) – Posibles valores (True, False, None).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.establecer_campo_decimal">
+<span class="sig-name descname"><span class="pre">establecer_campo_decimal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">campo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rango</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.establecer_campo_decimal"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.establecer_campo_decimal" title="Link to this definition"></a></dt>
+<dd><p>Establece un campo como de decimales.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>campo</strong> (<em>str</em>) – Nombre del campo.</p></li>
+<li><p><strong>rango</strong> (<em>tuple</em>) – Rango de posibles valores.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.establecer_campo_entero">
+<span class="sig-name descname"><span class="pre">establecer_campo_entero</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">campo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rango</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.establecer_campo_entero"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.establecer_campo_entero" title="Link to this definition"></a></dt>
+<dd><p>Establece un campo como de enteros.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>campo</strong> (<em>str</em>) – Nombre del campo.</p></li>
+<li><p><strong>rango</strong> (<em>tuple</em>) – Rango de posibles valores.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.establecer_campo_texto">
+<span class="sig-name descname"><span class="pre">establecer_campo_texto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nombre_campo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valores</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.establecer_campo_texto"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.establecer_campo_texto" title="Link to this definition"></a></dt>
+<dd><p>Establece un campo como de texto.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nombre_campo</strong> (<em>str</em>) – Nombre del campo.</p></li>
+<li><p><strong>valores</strong> (<em>list</em>) – Alternativas de texto para el campo.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.establecer_criterio">
+<span class="sig-name descname"><span class="pre">establecer_criterio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">criterio</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.establecer_criterio"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.establecer_criterio" title="Link to this definition"></a></dt>
+<dd><p>Establece el campo de referencia para ordenar la tabla.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>criterio</strong> (<em>str</em>) – Campo de referencia.</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.establecer_delimitador">
+<span class="sig-name descname"><span class="pre">establecer_delimitador</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delimitador</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.establecer_delimitador"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.establecer_delimitador" title="Link to this definition"></a></dt>
+<dd><p>Establece el delimitador de las columnas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>delimitador</strong> (<em>str</em>) – Delimitador de la tabla.</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.establecer_encabezado">
+<span class="sig-name descname"><span class="pre">establecer_encabezado</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encabezado</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.establecer_encabezado"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.establecer_encabezado" title="Link to this definition"></a></dt>
+<dd><p>Establece los campos de la tabla.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>encabezado</strong> (<em>list</em>) – Campos de la tabla.</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.establecer_modo">
+<span class="sig-name descname"><span class="pre">establecer_modo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.establecer_modo"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.establecer_modo" title="Link to this definition"></a></dt>
+<dd><p>Establece el modo de aleatoriedad.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>modo</strong> (<em>str</em>) – Librería a utilizar.</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.establecer_orden">
+<span class="sig-name descname"><span class="pre">establecer_orden</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orden</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.establecer_orden"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.establecer_orden" title="Link to this definition"></a></dt>
+<dd><p>Establece el orden de la tabla.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>orden</strong> (<em>str</em>) – Forma de ordenar la tabla.</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.establecer_ruta">
+<span class="sig-name descname"><span class="pre">establecer_ruta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ruta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.establecer_ruta"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.establecer_ruta" title="Link to this definition"></a></dt>
+<dd><p>Establece la ruta de salida.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ruta</strong> (<em>str</em>) – Ruta de salida.</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.establecer_semilla">
+<span class="sig-name descname"><span class="pre">establecer_semilla</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">semilla</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.establecer_semilla"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.establecer_semilla" title="Link to this definition"></a></dt>
+<dd><p>Establece el estado incial para “random”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>semilla</strong> (<em>str</em>) – Valor de “seed”.</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.obtener_campos_booleanos">
+<span class="sig-name descname"><span class="pre">obtener_campos_booleanos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.obtener_campos_booleanos"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.obtener_campos_booleanos" title="Link to this definition"></a></dt>
+<dd><p>Ver Tabla.obtener_ruta()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.obtener_campos_decimales">
+<span class="sig-name descname"><span class="pre">obtener_campos_decimales</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.obtener_campos_decimales"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.obtener_campos_decimales" title="Link to this definition"></a></dt>
+<dd><p>Ver Tabla.obtener_ruta()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.obtener_campos_enteros">
+<span class="sig-name descname"><span class="pre">obtener_campos_enteros</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.obtener_campos_enteros"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.obtener_campos_enteros" title="Link to this definition"></a></dt>
+<dd><p>Ver Tabla.obtener_ruta()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.obtener_campos_texto">
+<span class="sig-name descname"><span class="pre">obtener_campos_texto</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.obtener_campos_texto"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.obtener_campos_texto" title="Link to this definition"></a></dt>
+<dd><p>Ver Tabla.obtener_ruta()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.obtener_criterio">
+<span class="sig-name descname"><span class="pre">obtener_criterio</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.obtener_criterio"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.obtener_criterio" title="Link to this definition"></a></dt>
+<dd><p>Ver Tabla.obtener_ruta()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.obtener_datos">
+<span class="sig-name descname"><span class="pre">obtener_datos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.obtener_datos"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.obtener_datos" title="Link to this definition"></a></dt>
+<dd><p>Produce y retorna una lista con todos los datos ingresados
+praparados para que se puedan insertar en la vista.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Lista con los datos.</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.obtener_delimitador">
+<span class="sig-name descname"><span class="pre">obtener_delimitador</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.obtener_delimitador"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.obtener_delimitador" title="Link to this definition"></a></dt>
+<dd><p>Ver Tabla.obtener_ruta()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.obtener_encabezado">
+<span class="sig-name descname"><span class="pre">obtener_encabezado</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.obtener_encabezado"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.obtener_encabezado" title="Link to this definition"></a></dt>
+<dd><p>Ver Tabla.obtener_ruta()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.obtener_modo">
+<span class="sig-name descname"><span class="pre">obtener_modo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.obtener_modo"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.obtener_modo" title="Link to this definition"></a></dt>
+<dd><p>Ver Tabla.obtener_ruta()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.obtener_orden">
+<span class="sig-name descname"><span class="pre">obtener_orden</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.obtener_orden"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.obtener_orden" title="Link to this definition"></a></dt>
+<dd><p>Ver Tabla.obtener_ruta()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.obtener_ruta">
+<span class="sig-name descname"><span class="pre">obtener_ruta</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.obtener_ruta"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.obtener_ruta" title="Link to this definition"></a></dt>
+<dd><p>Obtiene y retorna el valor del atributo.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Valor del atributo.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.obtener_semilla">
+<span class="sig-name descname"><span class="pre">obtener_semilla</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.obtener_semilla"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.obtener_semilla" title="Link to this definition"></a></dt>
+<dd><p>Ver Tabla.obtener_ruta()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.tabla.Tabla.restablecer_tabla">
+<span class="sig-name descname"><span class="pre">restablecer_tabla</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/logica/tabla.html#Tabla.restablecer_tabla"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.tabla.Tabla.restablecer_tabla" title="Link to this definition"></a></dt>
+<dd><p>Vacía todos los datos registrados y actualiza la vista.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-logica.generador">
+<span id="modulo-logica-generador"></span><h2>Módulo logica.generador<a class="headerlink" href="#module-logica.generador" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="logica.generador.Generador">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">logica.generador.</span></span><span class="sig-name descname"><span class="pre">Generador</span></span><a class="reference internal" href="_modules/logica/generador.html#Generador"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.generador.Generador" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Clase encargada de producir y exportar la tabla.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logica.generador.Generador._campos_booleanos">
+<span class="sig-name descname"><span class="pre">_campos_booleanos</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#logica.generador.Generador._campos_booleanos" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logica.generador.Generador._campos_decimales">
+<span class="sig-name descname"><span class="pre">_campos_decimales</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#logica.generador.Generador._campos_decimales" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logica.generador.Generador._campos_enteros">
+<span class="sig-name descname"><span class="pre">_campos_enteros</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#logica.generador.Generador._campos_enteros" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logica.generador.Generador._campos_texto">
+<span class="sig-name descname"><span class="pre">_campos_texto</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#logica.generador.Generador._campos_texto" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logica.generador.Generador._criterio">
+<span class="sig-name descname"><span class="pre">_criterio</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#logica.generador.Generador._criterio" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logica.generador.Generador._delimitador">
+<span class="sig-name descname"><span class="pre">_delimitador</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#logica.generador.Generador._delimitador" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logica.generador.Generador._encabezado_tabla">
+<span class="sig-name descname"><span class="pre">_encabezado_tabla</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#logica.generador.Generador._encabezado_tabla" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logica.generador.Generador._filas">
+<span class="sig-name descname"><span class="pre">_filas</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#logica.generador.Generador._filas" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.generador.Generador._grabar_datos">
+<span class="sig-name descname"><span class="pre">_grabar_datos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">registros</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/logica/generador.html#Generador._grabar_datos"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.generador.Generador._grabar_datos" title="Link to this definition"></a></dt>
+<dd><p>Utiliza el método writerows para escribir todos los registros
+simultáneamente como un bloque en el archivo de salida.
+Es auxiliar al método no incremental.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>registros</strong> (<em>list</em>) – Lista de listas con los registros.</p>
+</dd>
+<dt class="field-even">Return res<span class="colon">:</span></dt>
+<dd class="field-even"><p>True si la operación fue exitosa, de lo contrario False</p>
+</dd>
+<dt class="field-odd">Rtype res<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logica.generador.Generador._modo">
+<span class="sig-name descname"><span class="pre">_modo</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#logica.generador.Generador._modo" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logica.generador.Generador._orden">
+<span class="sig-name descname"><span class="pre">_orden</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#logica.generador.Generador._orden" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.generador.Generador._registros_incremental">
+<span class="sig-name descname"><span class="pre">_registros_incremental</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/logica/generador.html#Generador._registros_incremental"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.generador.Generador._registros_incremental" title="Link to this definition"></a></dt>
+<dd><p>Produce y exporta un lista de registros en el orden indicado.
+Se ordena con este método cuando está instalada la librería “pandas”.
+Genera los datos por fila y los escribe en el archivo de salida con el
+método writerow a medida que son creados. Luego los ordena si es necesario.
+Las tablas con orden “Ninguno” o “(…) - pandas” se producen con este método.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.generador.Generador._registros_no_incremental">
+<span class="sig-name descname"><span class="pre">_registros_no_incremental</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/logica/generador.html#Generador._registros_no_incremental"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.generador.Generador._registros_no_incremental" title="Link to this definition"></a></dt>
+<dd><p>Produce y retorna un lista de registros en el orden indicado,
+que luego se exporta en bloque en la ruta de salida.
+Se ordena con este método cuando no está instalada la librería “pandas”.
+Genera los datos por columna y después los transpone.
+Las tablas con orden “Asecendente” o “Descendente” se producen con este método.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Lista de listas con los registros ordenados.</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logica.generador.Generador._ruta_salida_csv">
+<span class="sig-name descname"><span class="pre">_ruta_salida_csv</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#logica.generador.Generador._ruta_salida_csv" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logica.generador.Generador._semilla">
+<span class="sig-name descname"><span class="pre">_semilla</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#logica.generador.Generador._semilla" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logica.generador.Generador.crear_tabla">
+<span class="sig-name descname"><span class="pre">crear_tabla</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">datos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/logica/generador.html#Generador.crear_tabla"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#logica.generador.Generador.crear_tabla" title="Link to this definition"></a></dt>
+<dd><p>Procesa los datos de la tabla utilizando el método correspondiente
+según el tipo de orden.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>datos</strong> (<em>dict</em>) – Datos regitrados en la tabla.</p>
+</dd>
+<dt class="field-even">Return res<span class="colon">:</span></dt>
+<dd class="field-even"><p>True si la operación fue exitosa, de lo contrario False.</p>
+</dd>
+<dt class="field-odd">Rtype res<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="gui.html" class="btn btn-neutral float-left" title="Paquete gui" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+        <a href="comunes.html" class="btn btn-neutral float-right" title="Paquete comunes" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2024, errejotaeme.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

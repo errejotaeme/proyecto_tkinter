@@ -1,0 +1,13 @@
+ 
+Dependencias
+=============
+
+Requisitos básicos
+-------------------
+
+* **Tkinter** permite construir la interfaz gráfica. Puede verificar que esté instalado en su sistema ejecutando el siguiente comando en la terminal: :code:`python -m tkinter`.
+
+Requisitos opcionales
+----------------------
+
+* **Pandas** se utiliza opcionalmente para ordenar la tabla. La elección de un orden *Ascendente* o *Descendente* seguido del sufijo *- pandas*, implica una escritura incremental directamente en el archivo, a medida que se van creando los registros. Luego se utiliza **Pandas** para ordenarlos segun la opción seleccionada. El orden *Ninguno* también se genera de esta forma incremental. Para instalar **Pandas**, puede utilizar el comando :code:`pip install pandas`.

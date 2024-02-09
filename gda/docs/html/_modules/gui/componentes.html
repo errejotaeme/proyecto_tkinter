@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>gui.componentes &mdash; documentación de GDA - 1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=36c4ab74"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/translations.js?v=efdbd0b9"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            GDA
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenido:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dependencias.html">Dependencias</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Paquetes y módulos</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GDA</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Código de módulo</a></li>
+      <li class="breadcrumb-item active">gui.componentes</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Código fuente para gui.componentes</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">filedialog</span><span class="p">,</span> <span class="n">messagebox</span>
+<span class="kn">from</span> <span class="nn">app.comunes.idioma</span> <span class="kn">import</span> <span class="n">leng</span>
+<span class="kn">from</span> <span class="nn">app.comunes.globales</span> <span class="kn">import</span> <span class="n">gb</span>
+<span class="kn">from</span> <span class="nn">app.gui.elementos</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">EntradaTexto</span><span class="p">,</span> <span class="n">EntradaOpciones</span><span class="p">,</span>
+    <span class="n">Boton</span><span class="p">,</span> <span class="n">NotaEmergente</span>
+<span class="p">)</span>
+
+
+
+<div class="viewcode-block" id="VerDatos">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.VerDatos">[documentos]</a>
+<span class="k">class</span> <span class="nc">VerDatos</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Clase encargada de gestionar la vista de los datos ingresados.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ubicacion</span><span class="p">,</span> <span class="n">m_raiz</span><span class="p">,</span> <span class="n">gestor</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor de la clase VerDatos. Permite ver y evaluar</span>
+<span class="sd">        los datos ingresados antes de exportar la tabla.</span>
+
+<span class="sd">        :param ubicacion: Marco donde se anidará el módulo.</span>
+<span class="sd">        :type ubicacion: tk.Frame </span>
+<span class="sd">        :param m_raiz: Instancia de la ventana principal (Tk).</span>
+<span class="sd">        :type m_raiz: tk.Tk</span>
+<span class="sd">        :param gestor: Instancia que comunica componentes, tabla y generador.</span>
+<span class="sd">        :type gestor: Gestor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span> <span class="o">=</span> <span class="n">gestor</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="n">ubicacion</span><span class="p">,</span> <span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_MARCO_MOD</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span>
+            <span class="n">side</span><span class="o">=</span><span class="s2">&quot;top&quot;</span><span class="p">,</span>
+            <span class="n">fill</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span>
+            <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="c1"># Barra de desplazamiento vertical</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_b_vertical</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Scrollbar</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">desplazar</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_b_vertical</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">side</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Cuadro texto donde se verán los datos ingresados</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_texto</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="p">,</span>
+            <span class="n">wrap</span><span class="o">=</span><span class="s2">&quot;word&quot;</span><span class="p">,</span>
+            <span class="n">yscrollcommand</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_b_vertical</span><span class="o">.</span><span class="n">set</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_texto</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span>
+            <span class="n">side</span><span class="o">=</span><span class="s2">&quot;top&quot;</span><span class="p">,</span>
+            <span class="n">fill</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span>
+            <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_texto</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_TX_VISTA</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_texto</span><span class="o">.</span><span class="n">tag_configure</span><span class="p">(</span><span class="s2">&quot;clave&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_TX_CLAVE</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_texto</span><span class="o">.</span><span class="n">tag_configure</span><span class="p">(</span><span class="s2">&quot;valor&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_TX_VALOR</span><span class="p">)</span>
+
+        <span class="c1"># Previene que se oculte la barra de desplazamiento</span>
+        <span class="n">m_raiz</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s2">&quot;&lt;Configure&gt;&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">barra_visible</span><span class="p">)</span>
+        <span class="c1"># Previene el ingreso de datos en el panel de vista</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_texto</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span> <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;aclaracion&#39;</span><span class="p">],</span> <span class="s2">&quot;clave&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_texto</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="s1">&#39;disabled&#39;</span><span class="p">)</span>        
+    
+<div class="viewcode-block" id="VerDatos.insertar_datos">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.VerDatos.insertar_datos">[documentos]</a>
+    <span class="k">def</span> <span class="nf">insertar_datos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datos</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Recibe del gestor los datos cargados por el usuario y</span>
+<span class="sd">        los inserta en el cuadro de texto.</span>
+
+<span class="sd">        :param datos: Valores ingresados y almacenados en la tabla.</span>
+<span class="sd">        :type datos: list</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_texto</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_texto</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_texto</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span> <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;aclaracion&#39;</span><span class="p">],</span> <span class="s2">&quot;clave&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">indice</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">datos</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">indice</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_texto</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s2">&quot;end&quot;</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="s2">&quot;clave&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_texto</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s2">&quot;end&quot;</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="s2">&quot;valor&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_texto</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="s1">&#39;disabled&#39;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="VerDatos.desplazar">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.VerDatos.desplazar">[documentos]</a>
+    <span class="k">def</span> <span class="nf">desplazar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Asocia la barra de desplazamiento vertical al cuadro de texto.</span>
+
+<span class="sd">        :param args: Señal de desplazamiento vertical en el cuadro de texto.</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_texto</span><span class="o">.</span><span class="n">yview</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="VerDatos.barra_visible">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.VerDatos.barra_visible">[documentos]</a>
+    <span class="k">def</span> <span class="nf">barra_visible</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Mantiene visible la barra de desplazamiento vertical</span>
+<span class="sd">        aunque se modifiquen las dimensiones de la ventana.</span>
+
+<span class="sd">        :param args: Señal de modificación del tamaño de la ventana.</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_texto</span><span class="o">.</span><span class="n">pack_configure</span><span class="p">(</span>
+            <span class="n">side</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span>
+            <span class="n">fill</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span>
+            <span class="n">expand</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Ruta">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.Ruta">[documentos]</a>
+<span class="k">class</span> <span class="nc">Ruta</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Clase encargada de gestionar el ingreso de la ruta de salida.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ubicacion</span><span class="p">,</span> <span class="n">gestor</span><span class="p">,</span> <span class="n">interface</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor de la clase Ruta. Administra el ingreso o selección</span>
+<span class="sd">        de la ruta de salida, ya sea para un directorio o un archivo CSV.</span>
+
+<span class="sd">        :param ubicacion: Marco donde se anidará el módulo.</span>
+<span class="sd">        :type ubicacion: tk.Frame</span>
+<span class="sd">        :param gestor: Instancia que comunica componentes, tabla y generador.</span>
+<span class="sd">        :type gestor: Gestor</span>
+<span class="sd">        :param interface: Instancia que contiene a los componentes principales.</span>
+<span class="sd">        :type interface: Interface</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span> <span class="o">=</span> <span class="n">gestor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span> <span class="o">=</span> <span class="n">interface</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="n">ubicacion</span><span class="p">,</span> <span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_MARCO_MOD</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">PACK_MARCO_MODULO</span><span class="p">)</span>
+
+        <span class="c1"># Crea el Entry que recibe la ruta de entrada</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_ruta</span> <span class="o">=</span> <span class="n">EntradaTexto</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;ruta&#39;</span><span class="p">],</span> <span class="c1"># Texto de etiqueta</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;ruta_def&#39;</span><span class="p">],</span> <span class="c1"># Ruta de ejemplo</span>
+            <span class="k">lambda</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_confirmar_ruta</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_boton_ruta</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_MARCO_MOD</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_boton_ruta</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">PACK_MARCO_BTN</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_boton_seleccionar_ruta</span> <span class="o">=</span> <span class="n">Boton</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_boton_ruta</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;btn_ubicacion&#39;</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_seleccionar_ruta</span><span class="p">,</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_BTN_OK</span><span class="p">,</span>
+            <span class="k">lambda</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_seleccionar_ruta</span><span class="p">(),</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">fuente_boton</span>
+        <span class="p">)</span>      
+        <span class="bp">self</span><span class="o">.</span><span class="n">_boton_confirmar_ruta</span> <span class="o">=</span> <span class="n">Boton</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_boton_ruta</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;btn_ok&#39;</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_confirmar_ruta</span><span class="p">,</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_BTN_OK</span><span class="p">,</span>
+            <span class="k">lambda</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_confirmar_ruta</span><span class="p">(),</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">fuente_boton</span>
+        <span class="p">)</span>
+        
+<div class="viewcode-block" id="Ruta.limpiar_entrada">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.Ruta.limpiar_entrada">[documentos]</a>
+    <span class="k">def</span> <span class="nf">limpiar_entrada</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Elimina el contenido actual del widget de entrada.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_ruta</span><span class="o">.</span><span class="n">borrar_valor</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Ruta.enfocar">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.Ruta.enfocar">[documentos]</a>
+    <span class="k">def</span> <span class="nf">enfocar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Dirige el enfoque del teclado al widget principal del módulo.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>    
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_ruta</span><span class="o">.</span><span class="n">enfocar_entrada</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Ruta._seleccionar_ruta">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.Ruta._seleccionar_ruta">[documentos]</a>
+    <span class="k">def</span> <span class="nf">_seleccionar_ruta</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Despliega una ventana que permite seleccionar el directorio</span>
+<span class="sd">        o archivo CSV de salida.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ruta_elegida</span> <span class="o">=</span> <span class="n">filedialog</span><span class="o">.</span><span class="n">askdirectory</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_ruta</span><span class="o">.</span><span class="n">establecer_valor</span><span class="p">(</span><span class="n">ruta_elegida</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Ruta._confirmar_ruta">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.Ruta._confirmar_ruta">[documentos]</a>
+    <span class="k">def</span> <span class="nf">_confirmar_ruta</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Envía al gestor la ruta ingresada para su validación.</span>
+<span class="sd">        Si fue exitosa, establece el enfoque del teclado</span>
+<span class="sd">        en la entrada de texto del módulo siguiente.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>   
+        <span class="n">respuesta</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span><span class="o">.</span><span class="n">recibir</span><span class="p">(</span>
+            <span class="s2">&quot;m_ruta&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_ruta</span><span class="o">.</span><span class="n">obtener_valor</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">respuesta</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">modulo_encabezado</span><span class="o">.</span><span class="n">enfocar</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Encabezado">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.Encabezado">[documentos]</a>
+<span class="k">class</span> <span class="nc">Encabezado</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Clase encargada de gestionar el ingreso de los campos de la tabla.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ubicacion</span><span class="p">,</span> <span class="n">gestor</span><span class="p">,</span> <span class="n">interface</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor de la clase Encabezado. Gestiona el ingreso</span>
+<span class="sd">        de campos de la tabla y actualiza las opciones de los modulos</span>
+<span class="sd">        que los utilizan.</span>
+
+<span class="sd">        :param ubicacion: Marco donde se anidará el módulo.</span>
+<span class="sd">        :type ubicacion: tk.Frame</span>
+<span class="sd">        :param gestor: Instancia que comunica componentes, tabla y generador.</span>
+<span class="sd">        :type gestor: Gestor</span>
+<span class="sd">        :param interface: Instancia que contiene a los componentes principales.</span>
+<span class="sd">        :type interface: Interface</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span> <span class="o">=</span> <span class="n">gestor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span> <span class="o">=</span> <span class="n">interface</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="n">ubicacion</span><span class="p">,</span> <span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_MARCO_MOD</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">PACK_MARCO_MODULO</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_encabezado</span> <span class="o">=</span> <span class="n">EntradaTexto</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;encabezado&#39;</span><span class="p">],</span> <span class="c1"># Texto de etiqueta</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;campos_def&#39;</span><span class="p">],</span> <span class="c1"># Campos de ejemplo</span>
+            <span class="k">lambda</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_confirmar_encabezado</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_botones_encabezado</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_MARCO_MOD</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_botones_encabezado</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">PACK_MARCO_BTN</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_boton_borrar_encabezado</span> <span class="o">=</span> <span class="n">Boton</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_botones_encabezado</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;btn_encabezado&#39;</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_borrar_campos_ingresados</span><span class="p">,</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_BTN_NO_OK</span><span class="p">,</span>
+            <span class="k">lambda</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_borrar_campos_ingresados</span><span class="p">(),</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">fuente_boton</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_boton_confirmar_encabezado</span> <span class="o">=</span> <span class="n">Boton</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_botones_encabezado</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;btn_ok&#39;</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_confirmar_encabezado</span><span class="p">,</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_BTN_OK</span><span class="p">,</span>
+            <span class="k">lambda</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_confirmar_encabezado</span><span class="p">(),</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">fuente_boton</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="Encabezado.limpiar_entrada">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.Encabezado.limpiar_entrada">[documentos]</a>
+    <span class="k">def</span> <span class="nf">limpiar_entrada</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ver Ruta.limpiar_entrada()</span>
+<span class="sd">        &quot;&quot;&quot;</span>     
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_encabezado</span><span class="o">.</span><span class="n">borrar_valor</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Encabezado.enfocar">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.Encabezado.enfocar">[documentos]</a>
+    <span class="k">def</span> <span class="nf">enfocar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ver Ruta.enfocar()</span>
+<span class="sd">        &quot;&quot;&quot;</span>       
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_encabezado</span><span class="o">.</span><span class="n">enfocar_entrada</span><span class="p">()</span></div>
+
+    
+<div class="viewcode-block" id="Encabezado._confirmar_encabezado">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.Encabezado._confirmar_encabezado">[documentos]</a>
+    <span class="k">def</span> <span class="nf">_confirmar_encabezado</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Envía al gestor los campos ingresados para su validación.</span>
+<span class="sd">        Si fue exitosa, actualiza las opciones de los componentes que podrían</span>
+<span class="sd">        utilizarlos y luego establece el enfoque del teclado en el widget</span>
+<span class="sd">        principal del módulo siguiente.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">respuesta</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span><span class="o">.</span><span class="n">recibir</span><span class="p">(</span>
+            <span class="s2">&quot;m_encabezado&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_encabezado</span><span class="o">.</span><span class="n">obtener_valor</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">respuesta</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span><span class="o">.</span><span class="n">actualizar_opciones</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">modulo_opciones_tabla</span><span class="o">.</span><span class="n">enfocar</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Encabezado._borrar_campos_ingresados">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.Encabezado._borrar_campos_ingresados">[documentos]</a>
+    <span class="k">def</span> <span class="nf">_borrar_campos_ingresados</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Vacia el widget de entrada y elimina los campos previamente definidos.</span>
+<span class="sd">        </span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">limpiar_entrada</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span><span class="o">.</span><span class="n">borrar_encabezado</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="OpcionesTabla">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.OpcionesTabla">[documentos]</a>
+<span class="k">class</span> <span class="nc">OpcionesTabla</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Clase encargada de administrar las opciones de formato de la tabla.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ubicacion</span><span class="p">,</span> <span class="n">gestor</span><span class="p">,</span> <span class="n">interface</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor de la clase OpcionesTabla. Gestiona la entrada de</span>
+<span class="sd">        delimitadores, tipo de orden, campo de referencia, librería y seed</span>
+<span class="sd">        (estado inicial para &#39;random&#39;).</span>
+
+<span class="sd">        :param ubicacion: Marco donde se anidará el módulo.</span>
+<span class="sd">        :type ubicacion: tk.Frame</span>
+<span class="sd">        :param gestor: Instancia que comunica componentes, tabla y generador.</span>
+<span class="sd">        :type gestor: Gestor</span>
+<span class="sd">        :param interface: Instancia que contiene a los componentes principales.</span>
+<span class="sd">        :type interface: Interface</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span> <span class="o">=</span> <span class="n">gestor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span> <span class="o">=</span> <span class="n">interface</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="n">ubicacion</span><span class="p">,</span> <span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_MARCO_MOD</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">PACK_MARCO_MODULO</span><span class="p">)</span>
+  
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_delimitador</span> <span class="o">=</span> <span class="n">EntradaTexto</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;delimitador&#39;</span><span class="p">],</span>
+            <span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="k">lambda</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_confirmar_opciones</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="c1"># Lista con las formas de ordenar la tabla</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_opc_orden_base</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;orden_opc_2&#39;</span><span class="p">],</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;orden_opc_0&#39;</span><span class="p">],</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;orden_opc_1&#39;</span><span class="p">],</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;orden_opc_3&#39;</span><span class="p">],</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;orden_opc_4&#39;</span><span class="p">]</span>
+        <span class="p">]</span>
+        <span class="c1"># Crea el OptionMenu de las formas de ordenar y su etiqueta        </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_opcion_orden</span> <span class="o">=</span> <span class="n">EntradaOpciones</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;orden&#39;</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_opc_orden_base</span>
+        <span class="p">)</span>
+        <span class="c1"># Nota emergente sobre las formas de ordenar el archivo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ne_orden</span> <span class="o">=</span> <span class="n">NotaEmergente</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_opcion_orden</span><span class="o">.</span><span class="n">entrada_opciones</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;ne_opc_orden&#39;</span><span class="p">]</span>
+        <span class="p">)</span>       
+        <span class="c1"># Muestra la nota cuando se ubica el cursor en el widget</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_opcion_orden</span><span class="o">.</span><span class="n">entrada_opciones</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span>
+            <span class="s2">&quot;&lt;Enter&gt;&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ne_orden</span><span class="o">.</span><span class="n">mostrar</span>
+        <span class="p">)</span>      
+        <span class="c1"># Oculta la nota cuando se retira el cursor del widget</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_opcion_orden</span><span class="o">.</span><span class="n">entrada_opciones</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span>
+            <span class="s2">&quot;&lt;Leave&gt;&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ne_orden</span><span class="o">.</span><span class="n">ocultar</span>
+        <span class="p">)</span>       
+        <span class="bp">self</span><span class="o">.</span><span class="n">_opc_criterio_base</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;criterio_opc_base&#39;</span><span class="p">]]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_opcion_criterio</span> <span class="o">=</span> <span class="n">EntradaOpciones</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;criterio&#39;</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_opc_criterio_base</span>
+        <span class="p">)</span>     
+        <span class="bp">self</span><span class="o">.</span><span class="n">_opc_modo_base</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;random&quot;</span><span class="p">,</span> <span class="s2">&quot;secrets&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_opcion_modo</span> <span class="o">=</span> <span class="n">EntradaOpciones</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;modo&#39;</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_opc_modo_base</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rastrear_opcion_aleatoriedad</span>
+        <span class="p">)</span>      
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_semilla</span> <span class="o">=</span> <span class="n">EntradaTexto</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;semilla&#39;</span><span class="p">],</span> <span class="c1"># Texto de etiqueta</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;semilla_def&#39;</span><span class="p">],</span> <span class="c1"># Valor por defecto</span>
+            <span class="k">lambda</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_confirmar_opciones</span><span class="p">()</span>
+        <span class="p">)</span>      
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_boton_opciones_tabla</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_MARCO_MOD</span>
+        <span class="p">)</span>       
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_boton_opciones_tabla</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">PACK_MARCO_BTN</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_boton_confirmar_opciones</span> <span class="o">=</span> <span class="n">Boton</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_boton_opciones_tabla</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;btn_ok&#39;</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_confirmar_opciones</span><span class="p">,</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_BTN_OK</span><span class="p">,</span>
+            <span class="k">lambda</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_confirmar_opciones</span><span class="p">(),</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">fuente_boton</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="OpcionesTabla.limpiar_entrada">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.OpcionesTabla.limpiar_entrada">[documentos]</a>
+    <span class="k">def</span> <span class="nf">limpiar_entrada</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ver Ruta.limpiar_entrada()</span>
+<span class="sd">        &quot;&quot;&quot;</span>     
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_delimitador</span><span class="o">.</span><span class="n">borrar_valor</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="OpcionesTabla.enfocar">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.OpcionesTabla.enfocar">[documentos]</a>
+    <span class="k">def</span> <span class="nf">enfocar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ver Ruta.enfocar()</span>
+<span class="sd">        &quot;&quot;&quot;</span>     
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_delimitador</span><span class="o">.</span><span class="n">enfocar_entrada</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="OpcionesTabla.actualizar_opciones_criterio">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.OpcionesTabla.actualizar_opciones_criterio">[documentos]</a>
+    <span class="k">def</span> <span class="nf">actualizar_opciones_criterio</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Actualiza las opciones de campos de referencia para ordenar la tabla</span>
+<span class="sd">        con los campos existentes.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="n">nuevos_campos</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span><span class="o">.</span><span class="n">ver_encabezado</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nuevos_campos</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">nuevos_campos</span> <span class="o">=</span> <span class="p">[</span><span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;opc_vacio&#39;</span><span class="p">]]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_opcion_criterio</span><span class="o">.</span><span class="n">actualizar_opciones</span><span class="p">(</span><span class="n">nuevos_campos</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="OpcionesTabla._rastrear_opcion_aleatoriedad">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.OpcionesTabla._rastrear_opcion_aleatoriedad">[documentos]</a>
+    <span class="k">def</span> <span class="nf">_rastrear_opcion_aleatoriedad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Rastrea el modo de aleatoriedad seleccionado. Si es &#39;secrets&#39;,</span>
+<span class="sd">        oculta la opción de ingresar &#39;seed&#39; y la de número decimal</span>
+<span class="sd">        en el módulo campo numérico.</span>
+<span class="sd">        </span>
+<span class="sd">        :param args: Señal de cambio en la opción del modo de aleatoriedad.</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">modo</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_opcion_modo</span><span class="o">.</span><span class="n">obtener_valor</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">modo</span> <span class="o">==</span> <span class="s2">&quot;random&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_semilla</span><span class="o">.</span><span class="n">mostrar_elemento</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">modulo_campo_numerico</span><span class="o">.</span><span class="n">actualizar_opciones_numero</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;opc_num_int&#39;</span><span class="p">],</span> <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;opc_num_float&#39;</span><span class="p">]]</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_semilla</span><span class="o">.</span><span class="n">ocultar_elemento</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_semilla</span><span class="o">.</span><span class="n">establecer_valor</span><span class="p">(</span><span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;semilla_def&#39;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">modulo_campo_numerico</span><span class="o">.</span><span class="n">actualizar_opciones_numero</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;opc_num_int&#39;</span><span class="p">]]</span>
+            <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="OpcionesTabla._confirmar_opciones">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.OpcionesTabla._confirmar_opciones">[documentos]</a>
+    <span class="k">def</span> <span class="nf">_confirmar_opciones</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reúne las opciones definidas y las envía al gestor para su</span>
+<span class="sd">        validación. Si fue exitosa, establece el enfoque del teclado</span>
+<span class="sd">        en el widget principal del módulo siguiente.</span>
+
+<span class="sd">        return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">aux_opc</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">aux_opc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_delimitador</span><span class="o">.</span><span class="n">obtener_valor</span><span class="p">())</span>
+        <span class="n">aux_opc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_elemento_opcion_orden</span><span class="o">.</span><span class="n">obtener_valor</span><span class="p">())</span>
+        <span class="n">aux_opc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_elemento_opcion_criterio</span><span class="o">.</span><span class="n">obtener_valor</span><span class="p">())</span>
+        <span class="n">aux_opc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_elemento_opcion_modo</span><span class="o">.</span><span class="n">obtener_valor</span><span class="p">())</span>
+        <span class="n">aux_opc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_semilla</span><span class="o">.</span><span class="n">obtener_valor</span><span class="p">())</span>
+        <span class="n">respuesta</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span><span class="o">.</span><span class="n">recibir</span><span class="p">(</span><span class="s2">&quot;m_opciones_tabla&quot;</span><span class="p">,</span> <span class="n">aux_opc</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">respuesta</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">modulo_campo_booleano</span><span class="o">.</span><span class="n">enfocar</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="CampoBooleano">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.CampoBooleano">[documentos]</a>
+<span class="k">class</span> <span class="nc">CampoBooleano</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Clase que gestiona la definción de un campo ingresado como booleano.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ubicacion</span><span class="p">,</span> <span class="n">gestor</span><span class="p">,</span> <span class="n">interface</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor de la clase CampoBooleano. Permite seleccionar</span>
+<span class="sd">        el campo a definir y los posibles valores (True, False, None) de</span>
+<span class="sd">        sus celdas.</span>
+
+<span class="sd">        :param ubicacion: Marco donde se anidará el módulo.</span>
+<span class="sd">        :type ubicacion: tk.Frame</span>
+<span class="sd">        :param gestor: Instancia que comunica componentes, tabla y generador.</span>
+<span class="sd">        :type gestor: Gestor</span>
+<span class="sd">        :param interface: Instancia que contiene a los componentes.</span>
+<span class="sd">        :type interface: Interface</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span> <span class="o">=</span> <span class="n">gestor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span> <span class="o">=</span> <span class="n">interface</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="n">ubicacion</span><span class="p">,</span> <span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_MARCO_MOD</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">PACK_MARCO_MODULO</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_boton_definir_campo_booleano</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_MARCO_MOD</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_boton_definir_campo_booleano</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">PACK_MARCO_BTN</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_boton_confirmar_campo_booleano</span> <span class="o">=</span> <span class="n">Boton</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_boton_definir_campo_booleano</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;btn_ok&#39;</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_confirmar_campo_booleano</span><span class="p">,</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_BTN_OK</span><span class="p">,</span>
+            <span class="k">lambda</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_confirmar_campo_booleano</span><span class="p">(),</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">fuente_boton</span>
+        <span class="p">)</span>
+        <span class="c1"># Lista con campos de ejemplo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_opc_elegir_campo_base</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;campo_def_0&#39;</span><span class="p">],</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;campo_def_1&#39;</span><span class="p">],</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;campo_def_2&#39;</span><span class="p">],</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;campo_def_3&#39;</span><span class="p">]</span>
+        <span class="p">]</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_elegir_campo</span> <span class="o">=</span> <span class="n">EntradaOpciones</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;selecc_campo_bool&#39;</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_opc_elegir_campo_base</span><span class="p">,</span>
+            <span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_BTN_OPC</span><span class="p">,</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">PACK_MARCO_ENT_BOOL</span>
+        <span class="p">)</span>
+        <span class="c1"># Lista con las opciones de campo booleano</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_opc_logica_base</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;True, False&quot;</span><span class="p">,</span> <span class="s2">&quot;True, False, None&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_elegir_logica</span> <span class="o">=</span> <span class="n">EntradaOpciones</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;logica&#39;</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_opc_logica_base</span><span class="p">,</span>
+            <span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_BTN_OPC</span><span class="p">,</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">PACK_MARCO_ENT_BOOL</span>
+        <span class="p">)</span>
+        
+<div class="viewcode-block" id="CampoBooleano.enfocar">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.CampoBooleano.enfocar">[documentos]</a>
+    <span class="k">def</span> <span class="nf">enfocar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ver Ruta.enfocar()</span>
+<span class="sd">        &quot;&quot;&quot;</span>     
+        <span class="bp">self</span><span class="o">.</span><span class="n">_boton_confirmar_campo_booleano</span><span class="o">.</span><span class="n">enfocar_boton</span><span class="p">()</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="CampoBooleano.actualizar_opciones_campo">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.CampoBooleano.actualizar_opciones_campo">[documentos]</a>
+    <span class="k">def</span> <span class="nf">actualizar_opciones_campo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Actualiza la opción de campo a elegir con campos aun no definidos.</span>
+
+<span class="sd">        :return: None        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nuevos_campos</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span><span class="o">.</span><span class="n">ver_campos_sin_definir</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nuevos_campos</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">nuevos_campos</span> <span class="o">=</span> <span class="p">[</span><span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;opc_vacio&#39;</span><span class="p">]]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_elegir_campo</span><span class="o">.</span><span class="n">actualizar_opciones</span><span class="p">(</span><span class="n">nuevos_campos</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CampoBooleano._confirmar_campo_booleano">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.CampoBooleano._confirmar_campo_booleano">[documentos]</a>
+    <span class="k">def</span> <span class="nf">_confirmar_campo_booleano</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reúne los valores definidos y los envía al gestor para su</span>
+<span class="sd">        validación. Si fue exitosa, actualiza las opciones y luego</span>
+<span class="sd">        establece el enfoque del teclado en el widget principal</span>
+<span class="sd">        del módulo siguiente.</span>
+
+<span class="sd">        return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>       
+        <span class="n">mensaje</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">mensaje</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_elemento_elegir_campo</span><span class="o">.</span><span class="n">obtener_valor</span><span class="p">())</span>
+        <span class="n">mensaje</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_elemento_elegir_logica</span><span class="o">.</span><span class="n">obtener_valor</span><span class="p">())</span>
+        <span class="n">respuesta</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span><span class="o">.</span><span class="n">recibir</span><span class="p">(</span><span class="s2">&quot;m_campo_booleano&quot;</span><span class="p">,</span> <span class="n">mensaje</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">respuesta</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span><span class="o">.</span><span class="n">actualizar_opciones</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">modulo_exportar</span><span class="o">.</span><span class="n">enfocar</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="CampoTexto">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.CampoTexto">[documentos]</a>
+<span class="k">class</span> <span class="nc">CampoTexto</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Clase encargada de gestionar la definción de un campo como de texto.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ubicacion</span><span class="p">,</span> <span class="n">gestor</span><span class="p">,</span> <span class="n">interface</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor de la clase CampoTexto. Permite seleccionar</span>
+<span class="sd">        el campo a definir e ingresar los posibles valores de texto</span>
+<span class="sd">        de sus celdas.</span>
+
+<span class="sd">        :param ubicacion: Marco donde se anidará el módulo.</span>
+<span class="sd">        :type ubicacion: tk.Frame</span>
+<span class="sd">        :param gestor: Instancia que comunica componentes, tabla y generador.</span>
+<span class="sd">        :type gestor: Gestor</span>
+<span class="sd">        :param interface: Instancia que contiene a los componentes.</span>
+<span class="sd">        :type interface: Interface</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span> <span class="o">=</span> <span class="n">gestor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span> <span class="o">=</span> <span class="n">interface</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="n">ubicacion</span><span class="p">,</span> <span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_MARCO_MOD</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">PACK_MARCO_MODULO</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_valores_texto</span> <span class="o">=</span> <span class="n">EntradaTexto</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;valores_texto&#39;</span><span class="p">],</span> <span class="c1"># Texto de etiqueta</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;valores_tex_def&#39;</span><span class="p">],</span> <span class="c1"># Valores de ejemplo</span>
+            <span class="k">lambda</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_confirmar_campo_texto</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_boton_texto</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_MARCO_MOD</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_boton_texto</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">PACK_MARCO_BTN</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_boton_borrar_valores_texto</span> <span class="o">=</span> <span class="n">Boton</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_boton_texto</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;btn_borrar_tex&#39;</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">limpiar_entrada</span><span class="p">,</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_BTN_NO_OK</span><span class="p">,</span>
+            <span class="k">lambda</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">limpiar_entrada</span><span class="p">(),</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">fuente_boton</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_boton_confirmar_texto</span> <span class="o">=</span> <span class="n">Boton</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_boton_texto</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;btn_ok&#39;</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_confirmar_campo_texto</span><span class="p">,</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_BTN_OK</span><span class="p">,</span>
+            <span class="k">lambda</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_confirmar_campo_texto</span><span class="p">(),</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">fuente_boton</span>
+        <span class="p">)</span>
+        <span class="c1"># Lista con campos de ejemplo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_opc_elegir_campo_base</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;campo_def_0&#39;</span><span class="p">],</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;campo_def_1&#39;</span><span class="p">],</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;campo_def_2&#39;</span><span class="p">],</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;campo_def_3&#39;</span><span class="p">]</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_elegir_campo</span> <span class="o">=</span> <span class="n">EntradaOpciones</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;selecc_campo&#39;</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_opc_elegir_campo_base</span><span class="p">,</span>
+            <span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_BTN_OPC</span><span class="p">,</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">PACK_MARCO_ENT_BOOL</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="CampoTexto.limpiar_entrada">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.CampoTexto.limpiar_entrada">[documentos]</a>
+    <span class="k">def</span> <span class="nf">limpiar_entrada</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ver Ruta.limpiar_entrada()</span>
+<span class="sd">        &quot;&quot;&quot;</span>     
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_valores_texto</span><span class="o">.</span><span class="n">borrar_valor</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="CampoTexto.enfocar">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.CampoTexto.enfocar">[documentos]</a>
+    <span class="k">def</span> <span class="nf">enfocar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ver Ruta.enfocar()</span>
+<span class="sd">        &quot;&quot;&quot;</span>     
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_valores_texto</span><span class="o">.</span><span class="n">enfocar_entrada</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="CampoTexto.actualizar_opciones_campo">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.CampoTexto.actualizar_opciones_campo">[documentos]</a>
+    <span class="k">def</span> <span class="nf">actualizar_opciones_campo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ver CampoBooleano.actualizar_opciones_campo()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nuevos_campos</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span><span class="o">.</span><span class="n">ver_campos_sin_definir</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nuevos_campos</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">nuevos_campos</span> <span class="o">=</span> <span class="p">[</span><span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;opc_vacio&#39;</span><span class="p">]]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_elegir_campo</span><span class="o">.</span><span class="n">actualizar_opciones</span><span class="p">(</span><span class="n">nuevos_campos</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CampoTexto._confirmar_campo_texto">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.CampoTexto._confirmar_campo_texto">[documentos]</a>
+    <span class="k">def</span> <span class="nf">_confirmar_campo_texto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ver CampoBooleano._confirmar_campo_booleano()</span>
+<span class="sd">        &quot;&quot;&quot;</span>   
+        <span class="n">mensaje</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">mensaje</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_elemento_elegir_campo</span><span class="o">.</span><span class="n">obtener_valor</span><span class="p">())</span>
+        <span class="n">mensaje</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_valores_texto</span><span class="o">.</span><span class="n">obtener_valor</span><span class="p">())</span>
+        <span class="n">respuesta</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span><span class="o">.</span><span class="n">recibir</span><span class="p">(</span><span class="s2">&quot;m_campo_texto&quot;</span><span class="p">,</span> <span class="n">mensaje</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">respuesta</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span><span class="o">.</span><span class="n">actualizar_opciones</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">modulo_exportar</span><span class="o">.</span><span class="n">enfocar</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="CampoNumerico">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.CampoNumerico">[documentos]</a>
+<span class="k">class</span> <span class="nc">CampoNumerico</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Clase encargada de gestionar la definción de un campo como numérico.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ubicacion</span><span class="p">,</span> <span class="n">gestor</span><span class="p">,</span> <span class="n">interface</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor de la clase CampoNumerico. Permite seleccionar</span>
+<span class="sd">        el campo a definir, establecer el rango de posibles valores</span>
+<span class="sd">        y el tipo numérico (entero o decimal).</span>
+
+<span class="sd">        :param ubicacion: Marco donde se anidará el módulo.</span>
+<span class="sd">        :type ubicacion: tk.Frame</span>
+<span class="sd">        :param gestor: Instancia que comunica componentes, tabla y generador.</span>
+<span class="sd">        :type gestor: Gestor</span>
+<span class="sd">        :param interface: Instancia que contiene a los componentes.</span>
+<span class="sd">        :type interface: Interface</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span> <span class="o">=</span> <span class="n">gestor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span> <span class="o">=</span> <span class="n">interface</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="n">ubicacion</span><span class="p">,</span> <span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_MARCO_MOD</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">PACK_MARCO_MODULO</span><span class="p">)</span>
+  
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_rango_inicio</span> <span class="o">=</span> <span class="n">EntradaTexto</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;rango_desde&#39;</span><span class="p">],</span>
+            <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="c1"># Opción por defecto</span>
+            <span class="k">lambda</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_confirmar_rango</span><span class="p">()</span>
+        <span class="p">)</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_rango_fin</span> <span class="o">=</span> <span class="n">EntradaTexto</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;rango_hasta&#39;</span><span class="p">],</span>
+            <span class="s2">&quot;100&quot;</span><span class="p">,</span> <span class="c1"># Opción por defecto</span>
+            <span class="k">lambda</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_confirmar_rango</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="c1"># Nota emergente rango inicio </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ne_digitos_ini</span> <span class="o">=</span> <span class="n">NotaEmergente</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_rango_inicio</span><span class="o">.</span><span class="n">entrada</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;ne_digitos&#39;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_rango_inicio</span><span class="o">.</span><span class="n">entrada</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span>
+            <span class="s2">&quot;&lt;Enter&gt;&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ne_digitos_ini</span><span class="o">.</span><span class="n">mostrar</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_rango_inicio</span><span class="o">.</span><span class="n">entrada</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span>
+            <span class="s2">&quot;&lt;Leave&gt;&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ne_digitos_ini</span><span class="o">.</span><span class="n">ocultar</span>
+        <span class="p">)</span>
+        <span class="c1"># Nota emergente rango fin</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ne_digitos_fin</span> <span class="o">=</span> <span class="n">NotaEmergente</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_rango_fin</span><span class="o">.</span><span class="n">entrada</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;ne_digitos&#39;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_rango_fin</span><span class="o">.</span><span class="n">entrada</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span>
+            <span class="s2">&quot;&lt;Enter&gt;&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ne_digitos_fin</span><span class="o">.</span><span class="n">mostrar</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_rango_fin</span><span class="o">.</span><span class="n">entrada</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span>
+            <span class="s2">&quot;&lt;Leave&gt;&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ne_digitos_fin</span><span class="o">.</span><span class="n">ocultar</span>
+        <span class="p">)</span>
+        <span class="c1"># Lista con tipos numéricos</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_opc_tipo_base</span> <span class="o">=</span> <span class="p">[</span><span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;opc_num_int&#39;</span><span class="p">],</span> <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;opc_num_float&#39;</span><span class="p">]]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_opcion_tipo</span> <span class="o">=</span> <span class="n">EntradaOpciones</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;selecc_tipo_num&#39;</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_opc_tipo_base</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rastrear_tipo_num</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_redondeo</span> <span class="o">=</span> <span class="n">EntradaTexto</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;redondear&#39;</span><span class="p">],</span>
+            <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="c1"># Opción por defecto</span>
+            <span class="k">lambda</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_confirmar_rango</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ne_redondeo</span> <span class="o">=</span> <span class="n">NotaEmergente</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_redondeo</span><span class="o">.</span><span class="n">entrada</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;ne_redondeo&#39;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_redondeo</span><span class="o">.</span><span class="n">entrada</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span>
+            <span class="s2">&quot;&lt;Enter&gt;&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ne_redondeo</span><span class="o">.</span><span class="n">mostrar</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_redondeo</span><span class="o">.</span><span class="n">entrada</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span>
+            <span class="s2">&quot;&lt;Leave&gt;&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ne_redondeo</span><span class="o">.</span><span class="n">ocultar</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_boton_campo_numerico</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_MARCO_MOD</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_boton_campo_numerico</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">PACK_MARCO_BTN</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_boton_confirmar_rango</span> <span class="o">=</span> <span class="n">Boton</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_boton_campo_numerico</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;btn_ok&#39;</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_confirmar_rango</span><span class="p">,</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_BTN_OK</span><span class="p">,</span>
+            <span class="k">lambda</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_confirmar_rango</span><span class="p">(),</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">fuente_boton</span>
+        <span class="p">)</span>
+        <span class="c1"># Lista con campos de ejemplo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_opc_elegir_campo_base</span> <span class="o">=</span> <span class="p">[</span><span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;campo_def_0&#39;</span><span class="p">],</span>
+                                       <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;campo_def_1&#39;</span><span class="p">],</span>
+                                       <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;campo_def_2&#39;</span><span class="p">],</span>
+                                       <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;campo_def_3&#39;</span><span class="p">]]</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_elegir_campo</span> <span class="o">=</span> <span class="n">EntradaOpciones</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;selecc_campo_num&#39;</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_opc_elegir_campo_base</span><span class="p">,</span>
+            <span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_BTN_OPC</span><span class="p">,</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">PACK_MARCO_ENT_BOOL</span>
+        <span class="p">)</span>         
+        <span class="c1"># Oculta la entrada de redondeo al inicio </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rastrear_tipo_num</span><span class="p">()</span>
+
+<div class="viewcode-block" id="CampoNumerico.limpiar_entrada">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.CampoNumerico.limpiar_entrada">[documentos]</a>
+    <span class="k">def</span> <span class="nf">limpiar_entrada</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ver Ruta.limpiar_entrada()</span>
+<span class="sd">        &quot;&quot;&quot;</span>     
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_rango_inicio</span><span class="o">.</span><span class="n">borrar_valor</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_rango_fin</span><span class="o">.</span><span class="n">borrar_valor</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="CampoNumerico.enfocar">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.CampoNumerico.enfocar">[documentos]</a>
+    <span class="k">def</span> <span class="nf">enfocar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ver Ruta.enfocar()</span>
+<span class="sd">        &quot;&quot;&quot;</span>     
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_rango_inicio</span><span class="o">.</span><span class="n">enfocar_entrada</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="CampoNumerico.actualizar_opciones_campo">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.CampoNumerico.actualizar_opciones_campo">[documentos]</a>
+    <span class="k">def</span> <span class="nf">actualizar_opciones_campo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ver CampoBooleano.actualizar_opciones_campo()       </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nuevos_campos</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span><span class="o">.</span><span class="n">ver_campos_sin_definir</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nuevos_campos</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">nuevos_campos</span> <span class="o">=</span> <span class="p">[</span><span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;opc_vacio&#39;</span><span class="p">]]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_elegir_campo</span><span class="o">.</span><span class="n">actualizar_opciones</span><span class="p">(</span><span class="n">nuevos_campos</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="CampoNumerico.actualizar_opciones_numero">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.CampoNumerico.actualizar_opciones_numero">[documentos]</a>
+    <span class="k">def</span> <span class="nf">actualizar_opciones_numero</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">opciones</span><span class="p">:</span><span class="nb">list</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Actualiza la opción de tipo numérico según el modo de aleatoriedad.</span>
+
+<span class="sd">        :param opciones: Opciones de tipo numérico (entero o decimal)</span>
+<span class="sd">        :type opciones: list</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_opcion_tipo</span><span class="o">.</span><span class="n">actualizar_opciones</span><span class="p">(</span><span class="n">opciones</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CampoNumerico._confirmar_rango">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.CampoNumerico._confirmar_rango">[documentos]</a>
+    <span class="k">def</span> <span class="nf">_confirmar_rango</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ver CampoBooleano._confirmar_campo_booleano()</span>
+<span class="sd">        &quot;&quot;&quot;</span>   
+        <span class="n">mensaje</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">mensaje</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_elemento_elegir_campo</span><span class="o">.</span><span class="n">obtener_valor</span><span class="p">())</span>
+        <span class="n">mensaje</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_rango_inicio</span><span class="o">.</span><span class="n">obtener_valor</span><span class="p">())</span>
+        <span class="n">mensaje</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_rango_fin</span><span class="o">.</span><span class="n">obtener_valor</span><span class="p">())</span>
+        <span class="n">mensaje</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_elemento_opcion_tipo</span><span class="o">.</span><span class="n">obtener_valor</span><span class="p">())</span>
+        <span class="n">mensaje</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_redondeo</span><span class="o">.</span><span class="n">obtener_valor</span><span class="p">())</span>
+        <span class="n">respuesta</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span><span class="o">.</span><span class="n">recibir</span><span class="p">(</span><span class="s2">&quot;m_campo_numerico&quot;</span><span class="p">,</span> <span class="n">mensaje</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">respuesta</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span><span class="o">.</span><span class="n">actualizar_opciones</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">modulo_exportar</span><span class="o">.</span><span class="n">enfocar</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="CampoNumerico._rastrear_tipo_num">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.CampoNumerico._rastrear_tipo_num">[documentos]</a>
+    <span class="k">def</span> <span class="nf">_rastrear_tipo_num</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Rastrea el tipo numérico seleccionado. Si es &#39;decimal&#39;, habilita</span>
+<span class="sd">        la entrada que permite ingresar en cuántos dígitos redondear.</span>
+<span class="sd">        </span>
+<span class="sd">        :param args: Señal de cambio en la opción de tipo numérico.</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tipo</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_opcion_tipo</span><span class="o">.</span><span class="n">obtener_valor</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">tipo</span> <span class="o">==</span> <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;opc_num_float&#39;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_redondeo</span><span class="o">.</span><span class="n">establecer_valor</span><span class="p">(</span><span class="s2">&quot;2&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_redondeo</span><span class="o">.</span><span class="n">mostrar_elemento</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_redondeo</span><span class="o">.</span><span class="n">establecer_valor</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_redondeo</span><span class="o">.</span><span class="n">ocultar_elemento</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="BorrarCampo">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.BorrarCampo">[documentos]</a>
+<span class="k">class</span> <span class="nc">BorrarCampo</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Clase encargada de gestionar la eliminación de los valores de los campos y</span>
+<span class="sd">    la opción de restablecer la tabla.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ubicacion</span><span class="p">,</span> <span class="n">gestor</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor de la clase BorrarCampo. Permite vaciar un campo</span>
+<span class="sd">        o todos los valores ingresados y las opciones seleccionadas.</span>
+
+<span class="sd">        :param ubicacion: Marco donde se anidará el módulo.</span>
+<span class="sd">        :type ubicacion: tk.Frame</span>
+<span class="sd">        :param gestor: Instancia que comunica componentes, tabla y generador.</span>
+<span class="sd">        :type gestor: Gestor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span> <span class="o">=</span> <span class="n">gestor</span>        
+        
+        <span class="c1"># Almacena la opción activa del campo a vaciar</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_campo_a_vaciar</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="n">ubicacion</span><span class="p">,</span> <span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_MARCO_MOD</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">PACK_MARCO_MODULO</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_boton_restablecer</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_MARCO_MOD</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_boton_restablecer</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">PACK_MARCO_BTN</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_boton_reestablecer_tabla</span> <span class="o">=</span> <span class="n">Boton</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_boton_restablecer</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;btn_vaciar_tabla&#39;</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_restablecer_todo</span><span class="p">,</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_BTN_NO_OK</span><span class="p">,</span>
+            <span class="k">lambda</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_restablecer_todo</span><span class="p">(),</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">fuente_boton</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ne_restablecer</span> <span class="o">=</span> <span class="n">NotaEmergente</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_boton_reestablecer_tabla</span><span class="o">.</span><span class="n">boton</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;ne_btn_restablecer&#39;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_boton_reestablecer_tabla</span><span class="o">.</span><span class="n">boton</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span>
+            <span class="s2">&quot;&lt;Enter&gt;&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ne_restablecer</span><span class="o">.</span><span class="n">mostrar</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_boton_reestablecer_tabla</span><span class="o">.</span><span class="n">boton</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span>
+            <span class="s2">&quot;&lt;Leave&gt;&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ne_restablecer</span><span class="o">.</span><span class="n">ocultar</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_boton_borrar_campo</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_MARCO_MOD</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_boton_borrar_campo</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span>
+            <span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">PACK_MARCO_BTN</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_boton_borrar_campo</span> <span class="o">=</span> <span class="n">Boton</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_boton_borrar_campo</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;btn_vaciar_campo&#39;</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_eliminar_valores</span><span class="p">,</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_BTN_NO_OK</span><span class="p">,</span>
+            <span class="k">lambda</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eliminar_valores</span><span class="p">(),</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">fuente_boton</span>
+        <span class="p">)</span>
+        <span class="c1"># Lista con campos de ejemplo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_opc_campos</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;campo_def_0&#39;</span><span class="p">],</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;campo_def_1&#39;</span><span class="p">],</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;campo_def_2&#39;</span><span class="p">],</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;campo_def_3&#39;</span><span class="p">]</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_borrar_campo</span> <span class="o">=</span> <span class="n">EntradaOpciones</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;campo_a_borrar&#39;</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_opc_campos</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_campo_borrable</span><span class="p">,</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_ALERT</span><span class="p">,</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">PACK_MARCO_ENT_BOOL</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="BorrarCampo.actualizar_opciones_borrado">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.BorrarCampo.actualizar_opciones_borrado">[documentos]</a>
+    <span class="k">def</span> <span class="nf">actualizar_opciones_borrado</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Actualiza la opción de campo a elegir con campos definidos.</span>
+
+<span class="sd">        :param args: Señal de cambio en la opción del campo a borrar.</span>
+<span class="sd">        :return: None        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nuevos_campos</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span><span class="o">.</span><span class="n">ver_campos_definidos</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nuevos_campos</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">nuevos_campos</span> <span class="o">=</span> <span class="p">[</span><span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;opc_vacio&#39;</span><span class="p">]]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_borrar_campo</span><span class="o">.</span><span class="n">actualizar_opciones</span><span class="p">(</span><span class="n">nuevos_campos</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BorrarCampo._campo_borrable">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.BorrarCampo._campo_borrable">[documentos]</a>
+    <span class="k">def</span> <span class="nf">_campo_borrable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Establece el campo a vaciar.</span>
+
+<span class="sd">        :param args: Señal de cambio en la opción del campo a borrar.</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_campo_a_vaciar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_borrar_campo</span><span class="o">.</span><span class="n">obtener_valor</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="BorrarCampo._eliminar_valores">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.BorrarCampo._eliminar_valores">[documentos]</a>
+    <span class="k">def</span> <span class="nf">_eliminar_valores</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Vacía los valores del campo seleccionado y actualiza la vista.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span><span class="o">.</span><span class="n">vaciar_campo</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_campo_a_vaciar</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span><span class="o">.</span><span class="n">actualizar_opciones</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="BorrarCampo._restablecer_todo">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.BorrarCampo._restablecer_todo">[documentos]</a>
+    <span class="k">def</span> <span class="nf">_restablecer_todo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Vacía todos los valores ingresados y actualiza la vista.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span><span class="o">.</span><span class="n">vaciar_tabla</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span><span class="o">.</span><span class="n">restablecer_aplicacion</span><span class="p">()</span>    </div>
+</div>
+
+
+
+<div class="viewcode-block" id="Exportar">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.Exportar">[documentos]</a>
+<span class="k">class</span> <span class="nc">Exportar</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Clase encargada de inciar el proceso de exportar.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ubicacion</span><span class="p">,</span> <span class="n">gestor</span><span class="p">,</span> <span class="n">interface</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor de la clase Exportar. Permite establecer</span>
+<span class="sd">        la cantidad de registros a crear.</span>
+
+<span class="sd">        :param ubicacion: Marco donde se anidará el módulo.</span>
+<span class="sd">        :type ubicacion: tk.Frame</span>
+<span class="sd">        :param gestor: Instancia que comunica componentes, tabla y generador.</span>
+<span class="sd">        :type gestor: Gestor</span>
+<span class="sd">        :param interface: Instancia que contiene a los componentes.</span>
+<span class="sd">        :type interface: Interface</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span> <span class="o">=</span> <span class="n">gestor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span> <span class="o">=</span> <span class="n">interface</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="n">ubicacion</span><span class="p">,</span> <span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_MARCO_MOD</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">PACK_MARCO_MODULO</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_num_filas</span> <span class="o">=</span> <span class="n">EntradaTexto</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;num_filas&#39;</span><span class="p">],</span>
+            <span class="s2">&quot;1000&quot;</span><span class="p">,</span>
+            <span class="k">lambda</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exportar</span><span class="p">(),</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">PACK_ENT_TEX_FILA</span><span class="p">,</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">PACK_ETIQ_ENT_FILA</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ne_filas</span> <span class="o">=</span> <span class="n">NotaEmergente</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_num_filas</span><span class="o">.</span><span class="n">entrada</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;ne_filas&#39;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_num_filas</span><span class="o">.</span><span class="n">entrada</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span>
+            <span class="s2">&quot;&lt;Enter&gt;&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ne_filas</span><span class="o">.</span><span class="n">mostrar</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_num_filas</span><span class="o">.</span><span class="n">entrada</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span>
+            <span class="s2">&quot;&lt;Leave&gt;&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ne_filas</span><span class="o">.</span><span class="n">ocultar</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_botones_exportar</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marco_modulo</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_MARCO_MOD</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_botones_exportar</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">PACK_MARCO_BTN</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_boton_exportar</span> <span class="o">=</span> <span class="n">Boton</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_botones_exportar</span><span class="p">,</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;btn_exportar&#39;</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_exportar</span><span class="p">,</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_BTN_OK</span><span class="p">,</span>
+            <span class="k">lambda</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exportar</span><span class="p">(),</span>
+            <span class="n">gb</span><span class="o">.</span><span class="n">fuente_boton</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="Exportar.limpiar_entrada">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.Exportar.limpiar_entrada">[documentos]</a>
+    <span class="k">def</span> <span class="nf">limpiar_entrada</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ver Ruta.limpiar_entrada()</span>
+<span class="sd">        &quot;&quot;&quot;</span>     
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_num_filas</span><span class="o">.</span><span class="n">borrar_valor</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Exportar.enfocar">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.Exportar.enfocar">[documentos]</a>
+    <span class="k">def</span> <span class="nf">enfocar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ver Ruta.enfocar()</span>
+<span class="sd">        &quot;&quot;&quot;</span>     
+        <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_num_filas</span><span class="o">.</span><span class="n">enfocar_entrada</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Exportar._exportar">
+<a class="viewcode-back" href="../../gui.html#gui.componentes.Exportar._exportar">[documentos]</a>
+    <span class="k">def</span> <span class="nf">_exportar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Confirma e inicia el proceso de exportar. Si fue exitoso,</span>
+<span class="sd">        establece el enfoque del teclado en el widget principal</span>
+<span class="sd">        del módulo ruta.</span>
+
+<span class="sd">        return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">confirmacion</span> <span class="o">=</span> <span class="n">messagebox</span><span class="o">.</span><span class="n">askyesno</span><span class="p">(</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;vt_expo_sn&#39;</span><span class="p">],</span>
+            <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;vt_expo_sn_mensaje&#39;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">confirmacion</span><span class="p">:</span>            
+            <span class="n">respuesta</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span><span class="o">.</span><span class="n">recibir</span><span class="p">(</span>
+                <span class="s2">&quot;m_exportar&quot;</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_elemento_entrada_num_filas</span><span class="o">.</span><span class="n">obtener_valor</span><span class="p">()</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">respuesta</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">modulo_ruta</span><span class="o">.</span><span class="n">enfocar</span><span class="p">()</span></div>
+</div>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2024, errejotaeme.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

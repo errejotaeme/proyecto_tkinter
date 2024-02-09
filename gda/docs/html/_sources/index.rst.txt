@@ -1,0 +1,25 @@
+.. GDA documentation master file, created by
+   sphinx-quickstart on Tue Feb  6 01:34:19 2024.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Documentación de GDA
+====================
+
+GDA (*Generador de Datos Aleatorios*) es una interfaz gráfica que simplifica la creación de tablas con datos booleanos, de texto y numéricos de forma pseudoaleatoria. Utiliza las librerías estándar de Python `random` y `secrets`, para generar datos a partir de alternativas de texto, rangos y valores booleanos. La aplicación permite crear y exportar a un archivo CSV un conjunto de datos para su uso en pruebas, ejemplos o cualquier escenario que requiera información de prueba.
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contenido:
+   
+   dependencias
+   modules
+
+
+
+Índices y tablas
+================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

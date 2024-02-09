@@ -1,0 +1,41 @@
+Paquete gui
+===========
+
+Submódulos
+----------
+
+Módulo gui.ventana
+------------------
+
+.. automodule:: gui.ventana
+   :members:
+   :private-members:
+   :undoc-members:
+   :show-inheritance:
+
+Módulo gui.interface
+--------------------
+
+.. automodule:: gui.interface
+   :members:
+   :private-members:
+   :undoc-members:
+   :show-inheritance:
+
+Módulo gui.componentes
+----------------------
+
+.. automodule:: gui.componentes
+   :members:
+   :private-members:
+   :undoc-members:
+   :show-inheritance:
+
+Módulo gui.elementos
+--------------------
+
+.. automodule:: gui.elementos
+   :members:
+   :private-members:
+   :undoc-members:
+   :show-inheritance:

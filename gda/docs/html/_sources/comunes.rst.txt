@@ -1,0 +1,23 @@
+Paquete comunes
+===============
+
+Submódulos
+----------
+
+Módulo comunes.globales
+-----------------------
+
+.. automodule:: comunes.globales
+   :members:
+   :private-members:
+   :undoc-members:
+   :show-inheritance:
+
+Módulo comunes.idioma
+---------------------
+
+.. automodule:: comunes.idioma
+   :members:
+   :private-members:
+   :undoc-members:
+   :show-inheritance:

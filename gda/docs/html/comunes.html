@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paquete comunes &mdash; documentación de GDA - 1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=36c4ab74"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=efdbd0b9"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="prev" title="Paquete logica" href="logica.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            GDA
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenido:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="dependencias.html">Dependencias</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Paquetes y módulos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="main.html">Módulo main</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gui.html">Paquete gui</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logica.html">Paquete logica</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Paquete comunes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodulos">Submódulos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-comunes.globales">Módulo comunes.globales</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#comunes.globales.Globales"><code class="docutils literal notranslate"><span class="pre">Globales</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-comunes.idioma">Módulo comunes.idioma</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#comunes.idioma.Idioma"><code class="docutils literal notranslate"><span class="pre">Idioma</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#comunes.idioma.alternar"><code class="docutils literal notranslate"><span class="pre">alternar()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GDA</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">Paquetes y módulos</a></li>
+      <li class="breadcrumb-item active">Paquete comunes</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/comunes.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="paquete-comunes">
+<h1>Paquete comunes<a class="headerlink" href="#paquete-comunes" title="Link to this heading"></a></h1>
+<section id="submodulos">
+<h2>Submódulos<a class="headerlink" href="#submodulos" title="Link to this heading"></a></h2>
+</section>
+<section id="module-comunes.globales">
+<span id="modulo-comunes-globales"></span><h2>Módulo comunes.globales<a class="headerlink" href="#module-comunes.globales" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="comunes.globales.Globales">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">comunes.globales.</span></span><span class="sig-name descname"><span class="pre">Globales</span></span><a class="reference internal" href="_modules/comunes/globales.html#Globales"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#comunes.globales.Globales" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Clase encargada de contener variables y constantes globales.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.ESTILO_ALERT">
+<span class="sig-name descname"><span class="pre">ESTILO_ALERT</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'activebackground':</span> <span class="pre">'#0b0802',</span> <span class="pre">'activeforeground':</span> <span class="pre">'#dda823',</span> <span class="pre">'background':</span> <span class="pre">'#dda823',</span> <span class="pre">'bd':</span> <span class="pre">2,</span> <span class="pre">'highlightbackground':</span> <span class="pre">'#0d0d0d',</span> <span class="pre">'highlightcolor':</span> <span class="pre">'#ffbf28',</span> <span class="pre">'highlightthickness':</span> <span class="pre">0,</span> <span class="pre">'width':</span> <span class="pre">15}</span></em><a class="headerlink" href="#comunes.globales.Globales.ESTILO_ALERT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.ESTILO_BTN_LENG">
+<span class="sig-name descname"><span class="pre">ESTILO_BTN_LENG</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'activebackground':</span> <span class="pre">'#00000c',</span> <span class="pre">'activeforeground':</span> <span class="pre">'#0800ff',</span> <span class="pre">'background':</span> <span class="pre">'#0800ff',</span> <span class="pre">'bd':</span> <span class="pre">2,</span> <span class="pre">'height':</span> <span class="pre">1,</span> <span class="pre">'highlightbackground':</span> <span class="pre">'#0d0d0d',</span> <span class="pre">'highlightcolor':</span> <span class="pre">'#0703ff',</span> <span class="pre">'highlightthickness':</span> <span class="pre">2}</span></em><a class="headerlink" href="#comunes.globales.Globales.ESTILO_BTN_LENG" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.ESTILO_BTN_NO_OK">
+<span class="sig-name descname"><span class="pre">ESTILO_BTN_NO_OK</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'activebackground':</span> <span class="pre">'#100303',</span> <span class="pre">'activeforeground':</span> <span class="pre">'#d52b2b',</span> <span class="pre">'background':</span> <span class="pre">'#d52b2b',</span> <span class="pre">'bd':</span> <span class="pre">2,</span> <span class="pre">'highlightbackground':</span> <span class="pre">'#0d0d0d',</span> <span class="pre">'highlightcolor':</span> <span class="pre">'#ff3333',</span> <span class="pre">'highlightthickness':</span> <span class="pre">2}</span></em><a class="headerlink" href="#comunes.globales.Globales.ESTILO_BTN_NO_OK" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.ESTILO_BTN_OK">
+<span class="sig-name descname"><span class="pre">ESTILO_BTN_OK</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'activebackground':</span> <span class="pre">'#01120d',</span> <span class="pre">'activeforeground':</span> <span class="pre">'#06b180',</span> <span class="pre">'background':</span> <span class="pre">'#06b180',</span> <span class="pre">'bd':</span> <span class="pre">2,</span> <span class="pre">'height':</span> <span class="pre">1,</span> <span class="pre">'highlightbackground':</span> <span class="pre">'#0d0d0d',</span> <span class="pre">'highlightcolor':</span> <span class="pre">'#08d698',</span> <span class="pre">'highlightthickness':</span> <span class="pre">2}</span></em><a class="headerlink" href="#comunes.globales.Globales.ESTILO_BTN_OK" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.ESTILO_BTN_OPC">
+<span class="sig-name descname"><span class="pre">ESTILO_BTN_OPC</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'activebackground':</span> <span class="pre">'#08000c',</span> <span class="pre">'activeforeground':</span> <span class="pre">'#7306b1',</span> <span class="pre">'background':</span> <span class="pre">'#7306b1',</span> <span class="pre">'bd':</span> <span class="pre">2,</span> <span class="pre">'height':</span> <span class="pre">1,</span> <span class="pre">'highlightthickness':</span> <span class="pre">0,</span> <span class="pre">'width':</span> <span class="pre">13}</span></em><a class="headerlink" href="#comunes.globales.Globales.ESTILO_BTN_OPC" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.ESTILO_BTN_SALIR">
+<span class="sig-name descname"><span class="pre">ESTILO_BTN_SALIR</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'activebackground':</span> <span class="pre">'#0b0802',</span> <span class="pre">'activeforeground':</span> <span class="pre">'#dda823',</span> <span class="pre">'background':</span> <span class="pre">'#dda823',</span> <span class="pre">'bd':</span> <span class="pre">2,</span> <span class="pre">'height':</span> <span class="pre">1,</span> <span class="pre">'highlightbackground':</span> <span class="pre">'#0d0d0d',</span> <span class="pre">'highlightcolor':</span> <span class="pre">'#ffbf28',</span> <span class="pre">'highlightthickness':</span> <span class="pre">2,</span> <span class="pre">'width':</span> <span class="pre">5}</span></em><a class="headerlink" href="#comunes.globales.Globales.ESTILO_BTN_SALIR" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.ESTILO_ETIQ">
+<span class="sig-name descname"><span class="pre">ESTILO_ETIQ</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'background':</span> <span class="pre">'#0d0d0d',</span> <span class="pre">'foreground':</span> <span class="pre">'#e7e7eb'}</span></em><a class="headerlink" href="#comunes.globales.Globales.ESTILO_ETIQ" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.ESTILO_ETIQ_TITULO">
+<span class="sig-name descname"><span class="pre">ESTILO_ETIQ_TITULO</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'background':</span> <span class="pre">'#d9d9d9',</span> <span class="pre">'foreground':</span> <span class="pre">'#0d0d0d'}</span></em><a class="headerlink" href="#comunes.globales.Globales.ESTILO_ETIQ_TITULO" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.ESTILO_MARCO_MOD">
+<span class="sig-name descname"><span class="pre">ESTILO_MARCO_MOD</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'background':</span> <span class="pre">'#0d0d0d'}</span></em><a class="headerlink" href="#comunes.globales.Globales.ESTILO_MARCO_MOD" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.ESTILO_TX_CLAVE">
+<span class="sig-name descname"><span class="pre">ESTILO_TX_CLAVE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'font':</span> <span class="pre">'Monospace</span> <span class="pre">8</span> <span class="pre">bold',</span> <span class="pre">'foreground':</span> <span class="pre">'#e7e7eb'}</span></em><a class="headerlink" href="#comunes.globales.Globales.ESTILO_TX_CLAVE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.ESTILO_TX_ENTRADA">
+<span class="sig-name descname"><span class="pre">ESTILO_TX_ENTRADA</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'background':</span> <span class="pre">'#272727',</span> <span class="pre">'bd':</span> <span class="pre">0,</span> <span class="pre">'foreground':</span> <span class="pre">'#08d698',</span> <span class="pre">'highlightbackground':</span> <span class="pre">'#0d0d0d',</span> <span class="pre">'highlightcolor':</span> <span class="pre">'#a5a5a5',</span> <span class="pre">'highlightthickness':</span> <span class="pre">1}</span></em><a class="headerlink" href="#comunes.globales.Globales.ESTILO_TX_ENTRADA" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.ESTILO_TX_VALOR">
+<span class="sig-name descname"><span class="pre">ESTILO_TX_VALOR</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'font':</span> <span class="pre">'Monospace</span> <span class="pre">8</span> <span class="pre">normal</span> <span class="pre">italic',</span> <span class="pre">'foreground':</span> <span class="pre">'#08d698'}</span></em><a class="headerlink" href="#comunes.globales.Globales.ESTILO_TX_VALOR" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.ESTILO_TX_VISTA">
+<span class="sig-name descname"><span class="pre">ESTILO_TX_VISTA</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'background':</span> <span class="pre">'#272727',</span> <span class="pre">'highlightbackground':</span> <span class="pre">'#0d0d0d',</span> <span class="pre">'highlightcolor':</span> <span class="pre">'#08d698',</span> <span class="pre">'highlightthickness':</span> <span class="pre">2}</span></em><a class="headerlink" href="#comunes.globales.Globales.ESTILO_TX_VISTA" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.PACK_BTN">
+<span class="sig-name descname"><span class="pre">PACK_BTN</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'anchor':</span> <span class="pre">'s',</span> <span class="pre">'padx':</span> <span class="pre">5,</span> <span class="pre">'pady':</span> <span class="pre">5,</span> <span class="pre">'side':</span> <span class="pre">'left'}</span></em><a class="headerlink" href="#comunes.globales.Globales.PACK_BTN" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.PACK_BTN_SALIR">
+<span class="sig-name descname"><span class="pre">PACK_BTN_SALIR</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'anchor':</span> <span class="pre">'s',</span> <span class="pre">'padx':</span> <span class="pre">5,</span> <span class="pre">'pady':</span> <span class="pre">5,</span> <span class="pre">'side':</span> <span class="pre">'right'}</span></em><a class="headerlink" href="#comunes.globales.Globales.PACK_BTN_SALIR" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.PACK_ENT_OPC">
+<span class="sig-name descname"><span class="pre">PACK_ENT_OPC</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'anchor':</span> <span class="pre">'s',</span> <span class="pre">'expand':</span> <span class="pre">False,</span> <span class="pre">'side':</span> <span class="pre">'bottom'}</span></em><a class="headerlink" href="#comunes.globales.Globales.PACK_ENT_OPC" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.PACK_ENT_TEX">
+<span class="sig-name descname"><span class="pre">PACK_ENT_TEX</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'expand':</span> <span class="pre">True,</span> <span class="pre">'fill':</span> <span class="pre">'x',</span> <span class="pre">'ipady':</span> <span class="pre">3,</span> <span class="pre">'pady':</span> <span class="pre">2,</span> <span class="pre">'side':</span> <span class="pre">'top'}</span></em><a class="headerlink" href="#comunes.globales.Globales.PACK_ENT_TEX" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.PACK_ENT_TEX_FILA">
+<span class="sig-name descname"><span class="pre">PACK_ENT_TEX_FILA</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'anchor':</span> <span class="pre">'ne',</span> <span class="pre">'expand':</span> <span class="pre">False,</span> <span class="pre">'ipadx':</span> <span class="pre">10,</span> <span class="pre">'ipady':</span> <span class="pre">3,</span> <span class="pre">'padx':</span> <span class="pre">2,</span> <span class="pre">'pady':</span> <span class="pre">2,</span> <span class="pre">'side':</span> <span class="pre">'top'}</span></em><a class="headerlink" href="#comunes.globales.Globales.PACK_ENT_TEX_FILA" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.PACK_ETIQ_APP">
+<span class="sig-name descname"><span class="pre">PACK_ETIQ_APP</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'anchor':</span> <span class="pre">'s',</span> <span class="pre">'expand':</span> <span class="pre">False,</span> <span class="pre">'padx':</span> <span class="pre">5,</span> <span class="pre">'pady':</span> <span class="pre">12,</span> <span class="pre">'side':</span> <span class="pre">'bottom'}</span></em><a class="headerlink" href="#comunes.globales.Globales.PACK_ETIQ_APP" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.PACK_ETIQ_ENT">
+<span class="sig-name descname"><span class="pre">PACK_ETIQ_ENT</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'anchor':</span> <span class="pre">'n',</span> <span class="pre">'expand':</span> <span class="pre">True,</span> <span class="pre">'padx':</span> <span class="pre">5,</span> <span class="pre">'pady':</span> <span class="pre">2,</span> <span class="pre">'side':</span> <span class="pre">'top'}</span></em><a class="headerlink" href="#comunes.globales.Globales.PACK_ETIQ_ENT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.PACK_ETIQ_ENT_FILA">
+<span class="sig-name descname"><span class="pre">PACK_ETIQ_ENT_FILA</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'anchor':</span> <span class="pre">'ne',</span> <span class="pre">'padx':</span> <span class="pre">25,</span> <span class="pre">'pady':</span> <span class="pre">5,</span> <span class="pre">'side':</span> <span class="pre">'top'}</span></em><a class="headerlink" href="#comunes.globales.Globales.PACK_ETIQ_ENT_FILA" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.PACK_ETI_ERROR">
+<span class="sig-name descname"><span class="pre">PACK_ETI_ERROR</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'anchor':</span> <span class="pre">'s',</span> <span class="pre">'expand':</span> <span class="pre">True,</span> <span class="pre">'fill':</span> <span class="pre">'x',</span> <span class="pre">'padx':</span> <span class="pre">5,</span> <span class="pre">'pady':</span> <span class="pre">30,</span> <span class="pre">'side':</span> <span class="pre">'top'}</span></em><a class="headerlink" href="#comunes.globales.Globales.PACK_ETI_ERROR" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.PACK_MARCO_BTN">
+<span class="sig-name descname"><span class="pre">PACK_MARCO_BTN</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'expand':</span> <span class="pre">False,</span> <span class="pre">'fill':</span> <span class="pre">'both',</span> <span class="pre">'padx':</span> <span class="pre">5,</span> <span class="pre">'pady':</span> <span class="pre">5,</span> <span class="pre">'side':</span> <span class="pre">'right'}</span></em><a class="headerlink" href="#comunes.globales.Globales.PACK_MARCO_BTN" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.PACK_MARCO_ENT">
+<span class="sig-name descname"><span class="pre">PACK_MARCO_ENT</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'anchor':</span> <span class="pre">'w',</span> <span class="pre">'expand':</span> <span class="pre">True,</span> <span class="pre">'fill':</span> <span class="pre">'x',</span> <span class="pre">'padx':</span> <span class="pre">5,</span> <span class="pre">'pady':</span> <span class="pre">10,</span> <span class="pre">'side':</span> <span class="pre">'left'}</span></em><a class="headerlink" href="#comunes.globales.Globales.PACK_MARCO_ENT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.PACK_MARCO_ENT_BOOL">
+<span class="sig-name descname"><span class="pre">PACK_MARCO_ENT_BOOL</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'anchor':</span> <span class="pre">'w',</span> <span class="pre">'expand':</span> <span class="pre">False,</span> <span class="pre">'padx':</span> <span class="pre">5,</span> <span class="pre">'pady':</span> <span class="pre">10,</span> <span class="pre">'side':</span> <span class="pre">'right'}</span></em><a class="headerlink" href="#comunes.globales.Globales.PACK_MARCO_ENT_BOOL" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.PACK_MARCO_MODULO">
+<span class="sig-name descname"><span class="pre">PACK_MARCO_MODULO</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'anchor':</span> <span class="pre">'n',</span> <span class="pre">'expand':</span> <span class="pre">False,</span> <span class="pre">'fill':</span> <span class="pre">'x',</span> <span class="pre">'padx':</span> <span class="pre">2,</span> <span class="pre">'pady':</span> <span class="pre">2,</span> <span class="pre">'side':</span> <span class="pre">'top'}</span></em><a class="headerlink" href="#comunes.globales.Globales.PACK_MARCO_MODULO" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.fuente_boton">
+<span class="sig-name descname"><span class="pre">fuente_boton</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#comunes.globales.Globales.fuente_boton" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.fuente_boton_salir">
+<span class="sig-name descname"><span class="pre">fuente_boton_salir</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#comunes.globales.Globales.fuente_boton_salir" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.fuente_entrada">
+<span class="sig-name descname"><span class="pre">fuente_entrada</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#comunes.globales.Globales.fuente_entrada" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.fuente_etiqueta">
+<span class="sig-name descname"><span class="pre">fuente_etiqueta</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#comunes.globales.Globales.fuente_etiqueta" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.fuente_principal">
+<span class="sig-name descname"><span class="pre">fuente_principal</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#comunes.globales.Globales.fuente_principal" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.globales.Globales.fuente_titulo">
+<span class="sig-name descname"><span class="pre">fuente_titulo</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#comunes.globales.Globales.fuente_titulo" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-comunes.idioma">
+<span id="modulo-comunes-idioma"></span><h2>Módulo comunes.idioma<a class="headerlink" href="#module-comunes.idioma" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="comunes.idioma.Idioma">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">comunes.idioma.</span></span><span class="sig-name descname"><span class="pre">Idioma</span></span><a class="reference internal" href="_modules/comunes/idioma.html#Idioma"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#comunes.idioma.Idioma" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Clase que genera el diccionario que permite alternar el idioma
+entre inglés y español.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="comunes.idioma.Idioma.tex">
+<span class="sig-name descname"><span class="pre">tex</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#comunes.idioma.Idioma.tex" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="comunes.idioma.alternar">
+<span class="sig-prename descclassname"><span class="pre">comunes.idioma.</span></span><span class="sig-name descname"><span class="pre">alternar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raiz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reseteador</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/comunes/idioma.html#alternar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#comunes.idioma.alternar" title="Link to this definition"></a></dt>
+<dd><p>Administra el cambio de idioma mediante la actualización del diccionario
+de texto y la posterior reinicialización de la aplicación.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>raiz</strong> (<em>Tk</em>) – Instancia de la ventana principal.</p></li>
+<li><p><strong>reseteador</strong> (<a class="reference internal" href="gui.html#gui.ventana.Reseteador" title="gui.ventana.Reseteador"><em>Reseteador</em></a>) – Instancia que permite el reinicio de la aplicación.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="logica.html" class="btn btn-neutral float-left" title="Paquete logica" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2024, errejotaeme.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

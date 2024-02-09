@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>logica.tabla &mdash; documentación de GDA - 1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=36c4ab74"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/translations.js?v=efdbd0b9"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            GDA
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenido:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dependencias.html">Dependencias</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Paquetes y módulos</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GDA</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Código de módulo</a></li>
+      <li class="breadcrumb-item active">logica.tabla</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Código fuente para logica.tabla</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">app.comunes.idioma</span> <span class="kn">import</span> <span class="n">leng</span>
+
+
+<div class="viewcode-block" id="Tabla">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla">[documentos]</a>
+<span class="k">class</span> <span class="nc">Tabla</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Clase encargada de almacenar los datos y opciones ingresadas.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor de la clase Tabla.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span> <span class="o">=</span> <span class="kc">None</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ruta_salida_csv</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_encabezado_tabla</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_delimitador</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_orden</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_criterio</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_modo</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semilla</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_campos_booleanos</span><span class="p">:</span><span class="nb">dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_campos_texto</span><span class="p">:</span><span class="nb">dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_campos_enteros</span><span class="p">:</span><span class="nb">dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_campos_decimales</span><span class="p">:</span><span class="nb">dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Tabla.enlazar_gestor">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.enlazar_gestor">[documentos]</a>
+    <span class="k">def</span> <span class="nf">enlazar_gestor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gestor</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Almacena la instancia del gestor.</span>
+<span class="sd">        </span>
+<span class="sd">        :param gestor: Componente que coordina y comunica los módulos.</span>
+<span class="sd">        :type gestor: Gestor</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span> <span class="o">=</span> <span class="n">gestor</span></div>
+
+        
+    <span class="c1"># Ruta</span>
+<div class="viewcode-block" id="Tabla.establecer_ruta">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.establecer_ruta">[documentos]</a>
+    <span class="k">def</span> <span class="nf">establecer_ruta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ruta</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Establece la ruta de salida.</span>
+
+<span class="sd">        :param ruta: Ruta de salida.</span>
+<span class="sd">        :type ruta: str</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ruta_salida_csv</span> <span class="o">=</span> <span class="n">ruta</span></div>
+
+
+<div class="viewcode-block" id="Tabla.obtener_ruta">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.obtener_ruta">[documentos]</a>
+    <span class="k">def</span> <span class="nf">obtener_ruta</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Obtiene y retorna el valor del atributo.</span>
+
+<span class="sd">        :return: Valor del atributo.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ruta_salida_csv</span></div>
+
+
+    <span class="c1"># Encabezado</span>
+<div class="viewcode-block" id="Tabla.establecer_encabezado">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.establecer_encabezado">[documentos]</a>
+    <span class="k">def</span> <span class="nf">establecer_encabezado</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">encabezado</span><span class="p">:</span><span class="nb">list</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Establece los campos de la tabla.</span>
+
+<span class="sd">        :param encabezado: Campos de la tabla.</span>
+<span class="sd">        :type encabezado: list</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="n">encabezado</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">encabezado</span> <span class="k">if</span> <span class="n">e</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_encabezado_tabla</span> <span class="o">=</span> <span class="n">encabezado</span></div>
+
+
+<div class="viewcode-block" id="Tabla.obtener_encabezado">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.obtener_encabezado">[documentos]</a>
+    <span class="k">def</span> <span class="nf">obtener_encabezado</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ver Tabla.obtener_ruta()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_encabezado_tabla</span></div>
+
+
+<div class="viewcode-block" id="Tabla.borrar_encabezado">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.borrar_encabezado">[documentos]</a>
+    <span class="k">def</span> <span class="nf">borrar_encabezado</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Vacía el encabezado de la tabla y actualiza la vista</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_encabezado_tabla</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span><span class="o">.</span><span class="n">actualizar_vista</span><span class="p">()</span></div>
+
+
+    <span class="c1"># Delimitador</span>
+<div class="viewcode-block" id="Tabla.establecer_delimitador">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.establecer_delimitador">[documentos]</a>
+    <span class="k">def</span> <span class="nf">establecer_delimitador</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delimitador</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Establece el delimitador de las columnas.</span>
+
+<span class="sd">        :param delimitador: Delimitador de la tabla.</span>
+<span class="sd">        :type delimitador: str</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_delimitador</span> <span class="o">=</span> <span class="n">delimitador</span></div>
+
+
+<div class="viewcode-block" id="Tabla.obtener_delimitador">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.obtener_delimitador">[documentos]</a>
+    <span class="k">def</span> <span class="nf">obtener_delimitador</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ver Tabla.obtener_ruta()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_delimitador</span></div>
+
+
+    <span class="c1"># Orden</span>
+<div class="viewcode-block" id="Tabla.establecer_orden">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.establecer_orden">[documentos]</a>
+    <span class="k">def</span> <span class="nf">establecer_orden</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orden</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Establece el orden de la tabla.</span>
+
+<span class="sd">        :param orden: Forma de ordenar la tabla.</span>
+<span class="sd">        :type orden: str</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_orden</span> <span class="o">=</span> <span class="n">orden</span></div>
+
+
+<div class="viewcode-block" id="Tabla.obtener_orden">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.obtener_orden">[documentos]</a>
+    <span class="k">def</span> <span class="nf">obtener_orden</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ver Tabla.obtener_ruta()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_orden</span></div>
+
+
+    <span class="c1"># Criterio</span>
+<div class="viewcode-block" id="Tabla.establecer_criterio">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.establecer_criterio">[documentos]</a>
+    <span class="k">def</span> <span class="nf">establecer_criterio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">criterio</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Establece el campo de referencia para ordenar la tabla.</span>
+
+<span class="sd">        :param criterio: Campo de referencia.</span>
+<span class="sd">        :type criterio: str</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_criterio</span> <span class="o">=</span> <span class="n">criterio</span></div>
+
+
+<div class="viewcode-block" id="Tabla.obtener_criterio">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.obtener_criterio">[documentos]</a>
+    <span class="k">def</span> <span class="nf">obtener_criterio</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ver Tabla.obtener_ruta()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_criterio</span></div>
+
+
+    <span class="c1"># Modo</span>
+<div class="viewcode-block" id="Tabla.establecer_modo">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.establecer_modo">[documentos]</a>
+    <span class="k">def</span> <span class="nf">establecer_modo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">modo</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Establece el modo de aleatoriedad.</span>
+
+<span class="sd">        :param modo: Librería a utilizar.</span>
+<span class="sd">        :type modo: str</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_modo</span> <span class="o">=</span> <span class="n">modo</span></div>
+
+
+<div class="viewcode-block" id="Tabla.obtener_modo">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.obtener_modo">[documentos]</a>
+    <span class="k">def</span> <span class="nf">obtener_modo</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ver Tabla.obtener_ruta()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_modo</span></div>
+
+
+    <span class="c1"># Semilla</span>
+<div class="viewcode-block" id="Tabla.establecer_semilla">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.establecer_semilla">[documentos]</a>
+    <span class="k">def</span> <span class="nf">establecer_semilla</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">semilla</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Establece el estado incial para &#39;random&#39;.</span>
+
+<span class="sd">        :param semilla: Valor de &#39;seed&#39;.</span>
+<span class="sd">        :type semilla: str</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semilla</span> <span class="o">=</span> <span class="n">semilla</span></div>
+
+
+<div class="viewcode-block" id="Tabla.obtener_semilla">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.obtener_semilla">[documentos]</a>
+    <span class="k">def</span> <span class="nf">obtener_semilla</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ver Tabla.obtener_ruta()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_semilla</span></div>
+
+
+    <span class="c1"># Campos booleanos</span>
+<div class="viewcode-block" id="Tabla.establecer_campo_booleano">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.establecer_campo_booleano">[documentos]</a>
+    <span class="k">def</span> <span class="nf">establecer_campo_booleano</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nombre_campo</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">valores_bool</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Establece un campo como booleano.</span>
+
+<span class="sd">        :param nombre_campo: Nombre del campo.</span>
+<span class="sd">        :type nombre_campo: str</span>
+<span class="sd">        :param valores_bool: Posibles valores (True, False, None).</span>
+<span class="sd">        :type valores_bool: str</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_campos_booleanos</span><span class="p">[</span><span class="n">nombre_campo</span><span class="p">]</span> <span class="o">=</span> <span class="n">valores_bool</span></div>
+
+
+<div class="viewcode-block" id="Tabla.borrar_campo_booleano">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.borrar_campo_booleano">[documentos]</a>
+    <span class="k">def</span> <span class="nf">borrar_campo_booleano</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nombre_campo</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Si está registrado en la tabla, elimina el campo recibido y</span>
+<span class="sd">        actualiza la vista.</span>
+
+<span class="sd">        :param nombre_campo: Nombre del campo recibido.</span>
+<span class="sd">        :type nombre_campo: str</span>
+<span class="sd">        :return: None        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_campos_booleanos</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">nombre_campo</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span><span class="o">.</span><span class="n">actualizar_vista</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Tabla.obtener_campos_booleanos">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.obtener_campos_booleanos">[documentos]</a>
+    <span class="k">def</span> <span class="nf">obtener_campos_booleanos</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ver Tabla.obtener_ruta()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_campos_booleanos</span></div>
+
+
+    <span class="c1"># Campos de texto</span>
+<div class="viewcode-block" id="Tabla.establecer_campo_texto">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.establecer_campo_texto">[documentos]</a>
+    <span class="k">def</span> <span class="nf">establecer_campo_texto</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nombre_campo</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">valores</span><span class="p">:</span><span class="nb">list</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Establece un campo como de texto.</span>
+
+<span class="sd">        :param nombre_campo: Nombre del campo.</span>
+<span class="sd">        :type nombre_campo: str</span>
+<span class="sd">        :param valores: Alternativas de texto para el campo.</span>
+<span class="sd">        :type valores: list</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_campos_texto</span><span class="p">[</span><span class="n">nombre_campo</span><span class="p">]</span> <span class="o">=</span> <span class="n">valores</span></div>
+
+
+<div class="viewcode-block" id="Tabla.borrar_campo_texto">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.borrar_campo_texto">[documentos]</a>
+    <span class="k">def</span> <span class="nf">borrar_campo_texto</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nombre_campo</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ver Tabla.borrar_campo_booleano()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_campos_texto</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">nombre_campo</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span><span class="o">.</span><span class="n">actualizar_vista</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Tabla.obtener_campos_texto">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.obtener_campos_texto">[documentos]</a>
+    <span class="k">def</span> <span class="nf">obtener_campos_texto</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ver Tabla.obtener_ruta()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_campos_texto</span></div>
+
+
+    <span class="c1"># Campos enteros</span>
+<div class="viewcode-block" id="Tabla.establecer_campo_entero">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.establecer_campo_entero">[documentos]</a>
+    <span class="k">def</span> <span class="nf">establecer_campo_entero</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">campo</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">rango</span><span class="p">:</span><span class="nb">tuple</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Establece un campo como de enteros.</span>
+
+<span class="sd">        :param campo: Nombre del campo.</span>
+<span class="sd">        :type campo: str</span>
+<span class="sd">        :param rango: Rango de posibles valores.</span>
+<span class="sd">        :type rango: tuple</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_campos_enteros</span><span class="p">[</span><span class="n">campo</span><span class="p">]</span> <span class="o">=</span> <span class="n">rango</span></div>
+
+
+<div class="viewcode-block" id="Tabla.borrar_campo_entero">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.borrar_campo_entero">[documentos]</a>
+    <span class="k">def</span> <span class="nf">borrar_campo_entero</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">campo</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ver Tabla.borrar_campo_booleano()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_campos_enteros</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">campo</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span><span class="o">.</span><span class="n">actualizar_vista</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Tabla.obtener_campos_enteros">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.obtener_campos_enteros">[documentos]</a>
+    <span class="k">def</span> <span class="nf">obtener_campos_enteros</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ver Tabla.obtener_ruta()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_campos_enteros</span></div>
+
+
+    <span class="c1"># Campos decimales</span>
+<div class="viewcode-block" id="Tabla.establecer_campo_decimal">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.establecer_campo_decimal">[documentos]</a>
+    <span class="k">def</span> <span class="nf">establecer_campo_decimal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">campo</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">rango</span><span class="p">:</span><span class="nb">tuple</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Establece un campo como de decimales.</span>
+
+<span class="sd">        :param campo: Nombre del campo.</span>
+<span class="sd">        :type campo: str</span>
+<span class="sd">        :param rango: Rango de posibles valores.</span>
+<span class="sd">        :type rango: tuple</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_campos_decimales</span><span class="p">[</span><span class="n">campo</span><span class="p">]</span> <span class="o">=</span> <span class="n">rango</span></div>
+
+
+<div class="viewcode-block" id="Tabla.borrar_campo_real">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.borrar_campo_real">[documentos]</a>
+    <span class="k">def</span> <span class="nf">borrar_campo_real</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">campo</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ver Tabla.borrar_campo_booleano()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_campos_decimales</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">campo</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span><span class="o">.</span><span class="n">actualizar_vista</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Tabla.borrar_campos_decimales">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.borrar_campos_decimales">[documentos]</a>
+    <span class="k">def</span> <span class="nf">borrar_campos_decimales</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Elimina los campos definidos como decimales cuando se elige</span>
+<span class="sd">        el modo de aleatoriedad &#39;secrets&#39;.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_campos_decimales</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Tabla.obtener_campos_decimales">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.obtener_campos_decimales">[documentos]</a>
+    <span class="k">def</span> <span class="nf">obtener_campos_decimales</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ver Tabla.obtener_ruta()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_campos_decimales</span></div>
+
+
+
+    <span class="c1"># Métodos generales</span>
+<div class="viewcode-block" id="Tabla.campos_definidos">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.campos_definidos">[documentos]</a>
+    <span class="k">def</span> <span class="nf">campos_definidos</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retorna una lista con los campos definidos.</span>
+
+<span class="sd">        :return: Lista con los campos definidos.</span>
+<span class="sd">        :rtype: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">lista_aux</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_campos_booleanos</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">lista_aux</span> <span class="o">+=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_campos_texto</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">lista_aux</span> <span class="o">+=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_campos_enteros</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">lista_aux</span> <span class="o">+=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_campos_decimales</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">lista_aux</span></div>
+
+
+<div class="viewcode-block" id="Tabla.borrar_todos_los_campos">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.borrar_todos_los_campos">[documentos]</a>
+    <span class="k">def</span> <span class="nf">borrar_todos_los_campos</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Elimina todos los campos registrados en la tabla y actualiza la vista.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_campos_booleanos</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_campos_texto</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_campos_enteros</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_campos_decimales</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_criterio</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span><span class="o">.</span><span class="n">actualizar_vista</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Tabla.obtener_datos">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.obtener_datos">[documentos]</a>
+    <span class="k">def</span> <span class="nf">obtener_datos</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Produce y retorna una lista con todos los datos ingresados</span>
+<span class="sd">        praparados para que se puedan insertar en la vista.</span>
+
+<span class="sd">        :return: Lista con los datos.</span>
+<span class="sd">        :rtype: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">l_aux</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">l_aux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;ruta_clave&#39;</span><span class="p">])</span>
+        <span class="n">l_aux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">obtener_ruta</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">l_aux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;encabezado_clave&#39;</span><span class="p">])</span>
+        <span class="n">l_aux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">obtener_encabezado</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">l_aux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;delimitador_clave&#39;</span><span class="p">])</span>
+        <span class="n">l_aux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">obtener_delimitador</span><span class="p">()</span><span class="si">}</span><span class="s1">&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">l_aux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;orden_clave&#39;</span><span class="p">])</span>
+        <span class="n">l_aux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">obtener_orden</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">l_aux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;criterio_campo&#39;</span><span class="p">])</span>
+        <span class="n">l_aux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">obtener_criterio</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">l_aux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;clave_modo&#39;</span><span class="p">])</span>
+        <span class="n">l_aux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">obtener_modo</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">l_aux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;clave_semilla&#39;</span><span class="p">])</span>
+        <span class="n">l_aux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">obtener_semilla</span><span class="p">()</span><span class="si">}</span><span class="s1">&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">l_aux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;clave_bool&#39;</span><span class="p">])</span>
+        <span class="n">l_aux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">obtener_campos_booleanos</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">l_aux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;clave_tex&#39;</span><span class="p">])</span>
+        <span class="n">l_aux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">obtener_campos_texto</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">l_aux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;clave_int&#39;</span><span class="p">])</span>
+        <span class="n">l_aux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">obtener_campos_enteros</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">l_aux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;clave_float&#39;</span><span class="p">])</span>
+        <span class="n">l_aux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">obtener_campos_decimales</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">l_aux</span></div>
+
+
+<div class="viewcode-block" id="Tabla.restablecer_tabla">
+<a class="viewcode-back" href="../../logica.html#logica.tabla.Tabla.restablecer_tabla">[documentos]</a>
+    <span class="k">def</span> <span class="nf">restablecer_tabla</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Vacía todos los datos registrados y actualiza la vista.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ruta_salida_csv</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_encabezado_tabla</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_delimitador</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_orden</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_criterio</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_modo</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semilla</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_campos_booleanos</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_campos_texto</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_campos_enteros</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_campos_decimales</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gestor</span><span class="o">.</span><span class="n">actualizar_vista</span><span class="p">()</span></div>
+</div>
+
+        
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2024, errejotaeme.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

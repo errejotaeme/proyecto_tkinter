@@ -1,0 +1,32 @@
+Paquete logica
+==============
+
+Submódulos
+----------
+
+Módulo logica.gestor
+--------------------
+
+.. automodule:: logica.gestor
+   :members:
+   :private-members:
+   :undoc-members:
+   :show-inheritance:
+
+Módulo logica.tabla
+-------------------
+
+.. automodule:: logica.tabla
+   :members:
+   :private-members:
+   :undoc-members:
+   :show-inheritance:
+
+Módulo logica.generador
+-----------------------
+
+.. automodule:: logica.generador
+   :members:
+   :private-members:
+   :undoc-members:
+   :show-inheritance:

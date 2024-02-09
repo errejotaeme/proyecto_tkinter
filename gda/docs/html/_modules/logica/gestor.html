@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>logica.gestor &mdash; documentación de GDA - 1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=36c4ab74"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/translations.js?v=efdbd0b9"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            GDA
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenido:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dependencias.html">Dependencias</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Paquetes y módulos</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GDA</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Código de módulo</a></li>
+      <li class="breadcrumb-item active">logica.gestor</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Código fuente para logica.gestor</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">filedialog</span>
+<span class="kn">from</span> <span class="nn">app.comunes.globales</span> <span class="kn">import</span> <span class="n">gb</span>
+<span class="kn">from</span> <span class="nn">app.comunes.idioma</span> <span class="kn">import</span> <span class="n">leng</span>
+
+
+<div class="viewcode-block" id="Gestor">
+<a class="viewcode-back" href="../../logica.html#logica.gestor.Gestor">[documentos]</a>
+<span class="k">class</span> <span class="nc">Gestor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Clase encargada de coordinar los componentes y facilitar la comunicación</span>
+<span class="sd">    entre la tabla, los componentes y el generador.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor de la clase Gestor. Contiene los componentes principales</span>
+<span class="sd">        de la aplicación y coordina sus tareas.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">raiz</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">generador</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span> <span class="o">=</span> <span class="kc">None</span>
+        
+<div class="viewcode-block" id="Gestor.enlazar_raiz">
+<a class="viewcode-back" href="../../logica.html#logica.gestor.Gestor.enlazar_raiz">[documentos]</a>
+    <span class="k">def</span> <span class="nf">enlazar_raiz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raiz_activa</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Almacena la instancia de la ventana raiz.</span>
+
+<span class="sd">        :param raiz: Ventana principal de la aplicación.</span>
+<span class="sd">        :type raiz: Tk</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">raiz</span> <span class="o">=</span> <span class="n">raiz_activa</span></div>
+
+
+<div class="viewcode-block" id="Gestor.enlazar_tabla">
+<a class="viewcode-back" href="../../logica.html#logica.gestor.Gestor.enlazar_tabla">[documentos]</a>
+    <span class="k">def</span> <span class="nf">enlazar_tabla</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tabla_activa</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Almacena la instancia de la tabla.</span>
+
+<span class="sd">        :param tabla: Componente que almacena los datos ingresados.</span>
+<span class="sd">        :type tabla: Tabla</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span> <span class="o">=</span> <span class="n">tabla_activa</span></div>
+
+        
+<div class="viewcode-block" id="Gestor.enlazar_generador">
+<a class="viewcode-back" href="../../logica.html#logica.gestor.Gestor.enlazar_generador">[documentos]</a>
+    <span class="k">def</span> <span class="nf">enlazar_generador</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">generador_activo</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Almacena la instancia del generador.</span>
+
+<span class="sd">        :param generador_activo: Componente que produce y exporta la tabla.</span>
+<span class="sd">        :type generador_activo: Generador</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">generador</span> <span class="o">=</span> <span class="n">generador_activo</span></div>
+
+        
+<div class="viewcode-block" id="Gestor.enlazar_interface">
+<a class="viewcode-back" href="../../logica.html#logica.gestor.Gestor.enlazar_interface">[documentos]</a>
+    <span class="k">def</span> <span class="nf">enlazar_interface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interface_activa</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Almacena la instancia de la interface.</span>
+
+<span class="sd">        :param interface_activa: Componente que contiene los widgets de ingreso de datos.</span>
+<span class="sd">        :type interface_activa: Interface</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span> <span class="o">=</span> <span class="n">interface_activa</span></div>
+
+                
+        
+
+<div class="viewcode-block" id="Gestor.recibir">
+<a class="viewcode-back" href="../../logica.html#logica.gestor.Gestor.recibir">[documentos]</a>
+    <span class="k">def</span> <span class="nf">recibir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origen</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">mensaje</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Enruta los mensajes al método correspondiente. Si la gestión fue exitosa</span>
+<span class="sd">        (se logró almacenar los datos en la tabla), actualiza la vista.</span>
+
+<span class="sd">        :param origen: Módulo que efectúa la llamada.</span>
+<span class="sd">        :type origen: str</span>
+<span class="sd">        :param mensaje: Contenido a gestionar.</span>
+<span class="sd">        :type mensaje: str, list</span>
+<span class="sd">        :return gestion: True si fue exitosa, False en caso contrario.</span>
+<span class="sd">        :rtype gestion: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">gestion</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">if</span> <span class="n">origen</span> <span class="o">==</span> <span class="s2">&quot;m_ruta&quot;</span><span class="p">:</span>
+            <span class="n">gestion</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gestion_ruta</span><span class="p">(</span><span class="n">mensaje</span><span class="p">)</span> <span class="c1"># str</span>
+
+        <span class="k">elif</span> <span class="n">origen</span> <span class="o">==</span> <span class="s2">&quot;m_encabezado&quot;</span><span class="p">:</span>
+            <span class="n">gestion</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gestion_encabezado</span><span class="p">(</span><span class="n">mensaje</span><span class="p">)</span> <span class="c1"># str</span>
+
+        <span class="k">elif</span> <span class="n">origen</span> <span class="o">==</span> <span class="s2">&quot;m_opciones_tabla&quot;</span><span class="p">:</span>
+            <span class="n">gestion</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gestion_opciones_tabla</span><span class="p">(</span><span class="n">mensaje</span><span class="p">)</span> <span class="c1"># list</span>
+
+        <span class="k">elif</span> <span class="n">origen</span> <span class="o">==</span> <span class="s2">&quot;m_campo_booleano&quot;</span><span class="p">:</span>
+            <span class="n">gestion</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gestion_campo_booleano</span><span class="p">(</span><span class="n">mensaje</span><span class="p">)</span> <span class="c1"># list</span>
+
+        <span class="k">elif</span> <span class="n">origen</span> <span class="o">==</span> <span class="s2">&quot;m_campo_texto&quot;</span><span class="p">:</span>
+            <span class="n">gestion</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gestion_campo_texto</span><span class="p">(</span><span class="n">mensaje</span><span class="p">)</span> <span class="c1"># list</span>
+
+        <span class="k">elif</span> <span class="n">origen</span> <span class="o">==</span> <span class="s2">&quot;m_campo_numerico&quot;</span><span class="p">:</span>
+            <span class="n">gestion</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gestion_campo_numerico</span><span class="p">(</span><span class="n">mensaje</span><span class="p">)</span> <span class="c1"># list</span>
+
+        <span class="k">elif</span> <span class="n">origen</span> <span class="o">==</span> <span class="s2">&quot;m_exportar&quot;</span><span class="p">:</span>
+            <span class="n">gestion</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gestion_exportar</span><span class="p">(</span><span class="n">mensaje</span><span class="p">)</span> <span class="c1"># str</span>
+        
+        <span class="k">if</span> <span class="n">gestion</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">actualizar_vista</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">gestion</span></div>
+
+
+
+<div class="viewcode-block" id="Gestor.actualizar_vista">
+<a class="viewcode-back" href="../../logica.html#logica.gestor.Gestor.actualizar_vista">[documentos]</a>
+    <span class="k">def</span> <span class="nf">actualizar_vista</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Envía a la vista los datos almacenados en la tabla.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">modulo_ver_datos</span><span class="o">.</span><span class="n">insertar_datos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">obtener_datos</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="Gestor.ver_encabezado">
+<a class="viewcode-back" href="../../logica.html#logica.gestor.Gestor.ver_encabezado">[documentos]</a>
+    <span class="k">def</span> <span class="nf">ver_encabezado</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retorna los campos almacenados en la tabla.</span>
+
+<span class="sd">        :return encabezado: Campos ingresados.</span>
+<span class="sd">        :rtype encabezado: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">encabezado</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">obtener_encabezado</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">encabezado</span></div>
+
+
+<div class="viewcode-block" id="Gestor.borrar_encabezado">
+<a class="viewcode-back" href="../../logica.html#logica.gestor.Gestor.borrar_encabezado">[documentos]</a>
+    <span class="k">def</span> <span class="nf">borrar_encabezado</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Vacía la lista de campos, las opciones que la utilizan y luego</span>
+<span class="sd">        actualiza la vista.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">borrar_encabezado</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">borrar_todos_los_campos</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actualizar_opciones</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actualizar_vista</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Gestor.actualizar_opciones">
+<a class="viewcode-back" href="../../logica.html#logica.gestor.Gestor.actualizar_opciones">[documentos]</a>
+    <span class="k">def</span> <span class="nf">actualizar_opciones</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Actualiza todos los componentes que utilizan los campos ingresados</span>
+<span class="sd">        en la tabla.</span>
+<span class="sd">        </span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">modulo_opciones_tabla</span><span class="o">.</span><span class="n">actualizar_opciones_criterio</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">modulo_campo_booleano</span><span class="o">.</span><span class="n">actualizar_opciones_campo</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">modulo_campo_texto</span><span class="o">.</span><span class="n">actualizar_opciones_campo</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">modulo_campo_numerico</span><span class="o">.</span><span class="n">actualizar_opciones_campo</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">modulo_borrar_campo</span><span class="o">.</span><span class="n">actualizar_opciones_borrado</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Gestor.ver_campos_definidos">
+<a class="viewcode-back" href="../../logica.html#logica.gestor.Gestor.ver_campos_definidos">[documentos]</a>
+    <span class="k">def</span> <span class="nf">ver_campos_definidos</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retorna una lista con los nombres de los campos almacenados en la tabla.</span>
+
+<span class="sd">        :return: Lista de los nombres de los campos almacenados.</span>
+<span class="sd">        :rtype: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">campos_definidos</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Gestor.ver_campos_sin_definir">
+<a class="viewcode-back" href="../../logica.html#logica.gestor.Gestor.ver_campos_sin_definir">[documentos]</a>
+    <span class="k">def</span> <span class="nf">ver_campos_sin_definir</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retorna una lista con los nombres de los campos sin definir.</span>
+
+<span class="sd">        :return: Lista de los nombres de los campos sin definir.</span>
+<span class="sd">        :rtype: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ver_encabezado</span><span class="p">())</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ver_campos_definidos</span><span class="p">())</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Gestor.restablecer_aplicacion">
+<a class="viewcode-back" href="../../logica.html#logica.gestor.Gestor.restablecer_aplicacion">[documentos]</a>
+    <span class="k">def</span> <span class="nf">restablecer_aplicacion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Limpia el texto de las entradas, actualiza las opciones y</span>
+<span class="sd">        establece el enfoque del teclado en el widget principal</span>
+<span class="sd">        del módulo ruta.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">modulo_ruta</span><span class="o">.</span><span class="n">limpiar_entrada</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">modulo_encabezado</span><span class="o">.</span><span class="n">limpiar_entrada</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">modulo_campo_texto</span><span class="o">.</span><span class="n">limpiar_entrada</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">modulo_campo_numerico</span><span class="o">.</span><span class="n">limpiar_entrada</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">modulo_opciones_tabla</span><span class="o">.</span><span class="n">limpiar_entrada</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">modulo_exportar</span><span class="o">.</span><span class="n">limpiar_entrada</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actualizar_opciones</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">modulo_ruta</span><span class="o">.</span><span class="n">enfocar</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Gestor.vaciar_tabla">
+<a class="viewcode-back" href="../../logica.html#logica.gestor.Gestor.vaciar_tabla">[documentos]</a>
+    <span class="k">def</span> <span class="nf">vaciar_tabla</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Vacia todos los datos ingresados a la tabla.</span>
+<span class="sd">        </span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">restablecer_tabla</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Gestor.vaciar_campo">
+<a class="viewcode-back" href="../../logica.html#logica.gestor.Gestor.vaciar_campo">[documentos]</a>
+    <span class="k">def</span> <span class="nf">vaciar_campo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nombre_campo</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Borra los valores registrados en la tabla del campo especificado.</span>
+<span class="sd">        </span>
+<span class="sd">        :param nombre_campo: Campo especificado.</span>
+<span class="sd">        :type nombre_campo: str</span>
+<span class="sd">        :return: None        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">nombre_campo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">obtener_campos_booleanos</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">borrar_campo_booleano</span><span class="p">(</span><span class="n">nombre_campo</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">nombre_campo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">obtener_campos_texto</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">borrar_campo_texto</span><span class="p">(</span><span class="n">nombre_campo</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">nombre_campo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">obtener_campos_enteros</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">borrar_campo_entero</span><span class="p">(</span><span class="n">nombre_campo</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">nombre_campo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">obtener_campos_decimales</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">borrar_campo_real</span><span class="p">(</span><span class="n">nombre_campo</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Gestor._gestion_ruta">
+<a class="viewcode-back" href="../../logica.html#logica.gestor.Gestor._gestion_ruta">[documentos]</a>
+    <span class="k">def</span> <span class="nf">_gestion_ruta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mensaje</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gestiona la validación de la ruta ingresada. Si fue exitosa</span>
+<span class="sd">        retorna True, caso contrario notifica el error y retorna False.</span>
+<span class="sd">        </span>
+<span class="sd">        :param mensaje: Ruta de salida ingresada.</span>
+<span class="sd">        :type mensaje: str</span>
+<span class="sd">        :return res: True si la gestión fue exitosa, de lo contrario False.</span>
+<span class="sd">        :rtype res: bool </span>
+<span class="sd">        &quot;&quot;&quot;</span>       
+        <span class="n">res</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_es_ruta_valida</span><span class="p">(</span><span class="n">mensaje</span><span class="p">):</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_dialogo</span><span class="p">(</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_ruta_invalida&#39;</span><span class="p">],</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_vt_ruta_invalida&#39;</span><span class="p">]</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+
+<div class="viewcode-block" id="Gestor._es_ruta_valida">
+<a class="viewcode-back" href="../../logica.html#logica.gestor.Gestor._es_ruta_valida">[documentos]</a>
+    <span class="k">def</span> <span class="nf">_es_ruta_valida</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ruta</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Verifica la validez de la ruta ingresada o la existencia</span>
+<span class="sd">        del directorio de salida. Si la verificación es positiva,</span>
+<span class="sd">        registra la ruta en la tabla.</span>
+
+<span class="sd">        :param ruta: Ruta de salida ingresada.</span>
+<span class="sd">        :type ruta: str</span>
+<span class="sd">        :return res: True si la verificación fue exitosa, de lo contrario False.</span>
+<span class="sd">        :rtype res: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">ruta_final</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">ruta</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ruta</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.csv&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">ruta_final</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">elif</span> <span class="n">ruta_final</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+            <span class="n">ruta_final</span> <span class="o">=</span> <span class="n">ruta_final</span> <span class="o">/</span> <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;ruta_archivo&#39;</span><span class="p">]</span> 
+            <span class="n">res</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="n">res</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">establecer_ruta</span><span class="p">(</span><span class="n">ruta_final</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+
+<div class="viewcode-block" id="Gestor._gestion_encabezado">
+<a class="viewcode-back" href="../../logica.html#logica.gestor.Gestor._gestion_encabezado">[documentos]</a>
+    <span class="k">def</span> <span class="nf">_gestion_encabezado</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mensaje</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Notifica si el encabezado ingresado está vacío. Si no lo está,</span>
+<span class="sd">        lo procesa y registra en la tabla. Elimina aquellos campos</span>
+<span class="sd">        definidos que no estén en el nuevo encabezado y actualiza</span>
+<span class="sd">        las opciones de los componentes correspondientes.</span>
+
+<span class="sd">        :param mensaje: Encabezado ingresado.</span>
+<span class="sd">        :type mensaje: str</span>
+<span class="sd">        :return res: True si la gestión fue exitosa, de lo contrario False.</span>
+<span class="sd">        :rtype res: bool        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">lista_encabezado</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">mensaje</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_dialogo</span><span class="p">(</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_encabezado&#39;</span><span class="p">],</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_vt_encabezado&#39;</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">res</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">lista_encabezado</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_limpiar_lista</span><span class="p">(</span><span class="n">mensaje</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">establecer_encabezado</span><span class="p">(</span><span class="n">lista_encabezado</span><span class="p">)</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="kc">True</span>
+            
+        <span class="k">for</span> <span class="n">campo</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">obtener_campos_booleanos</span><span class="p">()):</span>
+            <span class="k">if</span> <span class="n">campo</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">lista_encabezado</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">borrar_campo_booleano</span><span class="p">(</span><span class="n">campo</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">campo</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">obtener_campos_texto</span><span class="p">()):</span>
+            <span class="k">if</span> <span class="n">campo</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">lista_encabezado</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">borrar_campo_texto</span><span class="p">(</span><span class="n">campo</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">campo</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">obtener_campos_enteros</span><span class="p">()):</span>
+            <span class="k">if</span> <span class="n">campo</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">lista_encabezado</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">borrar_campo_entero</span><span class="p">(</span><span class="n">campo</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">campo</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">obtener_campos_decimales</span><span class="p">()):</span>
+            <span class="k">if</span> <span class="n">campo</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">lista_encabezado</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">borrar_campo_real</span><span class="p">(</span><span class="n">campo</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">modulo_campo_booleano</span><span class="o">.</span><span class="n">actualizar_opciones_campo</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">modulo_campo_texto</span><span class="o">.</span><span class="n">actualizar_opciones_campo</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">modulo_campo_numerico</span><span class="o">.</span><span class="n">actualizar_opciones_campo</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">modulo_borrar_campo</span><span class="o">.</span><span class="n">actualizar_opciones_borrado</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+
+<div class="viewcode-block" id="Gestor._limpiar_lista">
+<a class="viewcode-back" href="../../logica.html#logica.gestor.Gestor._limpiar_lista">[documentos]</a>
+    <span class="k">def</span> <span class="nf">_limpiar_lista</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cadena</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Produce una lista de items únicos y no vacíos a partir de una cadena.</span>
+
+<span class="sd">        :param cadena: Cadena con valores separados por coma.</span>
+<span class="sd">        :param cadena: str</span>
+<span class="sd">        :return lista_salida: Lista de items únicos.</span>
+<span class="sd">        :rtype lista_salida: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">lista_salida</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="n">cadena</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+        <span class="n">lista_salida</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">lista_salida</span><span class="p">]</span>
+        <span class="n">lista_salida</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">lista_salida</span> <span class="k">if</span> <span class="n">item</span> <span class="o">!=</span> <span class="s2">&quot; &quot;</span><span class="p">]</span>
+        <span class="n">lista_aux</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="p">[</span><span class="n">lista_aux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">lista_salida</span> <span class="k">if</span> <span class="n">e</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">lista_aux</span><span class="p">]</span>
+        <span class="n">lista_salida</span> <span class="o">=</span> <span class="n">lista_aux</span>
+        <span class="k">return</span> <span class="n">lista_salida</span></div>
+
+
+<div class="viewcode-block" id="Gestor._gestion_opciones_tabla">
+<a class="viewcode-back" href="../../logica.html#logica.gestor.Gestor._gestion_opciones_tabla">[documentos]</a>
+    <span class="k">def</span> <span class="nf">_gestion_opciones_tabla</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mensaje</span><span class="p">:</span><span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Valida los valores definidos. Si la validación es exitosa</span>
+<span class="sd">        los registra en la tabla; caso contrario, notifica el error.</span>
+
+<span class="sd">        :param mensaje: Opciones seleccionadas.</span>
+<span class="sd">        :type mensaje: list</span>
+<span class="sd">        :return res: True si la gestión fue exitosa, de lo contrario False.</span>
+<span class="sd">        :rtype res: bool </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">delimitador</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="n">mensaje</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">orden</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="n">mensaje</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">criterio_campo</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="n">mensaje</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">modo</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="n">mensaje</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="n">semilla</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="n">mensaje</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+        <span class="n">encabezado</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">obtener_encabezado</span><span class="p">()</span>
+        <span class="k">if</span> <span class="s2">&quot;pandas&quot;</span> <span class="ow">in</span> <span class="n">orden</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="kn">import</span> <span class="nn">pandas</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">m_error</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_import_1&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_import_2&#39;</span><span class="p">]</span>
+                <span class="n">m_error</span> <span class="o">+=</span> <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_import_3&#39;</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_dialogo</span><span class="p">(</span><span class="n">m_error</span><span class="p">,</span> <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_vt_import&#39;</span><span class="p">])</span>
+                <span class="k">return</span> <span class="n">res</span>
+
+        <span class="k">if</span> <span class="n">modo</span> <span class="o">==</span> <span class="s2">&quot;secrets&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">borrar_campos_decimales</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">delimitador</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_dialogo</span><span class="p">(</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_delimitador&#39;</span><span class="p">],</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_vt_delimitador&#39;</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">res</span>
+        
+        <span class="k">elif</span> <span class="p">(</span><span class="ow">not</span> <span class="n">criterio_campo</span> <span class="ow">in</span> <span class="n">encabezado</span> <span class="ow">and</span>
+              <span class="n">orden</span> <span class="o">!=</span> <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;orden_opc_2&#39;</span><span class="p">]):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_dialogo</span><span class="p">(</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_criterio&#39;</span><span class="p">],</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_vt_criterio&#39;</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">res</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">establecer_delimitador</span><span class="p">(</span><span class="n">delimitador</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">establecer_orden</span><span class="p">(</span><span class="n">orden</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">establecer_criterio</span><span class="p">(</span><span class="n">criterio_campo</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">establecer_modo</span><span class="p">(</span><span class="n">modo</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">semilla</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">establecer_semilla</span><span class="p">(</span><span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;semilla_def&#39;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">establecer_semilla</span><span class="p">(</span><span class="n">semilla</span><span class="p">)</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+
+<div class="viewcode-block" id="Gestor._gestion_campo_booleano">
+<a class="viewcode-back" href="../../logica.html#logica.gestor.Gestor._gestion_campo_booleano">[documentos]</a>
+    <span class="k">def</span> <span class="nf">_gestion_campo_booleano</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mensaje</span><span class="p">:</span><span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Verifica las condiciones mínimas para registrar el campo.</span>
+<span class="sd">        Si la validación es exitosa lo registra en la tabla;</span>
+<span class="sd">        caso contrario, notifica el error.</span>
+
+<span class="sd">        :param mensaje: Campo y opción seleccionada.</span>
+<span class="sd">        :type mensaje: list</span>
+<span class="sd">        :return res: True si la gestión fue exitosa, de lo contrario False.</span>
+<span class="sd">        :rtype res: bool </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">nombre_campo</span> <span class="o">=</span> <span class="n">mensaje</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">valores_bool</span> <span class="o">=</span> <span class="n">mensaje</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">condiciones</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_condiciones_basicas</span><span class="p">(</span><span class="n">nombre_campo</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">condiciones</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">establecer_campo_booleano</span><span class="p">(</span><span class="n">nombre_campo</span><span class="p">,</span> <span class="n">valores_bool</span><span class="p">)</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+
+<div class="viewcode-block" id="Gestor._gestion_campo_texto">
+<a class="viewcode-back" href="../../logica.html#logica.gestor.Gestor._gestion_campo_texto">[documentos]</a>
+    <span class="k">def</span> <span class="nf">_gestion_campo_texto</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mensaje</span><span class="p">:</span><span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Verifica las condiciones mínimas para registrar el campo y procesa</span>
+<span class="sd">        las alternativas de texto ingresadas. Si la operación es exitosa</span>
+<span class="sd">        lo registra en la tabla; caso contrario, notifica el error.</span>
+
+<span class="sd">        :param mensaje: Campo y alternativas de texto.</span>
+<span class="sd">        :type mensaje: list</span>
+<span class="sd">        :return res: True si la gestión fue exitosa, de lo contrario False.</span>
+<span class="sd">        :rtype res: bool </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">nombre_campo</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="n">mensaje</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">valores_posibles</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="n">mensaje</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">condiciones</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_condiciones_basicas</span><span class="p">(</span><span class="n">nombre_campo</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">condiciones</span><span class="p">:</span>
+            <span class="n">valores</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_limpiar_lista</span><span class="p">(</span><span class="n">valores_posibles</span><span class="p">)</span>
+            <span class="n">valores</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">valores</span> <span class="k">if</span> <span class="n">item</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">valor</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span> <span class="k">for</span> <span class="n">valor</span> <span class="ow">in</span> <span class="n">valores</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">establecer_campo_texto</span><span class="p">(</span><span class="n">nombre_campo</span><span class="p">,</span> <span class="n">valores</span><span class="p">)</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_dialogo</span><span class="p">(</span>
+                    <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_no_valores_tex&#39;</span><span class="p">],</span>
+                    <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_vt_no_valores_tex&#39;</span><span class="p">]</span>
+                <span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+
+<div class="viewcode-block" id="Gestor._condiciones_basicas">
+<a class="viewcode-back" href="../../logica.html#logica.gestor.Gestor._condiciones_basicas">[documentos]</a>
+    <span class="k">def</span> <span class="nf">_condiciones_basicas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nombre_campo</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Verifica las condiciones mínimas que debe cumplir un campo</span>
+<span class="sd">        para ser registrado en la tabla.</span>
+
+<span class="sd">        :param nombre_campo: Campo a evaluar.</span>
+<span class="sd">        :type nombre_campo: str</span>
+<span class="sd">        :return res: True si la verificación fue exitosa, de lo contrario False.</span>
+<span class="sd">        :rtype res: bool&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">campos_definidos</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">campos_definidos</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">nombre_campo</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_dialogo</span><span class="p">(</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_campo_def&#39;</span><span class="p">],</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_vt_campo_def&#39;</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">res</span>
+        <span class="k">elif</span> <span class="n">nombre_campo</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">obtener_encabezado</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_dialogo</span><span class="p">(</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_campo_inexistente&#39;</span><span class="p">],</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_vt_campo_inex&#39;</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">res</span>
+        <span class="k">elif</span> <span class="n">nombre_campo</span> <span class="ow">in</span> <span class="n">campos_definidos</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_dialogo</span><span class="p">(</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_campo_repetido&#39;</span><span class="p">],</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_vt_campo_repe&#39;</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">res</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+
+<div class="viewcode-block" id="Gestor._gestion_campo_numerico">
+<a class="viewcode-back" href="../../logica.html#logica.gestor.Gestor._gestion_campo_numerico">[documentos]</a>
+    <span class="k">def</span> <span class="nf">_gestion_campo_numerico</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mensaje</span><span class="p">:</span><span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Verifica las condiciones mínimas para registrar el campo y valida</span>
+<span class="sd">        el rango y el valor de redondeo. Si la operación es exitosa</span>
+<span class="sd">        lo registra en la tabla; caso contrario, notifica el error.</span>
+
+<span class="sd">        :param mensaje: Campo, rango, tipo numérico y valor de redondeo.</span>
+<span class="sd">        :type mensaje: list</span>
+<span class="sd">        :return res: True si la gestión fue exitosa, de lo contrario False.</span>
+<span class="sd">        :rtype res: bool </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">nombre_campo</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="n">mensaje</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">rango_inicio</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="n">mensaje</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>        
+        <span class="n">rango_fin</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="n">mensaje</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>        
+        <span class="n">tipo_numerico</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="n">mensaje</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="n">redondeo</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">mensaje</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+        <span class="n">digitos_inicio</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rango_inicio</span><span class="p">)</span>
+        <span class="n">digitos_fin</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rango_fin</span><span class="p">)</span>
+        <span class="n">redondear</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">redondeo</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_dialogo</span><span class="p">(</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_redondeo&#39;</span><span class="p">],</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_vt_redondeo&#39;</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">res</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">redondeo</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span> <span class="ow">and</span>
+            <span class="nb">int</span><span class="p">(</span><span class="n">redondeo</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span>
+            <span class="nb">int</span><span class="p">(</span><span class="n">redondeo</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">16</span><span class="p">):</span> <span class="c1"># Umbral</span>
+            <span class="n">redondear</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">redondeo</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_dialogo</span><span class="p">(</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_redondeo&#39;</span><span class="p">],</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_vt_redondeo&#39;</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">res</span>
+        <span class="k">if</span> <span class="n">rango_inicio</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span> <span class="ow">or</span> <span class="n">rango_fin</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_dialogo</span><span class="p">(</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_rango_invalido&#39;</span><span class="p">],</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_vt_rango_invalido&#39;</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">res</span>
+        <span class="n">condiciones_ok</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_condiciones_basicas</span><span class="p">(</span><span class="n">nombre_campo</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">condiciones_ok</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">res</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">rango_i</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_preservar_signo</span><span class="p">(</span><span class="n">rango_inicio</span><span class="p">)</span>
+            <span class="n">rango_f</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_preservar_signo</span><span class="p">(</span><span class="n">rango_fin</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">rango_i</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">int</span> <span class="ow">and</span> <span class="nb">type</span><span class="p">(</span><span class="n">rango_f</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">int</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">rango_i</span> <span class="o">&gt;</span> <span class="n">rango_f</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_dialogo</span><span class="p">(</span>
+                        <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_rango_menor&#39;</span><span class="p">],</span>
+                        <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_vt_rango_menor&#39;</span><span class="p">]</span>
+                    <span class="p">)</span>
+                    <span class="k">return</span> <span class="n">res</span>
+                <span class="k">elif</span> <span class="p">(</span><span class="n">rango_i</span> <span class="o">&lt;</span> <span class="n">rango_f</span> <span class="ow">and</span>
+                      <span class="n">digitos_inicio</span> <span class="o">&lt;=</span> <span class="mi">100</span> <span class="ow">and</span>
+                      <span class="n">digitos_fin</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">):</span> <span class="c1"># Umbral</span>
+                    <span class="n">rango</span><span class="p">:</span><span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="n">rango_i</span><span class="p">,</span> <span class="n">rango_f</span><span class="p">,</span> <span class="n">redondear</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">tipo_numerico</span> <span class="o">==</span> <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;opc_num_int&#39;</span><span class="p">]:</span> <span class="c1"># Entero</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">establecer_campo_entero</span><span class="p">(</span><span class="n">nombre_campo</span><span class="p">,</span> <span class="n">rango</span><span class="p">)</span>
+                        <span class="n">res</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="k">elif</span> <span class="n">tipo_numerico</span> <span class="o">==</span> <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;opc_num_float&#39;</span><span class="p">]:</span> <span class="c1"># Flotante</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">establecer_campo_decimal</span><span class="p">(</span><span class="n">nombre_campo</span><span class="p">,</span> <span class="n">rango</span><span class="p">)</span>
+                        <span class="n">res</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">elif</span> <span class="n">rango_i</span> <span class="o">==</span> <span class="n">rango_f</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_dialogo</span><span class="p">(</span>
+                        <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_rango_invalido&#39;</span><span class="p">],</span>
+                        <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_vt_rango_invalido&#39;</span><span class="p">]</span>
+                    <span class="p">)</span>
+                    <span class="k">return</span> <span class="n">res</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_dialogo</span><span class="p">(</span>
+                    <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_rango_invalido&#39;</span><span class="p">],</span>
+                    <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_vt_rango_invalido&#39;</span><span class="p">]</span>
+                    <span class="p">)</span>
+                    <span class="k">return</span> <span class="n">res</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_dialogo</span><span class="p">(</span>
+                    <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_rango_invalido&#39;</span><span class="p">],</span>
+                    <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_vt_rango_invalido&#39;</span><span class="p">]</span>
+                <span class="p">)</span>         
+        <span class="k">return</span> <span class="n">res</span></div>
+
+
+<div class="viewcode-block" id="Gestor._preservar_signo">
+<a class="viewcode-back" href="../../logica.html#logica.gestor.Gestor._preservar_signo">[documentos]</a>
+    <span class="k">def</span> <span class="nf">_preservar_signo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">numero</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Evalúa y convierte una cadena a entero si es un número válido;</span>
+<span class="sd">        de lo contrario, retorna la cadena original.</span>
+
+<span class="sd">        :param numero: Cadena a evaluar.</span>
+<span class="sd">        :type numero: str</span>
+<span class="sd">        :return res: Resultado de la operación.</span>
+<span class="sd">        :rtype res: int, str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="p">((</span><span class="ow">not</span> <span class="n">numero</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span> <span class="ow">and</span>
+             <span class="n">numero</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;-&#39;</span> <span class="ow">and</span>
+             <span class="n">numero</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">())</span> <span class="ow">or</span>
+             <span class="n">numero</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()):</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">numero</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">numero</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+
+<div class="viewcode-block" id="Gestor._gestion_exportar">
+<a class="viewcode-back" href="../../logica.html#logica.gestor.Gestor._gestion_exportar">[documentos]</a>
+    <span class="k">def</span> <span class="nf">_gestion_exportar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mensaje</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Envía al generador los datos registrados en la tabla si se cumplen</span>
+<span class="sd">        las condiciones de exportación. Notifica si la operación fue existosa.</span>
+<span class="sd">        En caso de que alguna condición no se cumpla, notifica el error.</span>
+
+<span class="sd">        :param mensaje: Número de filas ingresado.</span>
+<span class="sd">        :type mensaje: str</span>
+<span class="sd">        :return res: True si la gestión fue exitosa, de lo contrario False.</span>
+<span class="sd">        :rtype res: bool </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">num_filas</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">mensaje</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+            <span class="n">num_filas</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">mensaje</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_dialogo</span><span class="p">(</span><span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_filas&#39;</span><span class="p">],</span> <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_vt_filas&#39;</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">res</span>         
+        <span class="k">if</span> <span class="n">num_filas</span> <span class="o">&gt;</span> <span class="mi">1000000</span><span class="p">:</span> <span class="c1"># Umbral</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_dialogo</span><span class="p">(</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_umbral_filas&#39;</span><span class="p">],</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_vt_umbral_filas&#39;</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">res</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Verifica la validez de la ruta y los permisos de escritura</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">obtener_ruta</span><span class="p">(),</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">):</span>
+                <span class="k">pass</span> <span class="c1"># Si no hay error sigue</span>
+        <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_dialogo</span><span class="p">(</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_ruta_ingresada&#39;</span><span class="p">],</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_vt_ruta_ingresada&#39;</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">res</span>
+        <span class="k">except</span> <span class="ne">PermissionError</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_dialogo</span><span class="p">(</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_escritura&#39;</span><span class="p">],</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;vt_err_escritura&#39;</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">res</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_dialogo</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s2">&quot;err_ruta_inesperado&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_vt_ruta_inesperado&#39;</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">res</span>
+        <span class="c1"># Chequea que no haya inconsistencias en el tipo de orden</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">obtener_orden</span><span class="p">()</span> <span class="o">!=</span> <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;orden_opc_2&#39;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">obtener_criterio</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">campos_definidos</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_dialogo</span><span class="p">(</span>
+                    <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_criterio&#39;</span><span class="p">],</span>
+                    <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_vt_criterio&#39;</span><span class="p">]</span>
+                <span class="p">)</span>
+                <span class="k">return</span> <span class="n">res</span>
+        <span class="c1"># Previene que se intente generar decimales con secrets</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">obtener_modo</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;secrets&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="o">.</span><span class="n">obtener_campos_decimales</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_dialogo</span><span class="p">(</span>
+                    <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_secrets&#39;</span><span class="p">],</span>
+                    <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_vt_secrets&#39;</span><span class="p">]</span>
+                <span class="p">)</span>
+                <span class="k">return</span> <span class="n">res</span>
+        <span class="c1"># Envia los datos al generador      </span>
+        <span class="k">if</span> <span class="n">num_filas</span><span class="p">:</span>
+            <span class="n">d_aux</span><span class="p">:</span><span class="nb">dict</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tabla</span><span class="p">)</span>
+            <span class="n">d_aux</span><span class="p">[</span><span class="s2">&quot;_filas&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">num_filas</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generador</span><span class="o">.</span><span class="n">crear_tabla</span><span class="p">(</span><span class="n">d_aux</span><span class="p">)</span>   
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_dialogo</span><span class="p">(</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_filas&#39;</span><span class="p">],</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_vt_filas&#39;</span><span class="p">]</span>
+            <span class="p">)</span>
+        <span class="c1"># Respuesta de tabla generada ok    </span>
+        <span class="k">if</span> <span class="n">res</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_dialogo</span><span class="p">(</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;ok_tabla&#39;</span><span class="p">],</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;vt_ok_tabla&#39;</span><span class="p">],</span>
+                <span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_BTN_OK</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_dialogo</span><span class="p">(</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_ruta_inesperado&#39;</span><span class="p">],</span>
+                <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;err_vt_ruta_inesperado&#39;</span><span class="p">]</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+
+<div class="viewcode-block" id="Gestor._ventana_dialogo">
+<a class="viewcode-back" href="../../logica.html#logica.gestor.Gestor._ventana_dialogo">[documentos]</a>
+    <span class="k">def</span> <span class="nf">_ventana_dialogo</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">notificacion</span><span class="p">,</span>
+        <span class="n">titulo_ventana</span><span class="p">,</span>
+        <span class="n">estilo_boton</span><span class="o">=</span><span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_BTN_NO_OK</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Produce la ventana de notificación.</span>
+
+<span class="sd">        :param notificacion: Mensaje a notificar.</span>
+<span class="sd">        :type notificacion: str</span>
+<span class="sd">        :param titulo_ventana: Título de la ventana.</span>
+<span class="sd">        :type titulo_ventana: str</span>
+<span class="sd">        :param estilo_boton: Aspecto visual del boton.</span>
+<span class="sd">        :type estilo_boton: dict</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_error</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Toplevel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">raiz</span><span class="p">,</span> <span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_MARCO_MOD</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_error</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">titulo_ventana</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_error</span><span class="o">.</span><span class="n">minsize</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_etiqueta_mensaje</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ventana_error</span><span class="p">,</span>
+                                  <span class="n">text</span><span class="o">=</span><span class="n">notificacion</span><span class="p">,</span>
+                                  <span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_ETIQ</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_etiqueta_mensaje</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">font</span><span class="o">=</span><span class="n">gb</span><span class="o">.</span><span class="n">fuente_etiqueta</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_etiqueta_mensaje</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">PACK_ETI_ERROR</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_boton_cerrar</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_error</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;btn_vt_cerrar&#39;</span><span class="p">],</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_ventana_error</span><span class="o">.</span><span class="n">destroy</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">estilo_boton</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_boton_cerrar</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">side</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_boton_cerrar</span><span class="o">.</span><span class="n">focus_set</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_boton_cerrar</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span>
+            <span class="s2">&quot;&lt;Return&gt;&quot;</span><span class="p">,</span>
+            <span class="k">lambda</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ventana_error</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+        <span class="p">)</span></div>
+</div>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2024, errejotaeme.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

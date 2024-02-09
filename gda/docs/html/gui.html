@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paquete gui &mdash; documentación de GDA - 1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=36c4ab74"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=efdbd0b9"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="Paquete logica" href="logica.html" />
+    <link rel="prev" title="Módulo main" href="main.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            GDA
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenido:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="dependencias.html">Dependencias</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Paquetes y módulos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="main.html">Módulo main</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Paquete gui</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodulos">Submódulos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-gui.ventana">Módulo gui.ventana</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gui.ventana.Reseteador"><code class="docutils literal notranslate"><span class="pre">Reseteador</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gui.ventana.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-gui.interface">Módulo gui.interface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gui.interface.Interface"><code class="docutils literal notranslate"><span class="pre">Interface</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-gui.componentes">Módulo gui.componentes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gui.componentes.BorrarCampo"><code class="docutils literal notranslate"><span class="pre">BorrarCampo</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gui.componentes.CampoBooleano"><code class="docutils literal notranslate"><span class="pre">CampoBooleano</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gui.componentes.CampoNumerico"><code class="docutils literal notranslate"><span class="pre">CampoNumerico</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gui.componentes.CampoTexto"><code class="docutils literal notranslate"><span class="pre">CampoTexto</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gui.componentes.Encabezado"><code class="docutils literal notranslate"><span class="pre">Encabezado</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gui.componentes.Exportar"><code class="docutils literal notranslate"><span class="pre">Exportar</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gui.componentes.OpcionesTabla"><code class="docutils literal notranslate"><span class="pre">OpcionesTabla</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gui.componentes.Ruta"><code class="docutils literal notranslate"><span class="pre">Ruta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gui.componentes.VerDatos"><code class="docutils literal notranslate"><span class="pre">VerDatos</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-gui.elementos">Módulo gui.elementos</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gui.elementos.Boton"><code class="docutils literal notranslate"><span class="pre">Boton</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gui.elementos.EntradaOpciones"><code class="docutils literal notranslate"><span class="pre">EntradaOpciones</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gui.elementos.EntradaTexto"><code class="docutils literal notranslate"><span class="pre">EntradaTexto</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gui.elementos.NotaEmergente"><code class="docutils literal notranslate"><span class="pre">NotaEmergente</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="logica.html">Paquete logica</a></li>
+<li class="toctree-l2"><a class="reference internal" href="comunes.html">Paquete comunes</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GDA</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">Paquetes y módulos</a></li>
+      <li class="breadcrumb-item active">Paquete gui</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/gui.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="paquete-gui">
+<h1>Paquete gui<a class="headerlink" href="#paquete-gui" title="Link to this heading"></a></h1>
+<section id="submodulos">
+<h2>Submódulos<a class="headerlink" href="#submodulos" title="Link to this heading"></a></h2>
+</section>
+<section id="module-gui.ventana">
+<span id="modulo-gui-ventana"></span><h2>Módulo gui.ventana<a class="headerlink" href="#module-gui.ventana" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="gui.ventana.Reseteador">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gui.ventana.</span></span><span class="sig-name descname"><span class="pre">Reseteador</span></span><a class="reference internal" href="_modules/gui/ventana.html#Reseteador"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.ventana.Reseteador" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Clase que gestiona el reinicio de la aplicación
+y evita la importación circular.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.ventana.Reseteador.reiniciar">
+<span class="sig-name descname"><span class="pre">reiniciar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/ventana.html#Reseteador.reiniciar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.ventana.Reseteador.reiniciar" title="Link to this definition"></a></dt>
+<dd><p>Construye de nuevo la interface cada vez que se modifica el idioma.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gui.ventana.main">
+<span class="sig-prename descclassname"><span class="pre">gui.ventana.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/ventana.html#main"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.ventana.main" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-gui.interface">
+<span id="modulo-gui-interface"></span><h2>Módulo gui.interface<a class="headerlink" href="#module-gui.interface" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="gui.interface.Interface">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gui.interface.</span></span><span class="sig-name descname"><span class="pre">Interface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raiz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gestor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reseteador</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/interface.html#Interface"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.interface.Interface" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Clase encargada de gestionar la ubicación de los widgets principales
+en paneles y marcos anidados, el cambio de idioma y el arranque
+de la aplicación.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.interface.Interface._salir">
+<span class="sig-name descname"><span class="pre">_salir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/interface.html#Interface._salir"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.interface.Interface._salir" title="Link to this definition"></a></dt>
+<dd><p>Confirma el cierre de la aplicación.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.interface.Interface.cambiar_idioma">
+<span class="sig-name descname"><span class="pre">cambiar_idioma</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/interface.html#Interface.cambiar_idioma"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.interface.Interface.cambiar_idioma" title="Link to this definition"></a></dt>
+<dd><p>Llama a una función global de reinicio para cambiar el idioma
+y aplicar los cambios.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.interface.Interface.ejecutar">
+<span class="sig-name descname"><span class="pre">ejecutar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/interface.html#Interface.ejecutar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.interface.Interface.ejecutar" title="Link to this definition"></a></dt>
+<dd><p>Inicia el bucle de la aplicación.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-gui.componentes">
+<span id="modulo-gui-componentes"></span><h2>Módulo gui.componentes<a class="headerlink" href="#module-gui.componentes" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="gui.componentes.BorrarCampo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gui.componentes.</span></span><span class="sig-name descname"><span class="pre">BorrarCampo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ubicacion</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gestor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#BorrarCampo"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.BorrarCampo" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Clase encargada de gestionar la eliminación de los valores de los campos y
+la opción de restablecer la tabla.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.BorrarCampo._campo_borrable">
+<span class="sig-name descname"><span class="pre">_campo_borrable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#BorrarCampo._campo_borrable"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.BorrarCampo._campo_borrable" title="Link to this definition"></a></dt>
+<dd><p>Establece el campo a vaciar.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>args</strong> – Señal de cambio en la opción del campo a borrar.</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.BorrarCampo._eliminar_valores">
+<span class="sig-name descname"><span class="pre">_eliminar_valores</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#BorrarCampo._eliminar_valores"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.BorrarCampo._eliminar_valores" title="Link to this definition"></a></dt>
+<dd><p>Vacía los valores del campo seleccionado y actualiza la vista.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.BorrarCampo._restablecer_todo">
+<span class="sig-name descname"><span class="pre">_restablecer_todo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#BorrarCampo._restablecer_todo"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.BorrarCampo._restablecer_todo" title="Link to this definition"></a></dt>
+<dd><p>Vacía todos los valores ingresados y actualiza la vista.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.BorrarCampo.actualizar_opciones_borrado">
+<span class="sig-name descname"><span class="pre">actualizar_opciones_borrado</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#BorrarCampo.actualizar_opciones_borrado"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.BorrarCampo.actualizar_opciones_borrado" title="Link to this definition"></a></dt>
+<dd><p>Actualiza la opción de campo a elegir con campos definidos.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>args</strong> – Señal de cambio en la opción del campo a borrar.</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gui.componentes.CampoBooleano">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gui.componentes.</span></span><span class="sig-name descname"><span class="pre">CampoBooleano</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ubicacion</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gestor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interface</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#CampoBooleano"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.CampoBooleano" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Clase que gestiona la definción de un campo ingresado como booleano.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.CampoBooleano._confirmar_campo_booleano">
+<span class="sig-name descname"><span class="pre">_confirmar_campo_booleano</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#CampoBooleano._confirmar_campo_booleano"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.CampoBooleano._confirmar_campo_booleano" title="Link to this definition"></a></dt>
+<dd><p>Reúne los valores definidos y los envía al gestor para su
+validación. Si fue exitosa, actualiza las opciones y luego
+establece el enfoque del teclado en el widget principal
+del módulo siguiente.</p>
+<p>return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.CampoBooleano.actualizar_opciones_campo">
+<span class="sig-name descname"><span class="pre">actualizar_opciones_campo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#CampoBooleano.actualizar_opciones_campo"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.CampoBooleano.actualizar_opciones_campo" title="Link to this definition"></a></dt>
+<dd><p>Actualiza la opción de campo a elegir con campos aun no definidos.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.CampoBooleano.enfocar">
+<span class="sig-name descname"><span class="pre">enfocar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#CampoBooleano.enfocar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.CampoBooleano.enfocar" title="Link to this definition"></a></dt>
+<dd><p>Ver Ruta.enfocar()</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gui.componentes.CampoNumerico">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gui.componentes.</span></span><span class="sig-name descname"><span class="pre">CampoNumerico</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ubicacion</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gestor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interface</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#CampoNumerico"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.CampoNumerico" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Clase encargada de gestionar la definción de un campo como numérico.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.CampoNumerico._confirmar_rango">
+<span class="sig-name descname"><span class="pre">_confirmar_rango</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#CampoNumerico._confirmar_rango"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.CampoNumerico._confirmar_rango" title="Link to this definition"></a></dt>
+<dd><p>Ver CampoBooleano._confirmar_campo_booleano()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.CampoNumerico._rastrear_tipo_num">
+<span class="sig-name descname"><span class="pre">_rastrear_tipo_num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#CampoNumerico._rastrear_tipo_num"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.CampoNumerico._rastrear_tipo_num" title="Link to this definition"></a></dt>
+<dd><p>Rastrea el tipo numérico seleccionado. Si es “decimal”, habilita
+la entrada que permite ingresar en cuántos dígitos redondear.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>args</strong> – Señal de cambio en la opción de tipo numérico.</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.CampoNumerico.actualizar_opciones_campo">
+<span class="sig-name descname"><span class="pre">actualizar_opciones_campo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#CampoNumerico.actualizar_opciones_campo"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.CampoNumerico.actualizar_opciones_campo" title="Link to this definition"></a></dt>
+<dd><p>Ver CampoBooleano.actualizar_opciones_campo()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.CampoNumerico.actualizar_opciones_numero">
+<span class="sig-name descname"><span class="pre">actualizar_opciones_numero</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">opciones</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#CampoNumerico.actualizar_opciones_numero"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.CampoNumerico.actualizar_opciones_numero" title="Link to this definition"></a></dt>
+<dd><p>Actualiza la opción de tipo numérico según el modo de aleatoriedad.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>opciones</strong> (<em>list</em>) – Opciones de tipo numérico (entero o decimal)</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.CampoNumerico.enfocar">
+<span class="sig-name descname"><span class="pre">enfocar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#CampoNumerico.enfocar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.CampoNumerico.enfocar" title="Link to this definition"></a></dt>
+<dd><p>Ver Ruta.enfocar()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.CampoNumerico.limpiar_entrada">
+<span class="sig-name descname"><span class="pre">limpiar_entrada</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#CampoNumerico.limpiar_entrada"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.CampoNumerico.limpiar_entrada" title="Link to this definition"></a></dt>
+<dd><p>Ver Ruta.limpiar_entrada()</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gui.componentes.CampoTexto">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gui.componentes.</span></span><span class="sig-name descname"><span class="pre">CampoTexto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ubicacion</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gestor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interface</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#CampoTexto"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.CampoTexto" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Clase encargada de gestionar la definción de un campo como de texto.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.CampoTexto._confirmar_campo_texto">
+<span class="sig-name descname"><span class="pre">_confirmar_campo_texto</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#CampoTexto._confirmar_campo_texto"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.CampoTexto._confirmar_campo_texto" title="Link to this definition"></a></dt>
+<dd><p>Ver CampoBooleano._confirmar_campo_booleano()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.CampoTexto.actualizar_opciones_campo">
+<span class="sig-name descname"><span class="pre">actualizar_opciones_campo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#CampoTexto.actualizar_opciones_campo"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.CampoTexto.actualizar_opciones_campo" title="Link to this definition"></a></dt>
+<dd><p>Ver CampoBooleano.actualizar_opciones_campo()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.CampoTexto.enfocar">
+<span class="sig-name descname"><span class="pre">enfocar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#CampoTexto.enfocar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.CampoTexto.enfocar" title="Link to this definition"></a></dt>
+<dd><p>Ver Ruta.enfocar()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.CampoTexto.limpiar_entrada">
+<span class="sig-name descname"><span class="pre">limpiar_entrada</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#CampoTexto.limpiar_entrada"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.CampoTexto.limpiar_entrada" title="Link to this definition"></a></dt>
+<dd><p>Ver Ruta.limpiar_entrada()</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gui.componentes.Encabezado">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gui.componentes.</span></span><span class="sig-name descname"><span class="pre">Encabezado</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ubicacion</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gestor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interface</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#Encabezado"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.Encabezado" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Clase encargada de gestionar el ingreso de los campos de la tabla.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.Encabezado._borrar_campos_ingresados">
+<span class="sig-name descname"><span class="pre">_borrar_campos_ingresados</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#Encabezado._borrar_campos_ingresados"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.Encabezado._borrar_campos_ingresados" title="Link to this definition"></a></dt>
+<dd><p>Vacia el widget de entrada y elimina los campos previamente definidos.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.Encabezado._confirmar_encabezado">
+<span class="sig-name descname"><span class="pre">_confirmar_encabezado</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#Encabezado._confirmar_encabezado"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.Encabezado._confirmar_encabezado" title="Link to this definition"></a></dt>
+<dd><p>Envía al gestor los campos ingresados para su validación.
+Si fue exitosa, actualiza las opciones de los componentes que podrían
+utilizarlos y luego establece el enfoque del teclado en el widget
+principal del módulo siguiente.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.Encabezado.enfocar">
+<span class="sig-name descname"><span class="pre">enfocar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#Encabezado.enfocar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.Encabezado.enfocar" title="Link to this definition"></a></dt>
+<dd><p>Ver Ruta.enfocar()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.Encabezado.limpiar_entrada">
+<span class="sig-name descname"><span class="pre">limpiar_entrada</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#Encabezado.limpiar_entrada"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.Encabezado.limpiar_entrada" title="Link to this definition"></a></dt>
+<dd><p>Ver Ruta.limpiar_entrada()</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gui.componentes.Exportar">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gui.componentes.</span></span><span class="sig-name descname"><span class="pre">Exportar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ubicacion</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gestor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interface</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#Exportar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.Exportar" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Clase encargada de inciar el proceso de exportar.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.Exportar._exportar">
+<span class="sig-name descname"><span class="pre">_exportar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#Exportar._exportar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.Exportar._exportar" title="Link to this definition"></a></dt>
+<dd><p>Confirma e inicia el proceso de exportar. Si fue exitoso,
+establece el enfoque del teclado en el widget principal
+del módulo ruta.</p>
+<p>return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.Exportar.enfocar">
+<span class="sig-name descname"><span class="pre">enfocar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#Exportar.enfocar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.Exportar.enfocar" title="Link to this definition"></a></dt>
+<dd><p>Ver Ruta.enfocar()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.Exportar.limpiar_entrada">
+<span class="sig-name descname"><span class="pre">limpiar_entrada</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#Exportar.limpiar_entrada"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.Exportar.limpiar_entrada" title="Link to this definition"></a></dt>
+<dd><p>Ver Ruta.limpiar_entrada()</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gui.componentes.OpcionesTabla">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gui.componentes.</span></span><span class="sig-name descname"><span class="pre">OpcionesTabla</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ubicacion</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gestor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interface</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#OpcionesTabla"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.OpcionesTabla" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Clase encargada de administrar las opciones de formato de la tabla.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.OpcionesTabla._confirmar_opciones">
+<span class="sig-name descname"><span class="pre">_confirmar_opciones</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#OpcionesTabla._confirmar_opciones"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.OpcionesTabla._confirmar_opciones" title="Link to this definition"></a></dt>
+<dd><p>Reúne las opciones definidas y las envía al gestor para su
+validación. Si fue exitosa, establece el enfoque del teclado
+en el widget principal del módulo siguiente.</p>
+<p>return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.OpcionesTabla._rastrear_opcion_aleatoriedad">
+<span class="sig-name descname"><span class="pre">_rastrear_opcion_aleatoriedad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#OpcionesTabla._rastrear_opcion_aleatoriedad"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.OpcionesTabla._rastrear_opcion_aleatoriedad" title="Link to this definition"></a></dt>
+<dd><p>Rastrea el modo de aleatoriedad seleccionado. Si es “secrets”,
+oculta la opción de ingresar “seed” y la de número decimal
+en el módulo campo numérico.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>args</strong> – Señal de cambio en la opción del modo de aleatoriedad.</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.OpcionesTabla.actualizar_opciones_criterio">
+<span class="sig-name descname"><span class="pre">actualizar_opciones_criterio</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#OpcionesTabla.actualizar_opciones_criterio"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.OpcionesTabla.actualizar_opciones_criterio" title="Link to this definition"></a></dt>
+<dd><p>Actualiza las opciones de campos de referencia para ordenar la tabla
+con los campos existentes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.OpcionesTabla.enfocar">
+<span class="sig-name descname"><span class="pre">enfocar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#OpcionesTabla.enfocar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.OpcionesTabla.enfocar" title="Link to this definition"></a></dt>
+<dd><p>Ver Ruta.enfocar()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.OpcionesTabla.limpiar_entrada">
+<span class="sig-name descname"><span class="pre">limpiar_entrada</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#OpcionesTabla.limpiar_entrada"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.OpcionesTabla.limpiar_entrada" title="Link to this definition"></a></dt>
+<dd><p>Ver Ruta.limpiar_entrada()</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gui.componentes.Ruta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gui.componentes.</span></span><span class="sig-name descname"><span class="pre">Ruta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ubicacion</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gestor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interface</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#Ruta"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.Ruta" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Clase encargada de gestionar el ingreso de la ruta de salida.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.Ruta._confirmar_ruta">
+<span class="sig-name descname"><span class="pre">_confirmar_ruta</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#Ruta._confirmar_ruta"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.Ruta._confirmar_ruta" title="Link to this definition"></a></dt>
+<dd><p>Envía al gestor la ruta ingresada para su validación.
+Si fue exitosa, establece el enfoque del teclado
+en la entrada de texto del módulo siguiente.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.Ruta._seleccionar_ruta">
+<span class="sig-name descname"><span class="pre">_seleccionar_ruta</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#Ruta._seleccionar_ruta"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.Ruta._seleccionar_ruta" title="Link to this definition"></a></dt>
+<dd><p>Despliega una ventana que permite seleccionar el directorio
+o archivo CSV de salida.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.Ruta.enfocar">
+<span class="sig-name descname"><span class="pre">enfocar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#Ruta.enfocar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.Ruta.enfocar" title="Link to this definition"></a></dt>
+<dd><p>Dirige el enfoque del teclado al widget principal del módulo.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.Ruta.limpiar_entrada">
+<span class="sig-name descname"><span class="pre">limpiar_entrada</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#Ruta.limpiar_entrada"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.Ruta.limpiar_entrada" title="Link to this definition"></a></dt>
+<dd><p>Elimina el contenido actual del widget de entrada.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gui.componentes.VerDatos">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gui.componentes.</span></span><span class="sig-name descname"><span class="pre">VerDatos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ubicacion</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m_raiz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gestor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#VerDatos"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.VerDatos" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Clase encargada de gestionar la vista de los datos ingresados.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.VerDatos.barra_visible">
+<span class="sig-name descname"><span class="pre">barra_visible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#VerDatos.barra_visible"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.VerDatos.barra_visible" title="Link to this definition"></a></dt>
+<dd><p>Mantiene visible la barra de desplazamiento vertical
+aunque se modifiquen las dimensiones de la ventana.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>args</strong> – Señal de modificación del tamaño de la ventana.</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.VerDatos.desplazar">
+<span class="sig-name descname"><span class="pre">desplazar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#VerDatos.desplazar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.VerDatos.desplazar" title="Link to this definition"></a></dt>
+<dd><p>Asocia la barra de desplazamiento vertical al cuadro de texto.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>args</strong> – Señal de desplazamiento vertical en el cuadro de texto.</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.componentes.VerDatos.insertar_datos">
+<span class="sig-name descname"><span class="pre">insertar_datos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">datos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/componentes.html#VerDatos.insertar_datos"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.componentes.VerDatos.insertar_datos" title="Link to this definition"></a></dt>
+<dd><p>Recibe del gestor los datos cargados por el usuario y
+los inserta en el cuadro de texto.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>datos</strong> (<em>list</em>) – Valores ingresados y almacenados en la tabla.</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-gui.elementos">
+<span id="modulo-gui-elementos"></span><h2>Módulo gui.elementos<a class="headerlink" href="#module-gui.elementos" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="gui.elementos.Boton">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gui.elementos.</span></span><span class="sig-name descname"><span class="pre">Boton</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ubicacion</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">texto_boton:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">funcion_comando</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">estilo_boton</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evento_enter=&lt;function</span> <span class="pre">Boton.&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fuente_boton=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pack_variable={'anchor':</span> <span class="pre">'s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'padx':</span> <span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'pady':</span> <span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'side':</span> <span class="pre">'left'}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/elementos.html#Boton"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.elementos.Boton" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Clase encargada de gestionar y generar un Button.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.elementos.Boton.enfocar_boton">
+<span class="sig-name descname"><span class="pre">enfocar_boton</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/elementos.html#Boton.enfocar_boton"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.elementos.Boton.enfocar_boton" title="Link to this definition"></a></dt>
+<dd><p>Establece el enfoque del teclado en el widget.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gui.elementos.EntradaOpciones">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gui.elementos.</span></span><span class="sig-name descname"><span class="pre">EntradaOpciones</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ubicacion</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">texto_etiqueta:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opciones_base:</span> <span class="pre">list</span> <span class="pre">=</span> <span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">funcion_rastrear_opciones=&lt;function</span> <span class="pre">EntradaOpciones.&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">estilo_opc={'activebackground':</span> <span class="pre">'#08000c'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'activeforeground':</span> <span class="pre">'#7306b1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'background':</span> <span class="pre">'#7306b1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'bd':</span> <span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'height':</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'highlightthickness':</span> <span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'width':</span> <span class="pre">13}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pack_cont_ingreso={'anchor':</span> <span class="pre">'w'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'expand':</span> <span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'fill':</span> <span class="pre">'x'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'padx':</span> <span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'pady':</span> <span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'side':</span> <span class="pre">'left'}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/elementos.html#EntradaOpciones"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.elementos.EntradaOpciones" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Clase encargada de gestionar y generar un OptionMenu
+junto con sus elementos asociados.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.elementos.EntradaOpciones.actualizar_opciones">
+<span class="sig-name descname"><span class="pre">actualizar_opciones</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nuevas_opciones</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/elementos.html#EntradaOpciones.actualizar_opciones"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.elementos.EntradaOpciones.actualizar_opciones" title="Link to this definition"></a></dt>
+<dd><p>Establece nuevas opciones en el OptionMenu.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>nuevas_opciones</strong> (<em>list</em>) – Las nuevas opciones.</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.elementos.EntradaOpciones.mostrar_elemento">
+<span class="sig-name descname"><span class="pre">mostrar_elemento</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/elementos.html#EntradaOpciones.mostrar_elemento"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.elementos.EntradaOpciones.mostrar_elemento" title="Link to this definition"></a></dt>
+<dd><p>Ver EntradaTexto.mostrar_elemento()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.elementos.EntradaOpciones.obtener_valor">
+<span class="sig-name descname"><span class="pre">obtener_valor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/gui/elementos.html#EntradaOpciones.obtener_valor"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.elementos.EntradaOpciones.obtener_valor" title="Link to this definition"></a></dt>
+<dd><p>Retorna la opción seleccionada en el widget de opción.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Cadena de texto con el valor ingresado.</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.elementos.EntradaOpciones.ocultar_elemento">
+<span class="sig-name descname"><span class="pre">ocultar_elemento</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/elementos.html#EntradaOpciones.ocultar_elemento"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.elementos.EntradaOpciones.ocultar_elemento" title="Link to this definition"></a></dt>
+<dd><p>Ver EntradaTexto.ocultar_elemento()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.elementos.EntradaOpciones.reiniciar_opciones">
+<span class="sig-name descname"><span class="pre">reiniciar_opciones</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/elementos.html#EntradaOpciones.reiniciar_opciones"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.elementos.EntradaOpciones.reiniciar_opciones" title="Link to this definition"></a></dt>
+<dd><p>Establece como opción seleccionada el primer item
+de la lista de opciones disponibles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gui.elementos.EntradaTexto">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gui.elementos.</span></span><span class="sig-name descname"><span class="pre">EntradaTexto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ubicacion</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">texto_etiqueta:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">texto_base_entrada:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evento_enter=&lt;function</span> <span class="pre">EntradaTexto.&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pack_entrada={'expand':</span> <span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'fill':</span> <span class="pre">'x'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'ipady':</span> <span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'pady':</span> <span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'side':</span> <span class="pre">'top'}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pack_etiqueta={'anchor':</span> <span class="pre">'n'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'expand':</span> <span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'padx':</span> <span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'pady':</span> <span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'side':</span> <span class="pre">'top'}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">estilo_entrada={'background':</span> <span class="pre">'#272727'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'bd':</span> <span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'foreground':</span> <span class="pre">'#08d698'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'highlightbackground':</span> <span class="pre">'#0d0d0d'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'highlightcolor':</span> <span class="pre">'#a5a5a5'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'highlightthickness':</span> <span class="pre">1}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/elementos.html#EntradaTexto"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.elementos.EntradaTexto" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Clase encargada de gestionar y generar un Entry
+junto con sus elementos asociados.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.elementos.EntradaTexto.borrar_valor">
+<span class="sig-name descname"><span class="pre">borrar_valor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/elementos.html#EntradaTexto.borrar_valor"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.elementos.EntradaTexto.borrar_valor" title="Link to this definition"></a></dt>
+<dd><p>Vacía el texto del widget de entrada.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.elementos.EntradaTexto.enfocar_entrada">
+<span class="sig-name descname"><span class="pre">enfocar_entrada</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/elementos.html#EntradaTexto.enfocar_entrada"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.elementos.EntradaTexto.enfocar_entrada" title="Link to this definition"></a></dt>
+<dd><p>Establece el enfoque del teclado en el widget de entrada.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.elementos.EntradaTexto.establecer_valor">
+<span class="sig-name descname"><span class="pre">establecer_valor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">valor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/elementos.html#EntradaTexto.establecer_valor"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.elementos.EntradaTexto.establecer_valor" title="Link to this definition"></a></dt>
+<dd><p>Establece el valor de texto del widget de entrada.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>valor</strong> (<em>str</em>) – Valor de texto a establecer.</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.elementos.EntradaTexto.mostrar_elemento">
+<span class="sig-name descname"><span class="pre">mostrar_elemento</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/elementos.html#EntradaTexto.mostrar_elemento"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.elementos.EntradaTexto.mostrar_elemento" title="Link to this definition"></a></dt>
+<dd><p>Vuelve visible el elemento si está oculto.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.elementos.EntradaTexto.obtener_valor">
+<span class="sig-name descname"><span class="pre">obtener_valor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/gui/elementos.html#EntradaTexto.obtener_valor"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.elementos.EntradaTexto.obtener_valor" title="Link to this definition"></a></dt>
+<dd><p>Retorna el texto ingresado en el widget de entrada.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Cadena de texto con el valor ingresado.</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.elementos.EntradaTexto.ocultar_elemento">
+<span class="sig-name descname"><span class="pre">ocultar_elemento</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/elementos.html#EntradaTexto.ocultar_elemento"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.elementos.EntradaTexto.ocultar_elemento" title="Link to this definition"></a></dt>
+<dd><p>Oculta el elemento si está visible.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gui.elementos.NotaEmergente">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gui.elementos.</span></span><span class="sig-name descname"><span class="pre">NotaEmergente</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elemento_asociado</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">texto</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/elementos.html#NotaEmergente"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.elementos.NotaEmergente" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Clase encargada de gestionar y generar una nota emergente.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.elementos.NotaEmergente.mostrar">
+<span class="sig-name descname"><span class="pre">mostrar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evento</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/elementos.html#NotaEmergente.mostrar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.elementos.NotaEmergente.mostrar" title="Link to this definition"></a></dt>
+<dd><p>Vuelve visible la nota emergente si está oculta.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>evento</strong> – Señala que el cursor entra en el widget.</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gui.elementos.NotaEmergente.ocultar">
+<span class="sig-name descname"><span class="pre">ocultar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evento</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gui/elementos.html#NotaEmergente.ocultar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#gui.elementos.NotaEmergente.ocultar" title="Link to this definition"></a></dt>
+<dd><p>Oculta la nota emergente si está visible.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>evento</strong> – Señala que el cursor sale del widget.</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="main.html" class="btn btn-neutral float-left" title="Módulo main" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+        <a href="logica.html" class="btn btn-neutral float-right" title="Paquete logica" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2024, errejotaeme.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>gui.elementos &mdash; documentación de GDA - 1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=36c4ab74"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/translations.js?v=efdbd0b9"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            GDA
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenido:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dependencias.html">Dependencias</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Paquetes y módulos</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GDA</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Código de módulo</a></li>
+      <li class="breadcrumb-item active">gui.elementos</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Código fuente para gui.elementos</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+<span class="kn">from</span> <span class="nn">app.comunes.globales</span> <span class="kn">import</span> <span class="n">gb</span>
+
+
+
+<div class="viewcode-block" id="EntradaTexto">
+<a class="viewcode-back" href="../../gui.html#gui.elementos.EntradaTexto">[documentos]</a>
+<span class="k">class</span> <span class="nc">EntradaTexto</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Clase encargada de gestionar y generar un Entry</span>
+<span class="sd">    junto con sus elementos asociados.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">ubicacion</span><span class="p">,</span>
+        <span class="n">texto_etiqueta</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">texto_base_entrada</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">evento_enter</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">:</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">pack_entrada</span><span class="o">=</span><span class="n">gb</span><span class="o">.</span><span class="n">PACK_ENT_TEX</span><span class="p">,</span>
+        <span class="n">pack_etiqueta</span><span class="o">=</span><span class="n">gb</span><span class="o">.</span><span class="n">PACK_ETIQ_ENT</span><span class="p">,</span>
+        <span class="n">estilo_entrada</span><span class="o">=</span><span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_TX_ENTRADA</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor de la clase EntradaTexto para crear un widget</span>
+<span class="sd">        de entrada con etiqueta asociada dentro de un contenedor.</span>
+
+<span class="sd">        :param ubicacion: Marco donde se anidará el módulo.</span>
+<span class="sd">        :type ubicacion: tk.Frame</span>
+<span class="sd">        :param texto_etiqueta: Contenido de la etiqueta.</span>
+<span class="sd">        :type texto_etiqueta: str</span>
+<span class="sd">        :param texto_base_entrada: Texto por defecto de la entrada.</span>
+<span class="sd">        :type texto_base_entrada: str</span>
+<span class="sd">        :param evento_enter: Función asociada al evento &lt;Return&gt; en la entrada.</span>
+<span class="sd">        :type evento_enter: function or None</span>
+<span class="sd">        :param pack_entrada: Configuración para ubicar el widget entrada.</span>
+<span class="sd">        :type pack_entrada: dict</span>
+<span class="sd">        :param pack_etiqueta: Configuración para ubicar el widget etiqueta.</span>
+<span class="sd">        :type pack_etiqueta: dict      </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pack_eti_base</span> <span class="o">=</span> <span class="n">pack_etiqueta</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pack_entrada_base</span> <span class="o">=</span> <span class="n">pack_entrada</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_ingreso</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="n">ubicacion</span><span class="p">,</span> <span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_MARCO_MOD</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_ingreso</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">PACK_MARCO_ENT</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_eti_ingreso</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_ingreso</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">texto_etiqueta</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_ETIQ</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_eti_ingreso</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">font</span><span class="o">=</span><span class="n">gb</span><span class="o">.</span><span class="n">fuente_etiqueta</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_eti_ingreso</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">pack_eti_base</span><span class="p">)</span>
+
+        <span class="c1"># Almacena el valor ingresado</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_valor_ingresado</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">StringVar</span><span class="p">()</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">entrada</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Entry</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_ingreso</span><span class="p">,</span>
+            <span class="n">textvariable</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_valor_ingresado</span><span class="p">,</span>
+            <span class="n">justify</span><span class="o">=</span><span class="s2">&quot;center&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entrada</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span>
+            <span class="n">font</span><span class="o">=</span><span class="n">gb</span><span class="o">.</span><span class="n">fuente_entrada</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">estilo_entrada</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entrada</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">texto_base_entrada</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entrada</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">pack_entrada_base</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entrada</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s2">&quot;&lt;Return&gt;&quot;</span><span class="p">,</span> <span class="n">evento_enter</span><span class="p">)</span>
+
+<div class="viewcode-block" id="EntradaTexto.borrar_valor">
+<a class="viewcode-back" href="../../gui.html#gui.elementos.EntradaTexto.borrar_valor">[documentos]</a>
+    <span class="k">def</span> <span class="nf">borrar_valor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Vacía el texto del widget de entrada.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entrada</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="EntradaTexto.obtener_valor">
+<a class="viewcode-back" href="../../gui.html#gui.elementos.EntradaTexto.obtener_valor">[documentos]</a>
+    <span class="k">def</span> <span class="nf">obtener_valor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retorna el texto ingresado en el widget de entrada.</span>
+
+<span class="sd">        :return: Cadena de texto con el valor ingresado.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_valor_ingresado</span><span class="o">.</span><span class="n">get</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="EntradaTexto.establecer_valor">
+<a class="viewcode-back" href="../../gui.html#gui.elementos.EntradaTexto.establecer_valor">[documentos]</a>
+    <span class="k">def</span> <span class="nf">establecer_valor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">valor</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Establece el valor de texto del widget de entrada.</span>
+
+<span class="sd">        :param valor: Valor de texto a establecer.</span>
+<span class="sd">        :type valor: str</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_valor_ingresado</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">valor</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="EntradaTexto.enfocar_entrada">
+<a class="viewcode-back" href="../../gui.html#gui.elementos.EntradaTexto.enfocar_entrada">[documentos]</a>
+    <span class="k">def</span> <span class="nf">enfocar_entrada</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Establece el enfoque del teclado en el widget de entrada.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entrada</span><span class="o">.</span><span class="n">focus_set</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="EntradaTexto.mostrar_elemento">
+<a class="viewcode-back" href="../../gui.html#gui.elementos.EntradaTexto.mostrar_elemento">[documentos]</a>
+    <span class="k">def</span> <span class="nf">mostrar_elemento</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Vuelve visible el elemento si está oculto.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_ingreso</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">PACK_MARCO_ENT</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_eti_ingreso</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">pack_eti_base</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entrada</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">pack_entrada_base</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="EntradaTexto.ocultar_elemento">
+<a class="viewcode-back" href="../../gui.html#gui.elementos.EntradaTexto.ocultar_elemento">[documentos]</a>
+    <span class="k">def</span> <span class="nf">ocultar_elemento</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Oculta el elemento si está visible.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_ingreso</span><span class="o">.</span><span class="n">pack_forget</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_eti_ingreso</span><span class="o">.</span><span class="n">pack_forget</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entrada</span><span class="o">.</span><span class="n">pack_forget</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="EntradaOpciones">
+<a class="viewcode-back" href="../../gui.html#gui.elementos.EntradaOpciones">[documentos]</a>
+<span class="k">class</span> <span class="nc">EntradaOpciones</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Clase encargada de gestionar y generar un OptionMenu</span>
+<span class="sd">    junto con sus elementos asociados.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">ubicacion</span><span class="p">,</span>
+        <span class="n">texto_etiqueta</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">opciones_base</span><span class="p">:</span><span class="nb">list</span><span class="o">=</span><span class="p">[],</span>
+        <span class="n">funcion_rastrear_opciones</span><span class="o">=</span><span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">estilo_opc</span><span class="o">=</span><span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_BTN_OPC</span><span class="p">,</span>
+        <span class="n">pack_cont_ingreso</span><span class="o">=</span><span class="n">gb</span><span class="o">.</span><span class="n">PACK_MARCO_ENT</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor de la clase EntradaOpciones para crear un widget</span>
+<span class="sd">        de opciones con etiqueta asociada dentro de un contenedor.</span>
+
+<span class="sd">        :param ubicacion: Marco donde se anidará el módulo.</span>
+<span class="sd">        :type ubicacion: tk.Frame</span>
+<span class="sd">        :param texto_etiqueta: Contenido de la etiqueta.</span>
+<span class="sd">        :type texto_etiqueta: str</span>
+<span class="sd">        :param opciones_base: Opciones del widget.</span>
+<span class="sd">        :type opciones_base: list</span>
+<span class="sd">        :param funcion_rastrear_opciones: Función asociada al valor seleccionado.</span>
+<span class="sd">        :type funcion_rastrear_opciones: function or None</span>
+<span class="sd">        :param estilo_opc: Configuración del aspecto visual del widget de opciones.</span>
+<span class="sd">        :type estilo_opc: dict</span>
+<span class="sd">        :param pack_cont_ingreso: Configuración para ubicar el marco del widget.</span>
+<span class="sd">        :type pack_cont_ingreso: dict      </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_ingreso</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="n">ubicacion</span><span class="p">,</span> <span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_MARCO_MOD</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_ingreso</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="o">**</span><span class="n">pack_cont_ingreso</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_eti_ingreso</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_ingreso</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">texto_etiqueta</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">ESTILO_ETIQ</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_eti_ingreso</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">font</span><span class="o">=</span><span class="n">gb</span><span class="o">.</span><span class="n">fuente_etiqueta</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_eti_ingreso</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">PACK_ETIQ_ENT</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_opciones</span> <span class="o">=</span> <span class="n">opciones_base</span>
+        <span class="c1"># Almacena el seleccionado</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_valor_ingresado</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">StringVar</span><span class="p">()</span>
+        <span class="c1"># Establece el valor incial</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_valor_ingresado</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_opciones</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">entrada_opciones</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">OptionMenu</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_ingreso</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_valor_ingresado</span><span class="p">,</span>
+            <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_opciones</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entrada_opciones</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">font</span><span class="o">=</span><span class="n">gb</span><span class="o">.</span><span class="n">fuente_boton</span><span class="p">,</span> <span class="o">**</span><span class="n">estilo_opc</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entrada_opciones</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">PACK_ENT_OPC</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_valor_ingresado</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">funcion_rastrear_opciones</span><span class="p">)</span>
+
+<div class="viewcode-block" id="EntradaOpciones.obtener_valor">
+<a class="viewcode-back" href="../../gui.html#gui.elementos.EntradaOpciones.obtener_valor">[documentos]</a>
+    <span class="k">def</span> <span class="nf">obtener_valor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retorna la opción seleccionada en el widget de opción.</span>
+
+<span class="sd">        :return: Cadena de texto con el valor ingresado.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_valor_ingresado</span><span class="o">.</span><span class="n">get</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="EntradaOpciones.actualizar_opciones">
+<a class="viewcode-back" href="../../gui.html#gui.elementos.EntradaOpciones.actualizar_opciones">[documentos]</a>
+    <span class="k">def</span> <span class="nf">actualizar_opciones</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nuevas_opciones</span><span class="p">:</span><span class="nb">list</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Establece nuevas opciones en el OptionMenu.</span>
+
+<span class="sd">        :param nuevas_opciones: Las nuevas opciones.</span>
+<span class="sd">        :type nuevas_opciones: list</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">nuevas_opciones</span><span class="p">:</span>
+            <span class="n">menu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">entrada_opciones</span><span class="p">[</span><span class="s2">&quot;menu&quot;</span><span class="p">]</span>
+            <span class="n">menu</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">opcion</span> <span class="ow">in</span> <span class="n">nuevas_opciones</span><span class="p">:</span>
+                <span class="n">menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
+                    <span class="n">label</span><span class="o">=</span><span class="n">opcion</span><span class="p">,</span>
+                    <span class="n">command</span><span class="o">=</span><span class="k">lambda</span> <span class="n">opc</span><span class="o">=</span><span class="n">opcion</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_valor_ingresado</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">opc</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_valor_ingresado</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">nuevas_opciones</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="EntradaOpciones.reiniciar_opciones">
+<a class="viewcode-back" href="../../gui.html#gui.elementos.EntradaOpciones.reiniciar_opciones">[documentos]</a>
+    <span class="k">def</span> <span class="nf">reiniciar_opciones</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Establece como opción seleccionada el primer item</span>
+<span class="sd">        de la lista de opciones disponibles.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_valor_ingresado</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_opciones</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="EntradaOpciones.mostrar_elemento">
+<a class="viewcode-back" href="../../gui.html#gui.elementos.EntradaOpciones.mostrar_elemento">[documentos]</a>
+    <span class="k">def</span> <span class="nf">mostrar_elemento</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ver EntradaTexto.mostrar_elemento()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_ingreso</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="o">**</span><span class="n">pack_cont_ingreso</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_eti_ingreso</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">PACK_ETIQ_ENT</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entrada_opciones</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="o">**</span><span class="n">gb</span><span class="o">.</span><span class="n">PACK_ENT_OPC</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="EntradaOpciones.ocultar_elemento">
+<a class="viewcode-back" href="../../gui.html#gui.elementos.EntradaOpciones.ocultar_elemento">[documentos]</a>
+    <span class="k">def</span> <span class="nf">ocultar_elemento</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ver EntradaTexto.ocultar_elemento()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_contenedor_ingreso</span><span class="o">.</span><span class="n">pack_forget</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_eti_ingreso</span><span class="o">.</span><span class="n">pack_forget</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entrada_opciones</span><span class="o">.</span><span class="n">pack_forget</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Boton">
+<a class="viewcode-back" href="../../gui.html#gui.elementos.Boton">[documentos]</a>
+<span class="k">class</span> <span class="nc">Boton</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Clase encargada de gestionar y generar un Button.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">ubicacion</span><span class="p">,</span>
+        <span class="n">texto_boton</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">funcion_comando</span><span class="p">,</span>
+        <span class="n">estilo_boton</span><span class="p">,</span>
+        <span class="n">evento_enter</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">:</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">fuente_boton</span><span class="o">=</span><span class="n">gb</span><span class="o">.</span><span class="n">fuente_boton</span><span class="p">,</span>
+        <span class="n">pack_variable</span><span class="o">=</span><span class="n">gb</span><span class="o">.</span><span class="n">PACK_BTN</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor de la clase Boton.</span>
+
+<span class="sd">        :param ubicacion: Marco donde se anidará el módulo.</span>
+<span class="sd">        :type ubicacion: tk.Frame</span>
+<span class="sd">        :param texto_boton: Texto del boton.</span>
+<span class="sd">        :type texto_boton: str</span>
+<span class="sd">        :param funcion_comando: Función asociada al boton.</span>
+<span class="sd">        :type funcion_comando: function</span>
+<span class="sd">        :param estilo_boton: Configuración del aspecto visual del widget.</span>
+<span class="sd">        :type estilo_boton: dict</span>
+<span class="sd">        :param evento_enter: Función asociada al evento &lt;Return&gt; en el boton.</span>
+<span class="sd">        :type evento_enter: function or None</span>
+<span class="sd">        :param fuente_boton: Configuración de la fuente.</span>
+<span class="sd">        :type fuente_boton: tk.Font</span>
+<span class="sd">        :param pack_cont_ingreso: Configuración para ubicar el marco del widget.</span>
+<span class="sd">        :type pack_cont_ingreso: dict    </span>
+<span class="sd">        &quot;&quot;&quot;</span>    
+        <span class="bp">self</span><span class="o">.</span><span class="n">boton</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+            <span class="n">ubicacion</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">texto_boton</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="n">funcion_comando</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">estilo_boton</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">boton</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">font</span><span class="o">=</span><span class="n">fuente_boton</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">boton</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="o">**</span><span class="n">pack_variable</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">boton</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s2">&quot;&lt;Return&gt;&quot;</span><span class="p">,</span> <span class="n">evento_enter</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Boton.enfocar_boton">
+<a class="viewcode-back" href="../../gui.html#gui.elementos.Boton.enfocar_boton">[documentos]</a>
+    <span class="k">def</span> <span class="nf">enfocar_boton</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Establece el enfoque del teclado en el widget.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">boton</span><span class="o">.</span><span class="n">focus_set</span><span class="p">()</span></div>
+</div>
+
+
+<div class="viewcode-block" id="NotaEmergente">
+<a class="viewcode-back" href="../../gui.html#gui.elementos.NotaEmergente">[documentos]</a>
+<span class="k">class</span> <span class="nc">NotaEmergente</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Clase encargada de gestionar y generar una nota emergente.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">elemento_asociado</span><span class="p">,</span> <span class="n">texto</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor de la clase NotaEmergente.</span>
+
+<span class="sd">        :param elemento_asociado: Widget sobre el cual será visible la nota.</span>
+<span class="sd">        :type elemento_asociado: tk.Widget</span>
+<span class="sd">        :param texto: Contenido de la nota.</span>
+<span class="sd">        :type texto: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>    
+        <span class="bp">self</span><span class="o">.</span><span class="n">elemento_asociado</span> <span class="o">=</span> <span class="n">elemento_asociado</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">texto</span> <span class="o">=</span> <span class="n">texto</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nota</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="NotaEmergente.mostrar">
+<a class="viewcode-back" href="../../gui.html#gui.elementos.NotaEmergente.mostrar">[documentos]</a>
+    <span class="k">def</span> <span class="nf">mostrar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">evento</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Vuelve visible la nota emergente si está oculta.</span>
+
+<span class="sd">        :param evento: Señala que el cursor entra en el widget.</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elemento_asociado</span><span class="o">.</span><span class="n">bbox</span><span class="p">(</span><span class="s2">&quot;insert&quot;</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elemento_asociado</span><span class="o">.</span><span class="n">winfo_rootx</span><span class="p">()</span> <span class="o">+</span> <span class="mi">25</span>
+        <span class="n">y</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elemento_asociado</span><span class="o">.</span><span class="n">winfo_rooty</span><span class="p">()</span> <span class="o">+</span> <span class="mi">25</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">nota</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Toplevel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">elemento_asociado</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nota</span><span class="o">.</span><span class="n">wm_overrideredirect</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nota</span><span class="o">.</span><span class="n">wm_geometry</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;+</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">+</span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">info</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nota</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">texto</span><span class="p">,</span>
+            <span class="n">background</span><span class="o">=</span><span class="s2">&quot;#ffffe0&quot;</span><span class="p">,</span>
+            <span class="n">relief</span><span class="o">=</span><span class="s2">&quot;solid&quot;</span><span class="p">,</span>
+            <span class="n">borderwidth</span><span class="o">=</span><span class="mi">1</span>
+        <span class="p">)</span>
+        <span class="n">info</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">ipadx</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="NotaEmergente.ocultar">
+<a class="viewcode-back" href="../../gui.html#gui.elementos.NotaEmergente.ocultar">[documentos]</a>
+    <span class="k">def</span> <span class="nf">ocultar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">evento</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Oculta la nota emergente si está visible.</span>
+
+<span class="sd">        :param evento: Señala que el cursor sale del widget.</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nota</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nota</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nota</span> <span class="o">=</span> <span class="kc">None</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2024, errejotaeme.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

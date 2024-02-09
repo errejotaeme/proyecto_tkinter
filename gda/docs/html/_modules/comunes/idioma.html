@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>comunes.idioma &mdash; documentación de GDA - 1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=36c4ab74"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/translations.js?v=efdbd0b9"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            GDA
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenido:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dependencias.html">Dependencias</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Paquetes y módulos</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GDA</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Código de módulo</a></li>
+      <li class="breadcrumb-item active">comunes.idioma</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Código fuente para comunes.idioma</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+
+<span class="c1"># Diccionarios que reunen el texto en español y en inglés.</span>
+<span class="c1"># Los dos diccionarios con sufijo &quot;_AUX&quot; contiene las frases largas</span>
+<span class="c1"># del idioma correspondiente, separadas en cadenas más pequeñas.</span>
+<span class="c1"># Los comentarios indican el módulo o función a la que pertenecen</span>
+<span class="c1"># o en la cual se utilizan por primera vez.</span>
+<span class="n">TEX_ES_AUX</span><span class="p">:</span><span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span> 
+    <span class="s2">&quot;_acl_0&quot;</span> <span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> DATOS INGRESADOS</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_acl_1&quot;</span> <span class="p">:</span> <span class="s2">&quot;Para los campos que se prevean como calculados, &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_acl_2&quot;</span> <span class="p">:</span> <span class="s2">&quot;no se requiere asignar valores ni tipos de datos.</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_err_enc_1&quot;</span> <span class="p">:</span> <span class="s2">&quot;Por favor, ingrese los campos de &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_err_enc_2&quot;</span> <span class="p">:</span> <span class="s2">&quot;su tabla separados por comas.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_err_criterio_1&quot;</span> <span class="p">:</span> <span class="s2">&quot;La tabla no pudo ser ordenada según el campo especificado. &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_err_criterio_2&quot;</span> <span class="p">:</span> <span class="s2">&quot;Por favor, verifique su selección.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_err_no_val_1&quot;</span> <span class="p">:</span> <span class="s2">&quot;El campo seleccionado no ha recibido ningún valor. &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_err_no_val_2&quot;</span> <span class="p">:</span> <span class="s2">&quot;Por favor, ingrese los datos y vuelva a intentarlo.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_err_campo_inex_1&quot;</span> <span class="p">:</span> <span class="s2">&quot;Solamente se pueden definir valores para un campo existente. &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_err_campo_inex_2&quot;</span> <span class="p">:</span> <span class="s2">&quot;Por favor, revise los campos de la tabla.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_err_campo_repe_1&quot;</span> <span class="p">:</span> <span class="s2">&quot;El campo seleccionado ya tiene valores definidos. &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_err_campo_repe_2&quot;</span> <span class="p">:</span> <span class="s2">&quot;Para reemplazarlos, elimine los valores existentes del campo.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_err_ruta_ent_1&quot;</span> <span class="p">:</span> <span class="s2">&quot;El archivo no se puede abrir porque &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_err_ruta_ent_2&quot;</span> <span class="p">:</span> <span class="s2">&quot;la ruta especificada no existe.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_err_secrets_1&quot;</span> <span class="p">:</span> <span class="s2">&quot;El módulo &#39;secrets&#39; no genera números de coma flotante.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_err_secrets_2&quot;</span> <span class="p">:</span> <span class="s2">&quot;Si necesita valores con decimales, puede seleccionar &#39;random&#39;.&quot;</span>
+<span class="p">}</span>                                       
+<span class="n">TEX_ES</span><span class="p">:</span><span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1"># Módulo interface</span>
+    <span class="s2">&quot;vt_principal&quot;</span> <span class="p">:</span> <span class="s2">&quot;GDA&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;titulo_app&quot;</span> <span class="p">:</span> <span class="s2">&quot;GENERADOR DE TABLAS CON DATOS PSEUDO-ALEATORIOS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;btn_salir&quot;</span> <span class="p">:</span> <span class="s2">&quot;Salir&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;btn_idioma&quot;</span> <span class="p">:</span> <span class="s2">&quot;EN&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ne_btn_idioma&quot;</span> <span class="p">:</span> <span class="s2">&quot;Se reiniciará la aplicación y se perderán los datos ingresados&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;vt_salida&quot;</span> <span class="p">:</span> <span class="s2">&quot;Confirmar Salir&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;vt_salida_mensaje&quot;</span> <span class="p">:</span> <span class="s2">&quot;¿Confirma que desea salir?&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;titulo_generar&quot;</span> <span class="p">:</span> <span class="s2">&quot; CONFIGURACION DE LA TABLA &quot;</span><span class="p">,</span>
+    <span class="c1"># Modulo vista</span>
+    <span class="s2">&quot;aclaracion&quot;</span> <span class="p">:</span> <span class="n">TEX_ES_AUX</span><span class="p">[</span><span class="s2">&quot;_acl_0&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">TEX_ES_AUX</span><span class="p">[</span><span class="s2">&quot;_acl_1&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">TEX_ES_AUX</span><span class="p">[</span><span class="s2">&quot;_acl_2&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;titulo_convertir&quot;</span> <span class="p">:</span> <span class="s2">&quot; CSV A JSON &quot;</span><span class="p">,</span>
+    <span class="c1"># Modulo ruta</span>
+    <span class="s2">&quot;ruta&quot;</span> <span class="p">:</span> <span class="s2">&quot;Ruta de salida&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ruta_def&quot;</span> <span class="p">:</span> <span class="s2">&quot;/ruta_a_archivo_vacío.csv&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;btn_ubicacion&quot;</span> <span class="p">:</span> <span class="s2">&quot;Elegir ubicación&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;btn_ok&quot;</span> <span class="p">:</span> <span class="s2">&quot;Aceptar&quot;</span><span class="p">,</span>
+    <span class="c1"># Modulo encabezado</span>
+    <span class="s2">&quot;campos_def&quot;</span> <span class="p">:</span> <span class="s2">&quot;Campo_1, Campo_2, ..., Campo_n&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;encabezado&quot;</span> <span class="p">:</span> <span class="s2">&quot;Campos de la tabla&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;btn_encabezado&quot;</span> <span class="p">:</span> <span class="s2">&quot;Borrar encabezado&quot;</span><span class="p">,</span>
+    <span class="c1"># Modulo opciones tabla</span>
+    <span class="s2">&quot;delimitador&quot;</span> <span class="p">:</span> <span class="s2">&quot;Delimitador&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;orden&quot;</span> <span class="p">:</span> <span class="s2">&quot;Orden&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ne_opc_orden&quot;</span> <span class="p">:</span> <span class="s2">&quot;Las tablas pequeñas no requieren librerías externas&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;criterio&quot;</span> <span class="p">:</span> <span class="s2">&quot;Criterio&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;modo&quot;</span> <span class="p">:</span> <span class="s2">&quot;Aleatoriedad&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;semilla&quot;</span> <span class="p">:</span> <span class="s2">&quot;Semilla&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;orden_opc_0&quot;</span> <span class="p">:</span> <span class="s2">&quot;Ascendente&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;orden_opc_1&quot;</span> <span class="p">:</span> <span class="s2">&quot;Descendente&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;orden_opc_2&quot;</span> <span class="p">:</span> <span class="s2">&quot;Ninguno&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;orden_opc_3&quot;</span> <span class="p">:</span> <span class="s2">&quot;Ascendente - pandas&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;orden_opc_4&quot;</span> <span class="p">:</span> <span class="s2">&quot;Descendente - pandas&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;criterio_opc_base&quot;</span> <span class="p">:</span> <span class="s2">&quot;Campo_n&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;semilla_def&quot;</span> <span class="p">:</span> <span class="s2">&quot;Sin semilla&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;opc_vacio&quot;</span> <span class="p">:</span> <span class="s2">&quot;Vacío&quot;</span><span class="p">,</span>
+    <span class="c1"># Modulo campo booleano</span>
+    <span class="s2">&quot;selecc_campo_bool&quot;</span> <span class="p">:</span> <span class="s2">&quot;Definir como booleano&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;logica&quot;</span> <span class="p">:</span> <span class="s2">&quot;Valores&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;campo_def_0&quot;</span> <span class="p">:</span> <span class="s2">&quot;Campo_1&quot;</span><span class="p">,</span> 
+    <span class="s2">&quot;campo_def_1&quot;</span> <span class="p">:</span> <span class="s2">&quot;Campo_2&quot;</span><span class="p">,</span> 
+    <span class="s2">&quot;campo_def_2&quot;</span> <span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>     
+    <span class="s2">&quot;campo_def_3&quot;</span> <span class="p">:</span> <span class="s2">&quot;Campo_n&quot;</span><span class="p">,</span> 
+    <span class="c1"># Modulo campo texto</span>
+    <span class="s2">&quot;valores_texto&quot;</span> <span class="p">:</span> <span class="s2">&quot;Alternativas de texto&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;selecc_campo&quot;</span> <span class="p">:</span> <span class="s2">&quot;Definir como texto&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;valores_tex_def&quot;</span> <span class="p">:</span> <span class="s2">&quot;valor_1, valor_2, ..., valor_n&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;btn_borrar_tex&quot;</span> <span class="p">:</span> <span class="s2">&quot;Borrar valores&quot;</span><span class="p">,</span>
+    <span class="c1"># Modulo campo numerico</span>
+    <span class="s2">&quot;selecc_campo_num&quot;</span> <span class="p">:</span> <span class="s2">&quot;Definir como numérico&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;rango_desde&quot;</span> <span class="p">:</span> <span class="s2">&quot;Desde&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;rango_hasta&quot;</span> <span class="p">:</span> <span class="s2">&quot;Hasta&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ne_digitos&quot;</span> <span class="p">:</span> <span class="s2">&quot;Máximo: 100 dígitos&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;selecc_tipo_num&quot;</span> <span class="p">:</span> <span class="s2">&quot;Tipo numérico&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;opc_num_int&quot;</span> <span class="p">:</span> <span class="s2">&quot;Enteros&quot;</span><span class="p">,</span>     
+    <span class="s2">&quot;opc_num_float&quot;</span> <span class="p">:</span> <span class="s2">&quot;Decimales&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;redondear&quot;</span> <span class="p">:</span> <span class="s2">&quot;Redondear&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ne_redondeo&quot;</span> <span class="p">:</span> <span class="s2">&quot;Máximo: 15&quot;</span><span class="p">,</span>
+    <span class="c1"># Modulo campo a borrar</span>
+    <span class="s2">&quot;campo_a_borrar&quot;</span> <span class="p">:</span> <span class="s2">&quot;Campo a borrar&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;btn_vaciar_campo&quot;</span> <span class="p">:</span> <span class="s2">&quot;Eliminar datos ingresados&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;btn_vaciar_tabla&quot;</span> <span class="p">:</span> <span class="s2">&quot;Borrar todo&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;ne_btn_restablecer&#39;</span> <span class="p">:</span> <span class="s2">&quot;Todos los datos ingresados serán eliminados&quot;</span><span class="p">,</span>
+    <span class="c1"># Modulo exportar</span>
+    <span class="s2">&quot;num_filas&quot;</span> <span class="p">:</span> <span class="s2">&quot;Número de filas&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ne_filas&quot;</span> <span class="p">:</span> <span class="s2">&quot;Máximo: 1000000 filas&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;btn_exportar&quot;</span> <span class="p">:</span> <span class="s2">&quot;Exportar tabla&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;vt_expo_sn&quot;</span> <span class="p">:</span> <span class="s2">&quot;Confirmar exportar&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;vt_expo_sn_mensaje&quot;</span> <span class="p">:</span> <span class="s2">&quot;¿Confirma que desea exportar?&quot;</span><span class="p">,</span> 
+    <span class="c1"># Gestion ruta</span>
+    <span class="s2">&quot;err_ruta_invalida&quot;</span> <span class="p">:</span> <span class="s2">&quot;Por favor introduzca una ruta válida&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_vt_ruta_invalida&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: ruta de salida&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ruta_archivo&quot;</span> <span class="p">:</span> <span class="s2">&quot;tabla_datos_pseudoaleatorios.csv&quot;</span><span class="p">,</span>
+    <span class="c1"># Gestion encabezado</span>
+    <span class="s2">&quot;err_encabezado&quot;</span> <span class="p">:</span> <span class="n">TEX_ES_AUX</span><span class="p">[</span><span class="s1">&#39;_err_enc_1&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">TEX_ES_AUX</span><span class="p">[</span><span class="s1">&#39;_err_enc_2&#39;</span><span class="p">],</span>
+    <span class="s2">&quot;err_vt_encabezado&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: campos no ingresados&quot;</span><span class="p">,</span>
+    <span class="c1"># Gestion opciones tabla</span>
+    <span class="s2">&quot;err_delimitador&quot;</span> <span class="p">:</span> <span class="s2">&quot;Solo se permite un único carácter como delimitador.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_vt_delimitador&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: delimitador no válido&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_import_1&quot;</span> <span class="p">:</span> <span class="s2">&quot;Ocurrió un error al importar &#39;pandas&#39;: &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_import_2&quot;</span> <span class="p">:</span> <span class="s2">&quot;Si la tabla es pequeña, puedes volver a &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_import_3&quot;</span> <span class="p">:</span> <span class="s2">&quot;intentarlo sin importar librerías externas.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_vt_import&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: importación de librería&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_criterio&quot;</span> <span class="p">:</span> <span class="n">TEX_ES_AUX</span><span class="p">[</span><span class="s1">&#39;_err_criterio_1&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">TEX_ES_AUX</span><span class="p">[</span><span class="s1">&#39;_err_criterio_2&#39;</span><span class="p">],</span>
+    <span class="s2">&quot;err_vt_criterio&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: campo de ordenación&quot;</span><span class="p">,</span>
+    <span class="c1"># Gestion campo texto</span>
+    <span class="s2">&quot;err_no_valores_tex&quot;</span> <span class="p">:</span> <span class="n">TEX_ES_AUX</span><span class="p">[</span><span class="s2">&quot;_err_no_val_1&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">TEX_ES_AUX</span><span class="p">[</span><span class="s2">&quot;_err_no_val_2&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;err_vt_no_valores_tex&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: valores no ingresados&quot;</span><span class="p">,</span>
+    <span class="c1"># Gestion condiciones basicas</span>
+    <span class="s2">&quot;err_campo_def&quot;</span> <span class="p">:</span> <span class="s2">&quot;Por favor seleccione un campo que no haya sido definido.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_vt_campo_def&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: campo ya definido&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_campo_inexistente&quot;</span> <span class="p">:</span> <span class="n">TEX_ES_AUX</span><span class="p">[</span><span class="s2">&quot;_err_campo_inex_1&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">TEX_ES_AUX</span><span class="p">[</span><span class="s2">&quot;_err_campo_inex_2&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;err_vt_campo_inex&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: campo inexistente&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_campo_repetido&quot;</span> <span class="p">:</span> <span class="n">TEX_ES_AUX</span><span class="p">[</span><span class="s2">&quot;_err_campo_repe_1&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">TEX_ES_AUX</span><span class="p">[</span><span class="s2">&quot;_err_campo_repe_2&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;err_vt_campo_repe&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: campo repetido&quot;</span><span class="p">,</span>
+    <span class="c1"># Gestion campo numerico</span>
+    <span class="s2">&quot;err_rango_invalido&quot;</span> <span class="p">:</span> <span class="s2">&quot;Por favor ingrese un rango válido.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_vt_rango_invalido&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: rango no válido&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_rango_menor&quot;</span> <span class="p">:</span> <span class="s2">&quot;El inicio del rango debe ser menor que el final.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_vt_rango_menor&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: rango inconsistente&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_redondeo&quot;</span> <span class="p">:</span> <span class="s2">&quot;Por favor ingrese un entero entre 0 y 15.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_vt_redondeo&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: valor de redondeo no válido&quot;</span><span class="p">,</span>
+    <span class="c1"># Gestion exportar</span>
+    <span class="s2">&quot;err_ruta_ingresada&quot;</span> <span class="p">:</span> <span class="n">TEX_ES_AUX</span><span class="p">[</span><span class="s2">&quot;_err_ruta_ent_1&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">TEX_ES_AUX</span><span class="p">[</span><span class="s2">&quot;_err_ruta_ent_2&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;err_vt_ruta_ingresada&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: ruta de salida&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_escritura&quot;</span> <span class="p">:</span> <span class="s2">&quot;No posee permisos de escritura en la ruta especificada.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;vt_err_escritura&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: permisos de escritura&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_ruta_inesperado&quot;</span> <span class="p">:</span> <span class="s2">&quot;Ocurrió un error inesperado: &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_vt_ruta_inesperado&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: inesperado&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_secrets&quot;</span> <span class="p">:</span> <span class="n">TEX_ES_AUX</span><span class="p">[</span><span class="s2">&quot;_err_secrets_1&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">TEX_ES_AUX</span><span class="p">[</span><span class="s2">&quot;_err_secrets_2&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;err_vt_secrets&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: modo de aleatoriedad&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_umbral_filas&quot;</span> <span class="p">:</span> <span class="s2">&quot;El número de filas ingresado excede el umbral establecido.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_vt_umbral_filas&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: umbral de número de filas&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_filas&quot;</span> <span class="p">:</span> <span class="s2">&quot;Por favor ingrese un número de filas válido&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_vt_filas&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: número de filas no válido&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ok_tabla&quot;</span> <span class="p">:</span> <span class="s2">&quot;¡La tabla se generó correctamente!&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;vt_ok_tabla&quot;</span> <span class="p">:</span> <span class="s2">&quot;Operación exitosa&quot;</span><span class="p">,</span>
+    <span class="c1"># Mostrar ventana</span>
+    <span class="s2">&quot;btn_vt_cerrar&quot;</span> <span class="p">:</span> <span class="s2">&quot;Cerrar&quot;</span><span class="p">,</span>
+    <span class="c1"># Tabla</span>
+    <span class="s2">&quot;ruta_clave&quot;</span> <span class="p">:</span> <span class="s2">&quot; • Ruta: &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;encabezado_clave&quot;</span> <span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> • Encabezado de la tabla: &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;delimitador_clave&quot;</span> <span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> • Delimitador: &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;orden_clave&quot;</span> <span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> • Tipo de orden: &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;criterio_campo&quot;</span> <span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> • Registros ordenados según el campo: &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;clave_modo&quot;</span> <span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> • Módulo de aleatoriedad: &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;clave_semilla&quot;</span> <span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> • Semilla: &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;clave_bool&quot;</span> <span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> • Campos con valores booleanos: &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;clave_tex&quot;</span> <span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> • Campos con valores de texto: &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;clave_int&quot;</span> <span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> • Campos con números enteros: &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;clave_float&quot;</span> <span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> • Campos con números decimales: &quot;</span>
+<span class="p">}</span>
+<span class="n">TEX_EN_AUX</span><span class="p">:</span><span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;_acl_0&quot;</span> <span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> ENTERED DATA</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_acl_1&quot;</span> <span class="p">:</span> <span class="s2">&quot;For fields envisioned as calculated, &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_acl_2&quot;</span> <span class="p">:</span> <span class="s2">&quot;assigning values or data types is not required.</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_err_criterio_1&quot;</span> <span class="p">:</span> <span class="s2">&quot;The table could not be sorted according &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_err_criterio_2&quot;</span> <span class="p">:</span> <span class="s2">&quot;to the specified field. Please review your choice.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_err_no_val_1&quot;</span> <span class="p">:</span> <span class="s2">&quot;The selected field has not received any value. &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_err_no_val_2&quot;</span> <span class="p">:</span> <span class="s2">&quot;Please enter the data and try again.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_err_campo_inex_1&quot;</span> <span class="p">:</span> <span class="s2">&quot;Values can only be defined for an existing field. &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_err_campo_inex_2&quot;</span> <span class="p">:</span> <span class="s2">&quot;Please review the table fields.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_err_campo_repe_1&quot;</span> <span class="p">:</span> <span class="s2">&quot;The selected field already has defined values. To &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_err_campo_repe_2&quot;</span> <span class="p">:</span> <span class="s2">&quot;replace them, remove the existing values from the field.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_err_ruta_ent_1&quot;</span> <span class="p">:</span> <span class="s2">&quot;The file cannot be opened because &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_err_ruta_ent_2&quot;</span> <span class="p">:</span> <span class="s2">&quot;the specified path does not exist.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_err_secrets_1&quot;</span> <span class="p">:</span> <span class="s2">&quot;The &#39;secrets&#39; module does not generate floating-point numbers.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_err_secrets_2&quot;</span> <span class="p">:</span> <span class="s2">&quot;If you need decimal values, you can choose &#39;random&#39;.&quot;</span>
+<span class="p">}</span>                        
+<span class="n">TEX_EN</span><span class="p">:</span><span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1"># Módulo interface</span>
+    <span class="s2">&quot;vt_principal&quot;</span> <span class="p">:</span> <span class="s2">&quot;GDA&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;titulo_app&quot;</span> <span class="p">:</span> <span class="s2">&quot;PSEUDO-RANDOM DATA TABLE GENERATOR&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;btn_salir&quot;</span> <span class="p">:</span> <span class="s2">&quot;Exit&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;btn_idioma&quot;</span> <span class="p">:</span> <span class="s2">&quot;ES&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ne_btn_idioma&quot;</span> <span class="p">:</span> <span class="s2">&quot;The application will restart, and any entered data will be lost&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;vt_salida&quot;</span> <span class="p">:</span> <span class="s2">&quot;Confirm Exit&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;vt_salida_mensaje&quot;</span> <span class="p">:</span> <span class="s2">&quot;Confirm that you want to exit?&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;titulo_generar&quot;</span> <span class="p">:</span> <span class="s2">&quot; TABLE SETTINGS &quot;</span><span class="p">,</span>
+    <span class="c1"># Modulo vista</span>
+    <span class="s2">&quot;aclaracion&quot;</span> <span class="p">:</span> <span class="n">TEX_EN_AUX</span><span class="p">[</span><span class="s2">&quot;_acl_0&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">TEX_EN_AUX</span><span class="p">[</span><span class="s2">&quot;_acl_1&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">TEX_EN_AUX</span><span class="p">[</span><span class="s2">&quot;_acl_2&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;titulo_convertir&quot;</span> <span class="p">:</span> <span class="s2">&quot; CSV TO JSON &quot;</span><span class="p">,</span>
+    <span class="c1"># Modulo ruta</span>
+    <span class="s2">&quot;ruta&quot;</span> <span class="p">:</span> <span class="s2">&quot;Output path or file location&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ruta_def&quot;</span> <span class="p">:</span> <span class="s2">&quot;/path_to_empty_file.csv&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;btn_ubicacion&quot;</span> <span class="p">:</span> <span class="s2">&quot;Choose location&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;btn_ok&quot;</span> <span class="p">:</span> <span class="s2">&quot;OK&quot;</span><span class="p">,</span>
+    <span class="c1"># Modulo encabezado</span>
+    <span class="s2">&quot;campos_def&quot;</span> <span class="p">:</span> <span class="s2">&quot;Field_1, Field_2, ..., Field_n&quot;</span><span class="p">,</span> 
+    <span class="s2">&quot;encabezado&quot;</span> <span class="p">:</span> <span class="s2">&quot;Table Fields&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;btn_encabezado&quot;</span> <span class="p">:</span> <span class="s2">&quot;Remove Header&quot;</span><span class="p">,</span>
+    <span class="c1"># Modulo opciones tabla</span>
+    <span class="s2">&quot;delimitador&quot;</span> <span class="p">:</span> <span class="s2">&quot;Delimiter&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;orden&quot;</span> <span class="p">:</span> <span class="s2">&quot;Sort&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ne_opc_orden&quot;</span> <span class="p">:</span> <span class="s2">&quot;Small tables do not require external libraries&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;criterio&quot;</span> <span class="p">:</span> <span class="s2">&quot;Criterion&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;modo&quot;</span> <span class="p">:</span> <span class="s2">&quot;Randomness&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;semilla&quot;</span> <span class="p">:</span> <span class="s2">&quot;Seed&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;orden_opc_0&quot;</span> <span class="p">:</span> <span class="s2">&quot;Ascending&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;orden_opc_1&quot;</span> <span class="p">:</span> <span class="s2">&quot;Descending&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;orden_opc_2&quot;</span> <span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;orden_opc_3&quot;</span> <span class="p">:</span> <span class="s2">&quot;Ascending - pandas&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;orden_opc_4&quot;</span> <span class="p">:</span> <span class="s2">&quot;Descending - pandas&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;criterio_opc_base&quot;</span> <span class="p">:</span> <span class="s2">&quot;Field_n&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;semilla_def&quot;</span> <span class="p">:</span> <span class="s2">&quot;No seed&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;opc_vacio&quot;</span> <span class="p">:</span> <span class="s2">&quot;Empty&quot;</span><span class="p">,</span> 
+    <span class="c1"># Modulo campo booleano</span>
+    <span class="s2">&quot;selecc_campo_bool&quot;</span> <span class="p">:</span> <span class="s2">&quot;Set as boolean field&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;logica&quot;</span> <span class="p">:</span> <span class="s2">&quot;Values&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;campo_def_0&quot;</span> <span class="p">:</span> <span class="s2">&quot;Field_1&quot;</span><span class="p">,</span> 
+    <span class="s2">&quot;campo_def_1&quot;</span> <span class="p">:</span> <span class="s2">&quot;Field_2&quot;</span><span class="p">,</span> 
+    <span class="s2">&quot;campo_def_2&quot;</span> <span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>     
+    <span class="s2">&quot;campo_def_3&quot;</span> <span class="p">:</span> <span class="s2">&quot;Field_n&quot;</span><span class="p">,</span> 
+    <span class="c1"># Modulo campo texto</span>
+    <span class="s2">&quot;valores_texto&quot;</span> <span class="p">:</span> <span class="s2">&quot;Text Alternatives&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;selecc_campo&quot;</span> <span class="p">:</span> <span class="s2">&quot;Set as text field&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;valores_tex_def&quot;</span> <span class="p">:</span> <span class="s2">&quot;value_1, value_2, ..., value_n&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;btn_borrar_tex&quot;</span> <span class="p">:</span> <span class="s2">&quot;Clear values&quot;</span><span class="p">,</span>
+    <span class="c1"># Modulo campo numerico</span>
+    <span class="s2">&quot;selecc_campo_num&quot;</span> <span class="p">:</span> <span class="s2">&quot;Set as numeric field&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;rango_desde&quot;</span> <span class="p">:</span> <span class="s2">&quot;From&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;rango_hasta&quot;</span> <span class="p">:</span> <span class="s2">&quot;To&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ne_digitos&quot;</span> <span class="p">:</span> <span class="s2">&quot;Max: 100 digits&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;selecc_tipo_num&quot;</span> <span class="p">:</span> <span class="s2">&quot;Number type&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;opc_num_int&quot;</span> <span class="p">:</span> <span class="s2">&quot;Integer&quot;</span><span class="p">,</span>  
+    <span class="s2">&quot;opc_num_float&quot;</span> <span class="p">:</span> <span class="s2">&quot;Float&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;redondear&quot;</span> <span class="p">:</span> <span class="s2">&quot;Round&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ne_redondeo&quot;</span> <span class="p">:</span> <span class="s2">&quot;Max: 15&quot;</span><span class="p">,</span>
+    <span class="c1"># Modulo campo a borrar</span>
+    <span class="s2">&quot;campo_a_borrar&quot;</span> <span class="p">:</span> <span class="s2">&quot;Field to delete&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;btn_vaciar_campo&quot;</span> <span class="p">:</span> <span class="s2">&quot;Remove entered data&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;btn_vaciar_tabla&quot;</span> <span class="p">:</span> <span class="s2">&quot;Clear all&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ne_btn_restablecer&quot;</span> <span class="p">:</span> <span class="s2">&quot;All entered data will be deleted&quot;</span><span class="p">,</span>
+    <span class="c1"># Modulo exportar</span>
+    <span class="s2">&quot;num_filas&quot;</span> <span class="p">:</span> <span class="s2">&quot;Number of rows&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ne_filas&quot;</span> <span class="p">:</span> <span class="s2">&quot;Max: 1000000 rows&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;btn_exportar&quot;</span> <span class="p">:</span> <span class="s2">&quot;Export table&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;vt_expo_sn&quot;</span> <span class="p">:</span> <span class="s2">&quot;Confirm export&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;vt_expo_sn_mensaje&quot;</span> <span class="p">:</span> <span class="s2">&quot;Confirm that you want to export?&quot;</span><span class="p">,</span>
+    <span class="c1"># Gestion ruta</span>
+    <span class="s2">&quot;err_ruta_invalida&quot;</span> <span class="p">:</span> <span class="s2">&quot;Please enter a valid path.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_vt_ruta_invalida&quot;</span> <span class="p">:</span> <span class="s2">&quot;Output path error&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ruta_archivo&quot;</span> <span class="p">:</span> <span class="s2">&quot;pseudo_random_data_table.csv&quot;</span><span class="p">,</span>
+    <span class="c1"># Gestion encabezado</span>
+    <span class="s2">&quot;err_encabezado&quot;</span> <span class="p">:</span> <span class="s2">&quot;Please enter your table headers separated by commas.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_vt_encabezado&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: Unentered fields&quot;</span><span class="p">,</span>
+    <span class="c1"># Gestion opciones tabla</span>
+    <span class="s2">&quot;err_delimitador&quot;</span> <span class="p">:</span> <span class="s2">&quot;Only a single character is allowed as a delimiter.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_vt_delimitador&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: Invalid delimiter&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_import_1&quot;</span> <span class="p">:</span> <span class="s2">&quot;An error occurred while importing &#39;pandas&#39;: &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_import_2&quot;</span> <span class="p">:</span> <span class="s2">&quot;If the table is small, you can try again &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_import_3&quot;</span> <span class="p">:</span> <span class="s2">&quot;without importing external libraries.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_vt_import&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: library import&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_criterio&quot;</span> <span class="p">:</span> <span class="n">TEX_EN_AUX</span><span class="p">[</span><span class="s1">&#39;_err_criterio_1&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">TEX_EN_AUX</span><span class="p">[</span><span class="s1">&#39;_err_criterio_2&#39;</span><span class="p">],</span>
+    <span class="s2">&quot;err_vt_criterio&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: Sorting field&quot;</span><span class="p">,</span>
+    <span class="c1"># Gestion campo texto</span>
+    <span class="s2">&quot;err_no_valores_tex&quot;</span> <span class="p">:</span> <span class="n">TEX_EN_AUX</span><span class="p">[</span><span class="s2">&quot;_err_no_val_1&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">TEX_EN_AUX</span><span class="p">[</span><span class="s2">&quot;_err_no_val_2&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;err_vt_no_valores_tex&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: Unentered values&quot;</span><span class="p">,</span>
+    <span class="c1"># Gestion condiciones basicas</span>
+    <span class="s2">&quot;err_campo_def&quot;</span> <span class="p">:</span> <span class="s2">&quot;Please select a field that has not been defined.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_vt_campo_def&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: Field already defined.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_campo_inexistente&quot;</span> <span class="p">:</span> <span class="n">TEX_EN_AUX</span><span class="p">[</span><span class="s2">&quot;_err_campo_inex_1&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">TEX_EN_AUX</span><span class="p">[</span><span class="s2">&quot;_err_campo_inex_2&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;err_vt_campo_inex&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: Field does not exist&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_campo_repetido&quot;</span> <span class="p">:</span> <span class="n">TEX_EN_AUX</span><span class="p">[</span><span class="s2">&quot;_err_campo_repe_1&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">TEX_EN_AUX</span><span class="p">[</span><span class="s2">&quot;_err_campo_repe_2&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;err_vt_campo_repe&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: Duplicate field&quot;</span><span class="p">,</span>
+    <span class="c1"># Gestion campo numerico</span>
+    <span class="s2">&quot;err_rango_invalido&quot;</span> <span class="p">:</span> <span class="s2">&quot;Please enter a valid range.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_vt_rango_invalido&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: Invalid range&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_rango_menor&quot;</span> <span class="p">:</span> <span class="s2">&quot;The start of the range must be less than the end.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_vt_rango_menor&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: Inconsistent range&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_redondeo&quot;</span> <span class="p">:</span> <span class="s2">&quot;Please enter an integer between 0 and 15.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_vt_redondeo&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: Invalid rounding value&quot;</span><span class="p">,</span>
+    <span class="c1"># Gestion exportar</span>
+    <span class="s2">&quot;err_ruta_ingresada&quot;</span> <span class="p">:</span> <span class="n">TEX_EN_AUX</span><span class="p">[</span><span class="s2">&quot;_err_ruta_ent_1&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">TEX_EN_AUX</span><span class="p">[</span><span class="s2">&quot;_err_ruta_ent_2&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;err_vt_ruta_ingresada&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: Output path&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_escritura&quot;</span> <span class="p">:</span> <span class="s2">&quot;No write permissions for the specified path.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;vt_err_escritura&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: write permission&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_ruta_inesperado&quot;</span> <span class="p">:</span> <span class="s2">&quot;An unexpected error occurred: &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_vt_ruta_inesperado&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: unexpected&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_secrets&quot;</span> <span class="p">:</span> <span class="n">TEX_EN_AUX</span><span class="p">[</span><span class="s2">&quot;_err_secrets_1&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">TEX_EN_AUX</span><span class="p">[</span><span class="s2">&quot;_err_secrets_2&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;err_vt_secrets&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: randomness mode&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_umbral_filas&quot;</span> <span class="p">:</span> <span class="s2">&quot;The number of entered rows exceeds the established threshold.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_vt_umbral_filas&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: threshold for number of rows&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_filas&quot;</span> <span class="p">:</span> <span class="s2">&quot;Please enter a valid number of rows.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;err_vt_filas&quot;</span> <span class="p">:</span> <span class="s2">&quot;Error: invalid number of rows&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ok_tabla&quot;</span> <span class="p">:</span> <span class="s2">&quot;The table was generated successfully!&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;vt_ok_tabla&quot;</span> <span class="p">:</span> <span class="s2">&quot;Successful operation&quot;</span><span class="p">,</span>
+    <span class="c1"># Mostrar ventana</span>
+    <span class="s2">&quot;btn_vt_cerrar&quot;</span> <span class="p">:</span> <span class="s2">&quot;Close&quot;</span><span class="p">,</span>
+    <span class="c1"># Tabla</span>
+    <span class="s2">&quot;ruta_clave&quot;</span> <span class="p">:</span> <span class="s2">&quot; • Path: &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;encabezado_clave&quot;</span> <span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> • Table header: &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;delimitador_clave&quot;</span> <span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> • Delimiter: &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;orden_clave&quot;</span> <span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> • Sorting type: &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;criterio_campo&quot;</span> <span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> • Records sorted by the field: &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;clave_modo&quot;</span> <span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> • Randomization module: &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;clave_semilla&quot;</span> <span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> • Seed: &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;clave_bool&quot;</span> <span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> • Fields with boolean values &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;clave_tex&quot;</span> <span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> • Fields with text values: &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;clave_int&quot;</span> <span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> • Fields with integer values: &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;clave_float&quot;</span> <span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> • Fields with float numbers: &quot;</span>
+<span class="p">}</span>
+
+<div class="viewcode-block" id="Idioma">
+<a class="viewcode-back" href="../../comunes.html#comunes.idioma.Idioma">[documentos]</a>
+<span class="k">class</span> <span class="nc">Idioma</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Clase que genera el diccionario que permite alternar el idioma</span>
+<span class="sd">    entre inglés y español.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tex</span><span class="p">:</span><span class="nb">dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span></div>
+
+
+<span class="n">leng</span> <span class="o">=</span> <span class="n">Idioma</span><span class="p">()</span>
+<span class="c1"># Inicia en español</span>
+<span class="n">leng</span><span class="o">.</span><span class="n">tex</span> <span class="o">=</span> <span class="n">TEX_ES</span>
+
+<div class="viewcode-block" id="alternar">
+<a class="viewcode-back" href="../../comunes.html#comunes.idioma.alternar">[documentos]</a>
+<span class="k">def</span> <span class="nf">alternar</span><span class="p">(</span><span class="n">raiz</span><span class="p">,</span> <span class="n">reseteador</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Administra el cambio de idioma mediante la actualización del diccionario</span>
+<span class="sd">    de texto y la posterior reinicialización de la aplicación.</span>
+
+<span class="sd">    :param raiz: Instancia de la ventana principal.</span>
+<span class="sd">    :type raiz: Tk</span>
+<span class="sd">    :param reseteador: Instancia que permite el reinicio de la aplicación.</span>
+<span class="sd">    :type reseteador: Reseteador</span>
+<span class="sd">    :return: None</span>
+<span class="sd">    &quot;&quot;&quot;</span> 
+    <span class="k">if</span> <span class="n">leng</span><span class="o">.</span><span class="n">tex</span> <span class="o">==</span> <span class="n">TEX_ES</span><span class="p">:</span>
+        <span class="n">leng</span><span class="o">.</span><span class="n">tex</span> <span class="o">=</span> <span class="n">TEX_EN</span>
+        <span class="n">raiz</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+        <span class="n">reseteador</span><span class="o">.</span><span class="n">reiniciar</span><span class="p">()</span>   
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">leng</span><span class="o">.</span><span class="n">tex</span> <span class="o">=</span> <span class="n">TEX_ES</span>
+        <span class="n">raiz</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+        <span class="n">reseteador</span><span class="o">.</span><span class="n">reiniciar</span><span class="p">()</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2024, errejotaeme.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

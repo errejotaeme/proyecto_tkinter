@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>logica.generador &mdash; documentación de GDA - 1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=36c4ab74"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/translations.js?v=efdbd0b9"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            GDA
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenido:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dependencias.html">Dependencias</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Paquetes y módulos</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GDA</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Código de módulo</a></li>
+      <li class="breadcrumb-item active">logica.generador</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Código fuente para logica.generador</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">secrets</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">app.comunes.idioma</span> <span class="kn">import</span> <span class="n">leng</span>
+
+
+<div class="viewcode-block" id="Generador">
+<a class="viewcode-back" href="../../logica.html#logica.generador.Generador">[documentos]</a>
+<span class="k">class</span> <span class="nc">Generador</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Clase encargada de producir y exportar la tabla.</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="n">_ruta_salida_csv</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">_encabezado_tabla</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">_delimitador</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">_orden</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">_criterio</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">_modo</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">_semilla</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">_campos_booleanos</span><span class="p">:</span><span class="nb">dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">_campos_texto</span><span class="p">:</span><span class="nb">dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">_campos_enteros</span><span class="p">:</span><span class="nb">dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">_campos_decimales</span><span class="p">:</span><span class="nb">dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">_filas</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor de la clase Generador.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+<div class="viewcode-block" id="Generador.crear_tabla">
+<a class="viewcode-back" href="../../logica.html#logica.generador.Generador.crear_tabla">[documentos]</a>
+    <span class="k">def</span> <span class="nf">crear_tabla</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datos</span><span class="p">:</span><span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Procesa los datos de la tabla utilizando el método correspondiente</span>
+<span class="sd">        según el tipo de orden.</span>
+<span class="sd">        </span>
+<span class="sd">        :param datos: Datos regitrados en la tabla.</span>
+<span class="sd">        :type datos: dict</span>
+<span class="sd">        :return res: True si la operación fue exitosa, de lo contrario False.</span>
+<span class="sd">        :rtype res: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">registros</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># Registra los valores de la tabla en las variables de clase</span>
+        <span class="k">for</span> <span class="n">clave</span><span class="p">,</span> <span class="n">valor</span> <span class="ow">in</span> <span class="n">datos</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clave</span><span class="p">):</span>
+                <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clave</span><span class="p">,</span> <span class="n">valor</span><span class="p">)</span>                
+        <span class="n">orden</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_orden</span>
+        <span class="k">if</span> <span class="n">orden</span> <span class="o">==</span> <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;orden_opc_2&#39;</span><span class="p">]</span> <span class="ow">or</span> <span class="s2">&quot;pandas&quot;</span> <span class="ow">in</span> <span class="n">orden</span><span class="p">:</span> 
+            <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_registros_incremental</span><span class="p">()</span> <span class="c1"># Ninguno, pandas</span>
+        <span class="k">else</span><span class="p">:</span> 
+            <span class="n">registros</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_registros_no_incremental</span><span class="p">()</span> <span class="c1"># Ascendente, Descendente</span>
+            <span class="c1"># Escribe los registros en la ruta de salida.</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_grabar_datos</span><span class="p">(</span><span class="n">registros</span><span class="p">)</span> 
+        <span class="k">return</span> <span class="n">res</span></div>
+
+
+
+<div class="viewcode-block" id="Generador._registros_no_incremental">
+<a class="viewcode-back" href="../../logica.html#logica.generador.Generador._registros_no_incremental">[documentos]</a>
+    <span class="k">def</span> <span class="nf">_registros_no_incremental</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Produce y retorna un lista de registros en el orden indicado,</span>
+<span class="sd">        que luego se exporta en bloque en la ruta de salida.</span>
+<span class="sd">        Se ordena con este método cuando no está instalada la librería &#39;pandas&#39;.</span>
+<span class="sd">        Genera los datos por columna y después los transpone.</span>
+<span class="sd">        Las tablas con orden &#39;Asecendente&#39; o &#39;Descendente&#39; se producen con este método.</span>
+
+<span class="sd">        :return: Lista de listas con los registros ordenados.</span>
+<span class="sd">        :rtype: list </span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="n">modo</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_modo</span>
+        <span class="c1"># Estado inicial para random</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_semilla</span> <span class="o">==</span> <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;semilla_def&#39;</span><span class="p">]:</span>
+            <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_semilla</span><span class="p">)</span>           
+
+        <span class="c1"># Crea los registros     </span>
+        <span class="n">filas</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filas</span>
+        <span class="n">booleanos</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="s2">&quot;None&quot;</span><span class="p">]</span>
+        <span class="n">registros_transpuestos</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">campo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_encabezado_tabla</span><span class="p">:</span>
+            <span class="n">columna</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="c1"># Booleanos</span>
+            <span class="k">if</span> <span class="n">campo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_campos_booleanos</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_campos_booleanos</span><span class="p">[</span><span class="n">campo</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;True, False&quot;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">modo</span> <span class="o">==</span> <span class="s2">&quot;random&quot;</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">filas</span><span class="p">):</span>
+                            <span class="n">columna</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">booleanos</span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
+                        <span class="n">registros_transpuestos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">columna</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span> <span class="c1"># secrets</span>
+                        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">filas</span><span class="p">):</span>
+                            <span class="n">columna</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">booleanos</span><span class="p">[</span><span class="n">secrets</span><span class="o">.</span><span class="n">randbelow</span><span class="p">(</span><span class="mi">2</span><span class="p">)])</span>
+                        <span class="n">registros_transpuestos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">columna</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">modo</span> <span class="o">==</span> <span class="s2">&quot;random&quot;</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">filas</span><span class="p">):</span>
+                            <span class="n">columna</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">booleanos</span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)])</span>
+                        <span class="n">registros_transpuestos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">columna</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span> <span class="c1"># secrets</span>
+                        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">filas</span><span class="p">):</span>
+                            <span class="n">columna</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">booleanos</span><span class="p">[</span><span class="n">secrets</span><span class="o">.</span><span class="n">randbelow</span><span class="p">(</span><span class="mi">3</span><span class="p">)])</span>
+                        <span class="n">registros_transpuestos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">columna</span><span class="p">)</span>                       
+
+            <span class="c1"># Texto</span>
+            <span class="k">elif</span> <span class="n">campo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_campos_texto</span><span class="p">:</span>
+                <span class="n">vars_texto</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_campos_texto</span><span class="p">[</span><span class="n">campo</span><span class="p">]</span>
+                <span class="n">n_items</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vars_texto</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">modo</span> <span class="o">==</span> <span class="s2">&quot;random&quot;</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">filas</span><span class="p">):</span>
+                        <span class="n">columna</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vars_texto</span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_items</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)])</span>
+                    <span class="n">registros_transpuestos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">columna</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span> <span class="c1"># secrets</span>
+                    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">filas</span><span class="p">):</span>
+                        <span class="n">columna</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vars_texto</span><span class="p">[</span><span class="n">secrets</span><span class="o">.</span><span class="n">randbelow</span><span class="p">(</span><span class="n">n_items</span><span class="p">)])</span>
+                    <span class="n">registros_transpuestos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">columna</span><span class="p">)</span>                 
+
+            <span class="c1"># Enteros</span>
+            <span class="k">elif</span> <span class="n">campo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_campos_enteros</span><span class="p">:</span>
+                <span class="n">rango</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_campos_enteros</span><span class="p">[</span><span class="n">campo</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">modo</span> <span class="o">==</span> <span class="s2">&quot;random&quot;</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">filas</span><span class="p">):</span>
+                        <span class="n">columna</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">rango</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">rango</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+                    <span class="n">registros_transpuestos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">columna</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span> <span class="c1"># secrets</span>
+                    <span class="n">intervalo</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="n">rango</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">rango</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+                    <span class="n">piso</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="n">rango</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> 
+                    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">filas</span><span class="p">):</span>
+                        <span class="n">columna</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">secrets</span><span class="o">.</span><span class="n">randbelow</span><span class="p">(</span><span class="n">intervalo</span><span class="p">)</span> <span class="o">+</span> <span class="n">piso</span><span class="p">)</span>
+                    <span class="n">registros_transpuestos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">columna</span><span class="p">)</span>                  
+
+            <span class="c1"># Decimales</span>
+            <span class="k">elif</span> <span class="n">campo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_campos_decimales</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">modo</span> <span class="o">==</span> <span class="s2">&quot;random&quot;</span><span class="p">:</span>
+                    <span class="n">rango</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_campos_decimales</span><span class="p">[</span><span class="n">campo</span><span class="p">]</span>
+                    <span class="n">redondeo</span> <span class="o">=</span> <span class="n">rango</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">filas</span><span class="p">):</span>
+                        <span class="n">columna</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                            <span class="nb">round</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">rango</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">rango</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                                  <span class="n">redondeo</span>
+                            <span class="p">)</span>
+                        <span class="p">)</span>
+                    <span class="n">registros_transpuestos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">columna</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span> <span class="c1"># secrets</span>
+                    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">filas</span><span class="p">):</span>
+                        <span class="n">columna</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+                    <span class="n">registros_transpuestos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">columna</span><span class="p">)</span>                    
+
+            <span class="c1"># Campos sin definir    </span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">filas</span><span class="p">):</span>
+                    <span class="n">columna</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="n">registros_transpuestos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">columna</span><span class="p">)</span>
+
+        <span class="c1"># Transpone la lista de listas para darle formato de tabla        </span>
+        <span class="n">registros</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">registros_transpuestos</span><span class="p">))</span>
+
+        <span class="c1"># Aplica el orden definido</span>
+        <span class="n">indice</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_encabezado_tabla</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_criterio</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_orden</span> <span class="o">==</span> <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;orden_opc_0&#39;</span><span class="p">]:</span> <span class="c1"># Ascendente</span>
+            <span class="n">registros</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">registros</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="n">indice</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_orden</span> <span class="o">==</span> <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;orden_opc_1&#39;</span><span class="p">]:</span> <span class="c1"># Descendente</span>
+            <span class="n">registros</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">registros</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="n">indice</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">registros</span></div>
+
+
+
+<div class="viewcode-block" id="Generador._registros_incremental">
+<a class="viewcode-back" href="../../logica.html#logica.generador.Generador._registros_incremental">[documentos]</a>
+    <span class="k">def</span> <span class="nf">_registros_incremental</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Produce y exporta un lista de registros en el orden indicado.</span>
+<span class="sd">        Se ordena con este método cuando está instalada la librería &#39;pandas&#39;.</span>
+<span class="sd">        Genera los datos por fila y los escribe en el archivo de salida con el</span>
+<span class="sd">        método writerow a medida que son creados. Luego los ordena si es necesario.</span>
+<span class="sd">        Las tablas con orden &#39;Ninguno&#39; o &#39;(...) - pandas&#39; se producen con este método.</span>
+<span class="sd">        &quot;&quot;&quot;</span>      
+        <span class="n">res</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">modo</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_modo</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ruta_salida_csv</span><span class="p">,</span>
+            <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">archivo</span><span class="p">:</span>
+            
+            <span class="n">tabla_final</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">archivo</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_delimitador</span><span class="p">)</span>
+            <span class="n">tabla_final</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_encabezado_tabla</span><span class="p">)</span>          
+
+            <span class="c1"># Estado inicial para random</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_semilla</span> <span class="o">==</span> <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;semilla_def&#39;</span><span class="p">]:</span>
+                <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_semilla</span><span class="p">)</span>            
+
+            <span class="c1"># Crea los registros</span>
+            <span class="n">filas</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filas</span>
+            <span class="n">booleanos</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="s2">&quot;None&quot;</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">filas</span><span class="p">):</span>
+                <span class="n">registro</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">campo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_encabezado_tabla</span><span class="p">:</span>     
+
+                    <span class="c1"># Booleanos</span>
+                    <span class="k">if</span> <span class="n">campo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_campos_booleanos</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_campos_booleanos</span><span class="p">[</span><span class="n">campo</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;True, False&quot;</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">modo</span> <span class="o">==</span> <span class="s2">&quot;random&quot;</span><span class="p">:</span>
+                                <span class="n">registro</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">booleanos</span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
+                            <span class="k">else</span><span class="p">:</span> <span class="c1"># secrets</span>
+                                <span class="n">registro</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">booleanos</span><span class="p">[</span><span class="n">secrets</span><span class="o">.</span><span class="n">randbelow</span><span class="p">(</span><span class="mi">2</span><span class="p">)])</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">modo</span> <span class="o">==</span> <span class="s2">&quot;random&quot;</span><span class="p">:</span>
+                                <span class="n">registro</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">booleanos</span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)])</span>
+                            <span class="k">else</span><span class="p">:</span> <span class="c1"># secrets</span>
+                                <span class="n">registro</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">booleanos</span><span class="p">[</span><span class="n">secrets</span><span class="o">.</span><span class="n">randbelow</span><span class="p">(</span><span class="mi">3</span><span class="p">)])</span>              
+
+                    <span class="c1"># Texto</span>
+                    <span class="k">elif</span> <span class="n">campo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_campos_texto</span><span class="p">:</span>
+                        <span class="n">vars_texto</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_campos_texto</span><span class="p">[</span><span class="n">campo</span><span class="p">]</span>
+                        <span class="n">n_items</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vars_texto</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">modo</span> <span class="o">==</span> <span class="s2">&quot;random&quot;</span><span class="p">:</span>
+                            <span class="n">registro</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vars_texto</span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_items</span><span class="o">-</span><span class="mi">1</span><span class="p">)])</span>
+                        <span class="k">else</span><span class="p">:</span> <span class="c1"># secrets</span>
+                            <span class="n">registro</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vars_texto</span><span class="p">[</span><span class="n">secrets</span><span class="o">.</span><span class="n">randbelow</span><span class="p">(</span><span class="n">n_items</span><span class="p">)])</span>            
+
+                    <span class="c1"># Enteros</span>
+                    <span class="k">elif</span> <span class="n">campo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_campos_enteros</span><span class="p">:</span>
+                        <span class="n">rango</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_campos_enteros</span><span class="p">[</span><span class="n">campo</span><span class="p">]</span>
+                        <span class="k">if</span> <span class="n">modo</span> <span class="o">==</span> <span class="s2">&quot;random&quot;</span><span class="p">:</span>
+                            <span class="n">registro</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">rango</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">rango</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+                        <span class="k">else</span><span class="p">:</span> <span class="c1"># secrets</span>
+                            <span class="n">intervalo</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="n">rango</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">rango</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+                            <span class="n">piso</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="n">rango</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                            <span class="n">registro</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">secrets</span><span class="o">.</span><span class="n">randbelow</span><span class="p">(</span><span class="n">intervalo</span><span class="p">)</span> <span class="o">+</span> <span class="n">piso</span><span class="p">)</span>        
+
+                    <span class="c1"># Decimales</span>
+                    <span class="k">elif</span> <span class="n">campo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_campos_decimales</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">modo</span> <span class="o">==</span> <span class="s2">&quot;random&quot;</span><span class="p">:</span>
+                            <span class="n">rango</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_campos_decimales</span><span class="p">[</span><span class="n">campo</span><span class="p">]</span>
+                            <span class="n">redondeo</span> <span class="o">=</span> <span class="n">rango</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                            <span class="n">registro</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                                <span class="nb">round</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">rango</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">rango</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                                      <span class="n">redondeo</span>
+                                <span class="p">)</span>
+                            <span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span> <span class="c1"># secrets</span>
+                            <span class="n">registro</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+                    <span class="c1"># Campos sin definir    </span>
+                    <span class="k">else</span><span class="p">:</span>                        
+                        <span class="n">registro</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="n">tabla_final</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">registro</span><span class="p">)</span> 
+
+        <span class="c1"># Ordena si corresponde</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_orden</span> <span class="o">!=</span> <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;orden_opc_2&#39;</span><span class="p">]:</span> <span class="c1"># Ninguno</span>
+            <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+            <span class="n">orden</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_orden</span><span class="p">)</span>
+            <span class="n">criterio</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_criterio</span><span class="p">)</span>
+            <span class="n">nueva_ruta</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ruta_salida_csv</span><span class="p">)[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">nueva_ruta</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;_</span><span class="si">{</span><span class="n">orden</span><span class="p">[:</span><span class="o">-</span><span class="mi">9</span><span class="p">]</span><span class="si">}</span><span class="s2">.csv&quot;</span>           
+
+            <span class="c1"># Lee el archivo generado y lo ordena</span>
+            <span class="n">tabla</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ruta_salida_csv</span><span class="p">)</span>          
+            <span class="k">if</span> <span class="n">orden</span> <span class="o">==</span> <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;orden_opc_3&#39;</span><span class="p">]:</span> <span class="c1"># Ascendente</span>
+                <span class="n">tabla_ordenada</span> <span class="o">=</span> <span class="n">tabla</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="n">criterio</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">orden</span> <span class="o">==</span> <span class="n">leng</span><span class="o">.</span><span class="n">tex</span><span class="p">[</span><span class="s1">&#39;orden_opc_4&#39;</span><span class="p">]:</span> <span class="c1"># Descendente</span>
+                <span class="n">tabla_ordenada</span> <span class="o">=</span> <span class="n">tabla</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="n">criterio</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="kc">False</span>  
+            <span class="n">tabla_ordenada</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">nueva_ruta</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ruta_salida_csv</span><span class="p">)</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">else</span><span class="p">:</span> <span class="c1"># Ninguno</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+
+    
+<div class="viewcode-block" id="Generador._grabar_datos">
+<a class="viewcode-back" href="../../logica.html#logica.generador.Generador._grabar_datos">[documentos]</a>
+    <span class="k">def</span> <span class="nf">_grabar_datos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">registros</span><span class="p">:</span><span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utiliza el método writerows para escribir todos los registros</span>
+<span class="sd">        simultáneamente como un bloque en el archivo de salida.</span>
+<span class="sd">        Es auxiliar al método no incremental.</span>
+
+<span class="sd">        :param registros: Lista de listas con los registros.</span>
+<span class="sd">        :type registros: list</span>
+<span class="sd">        :return res: True si la operación fue exitosa, de lo contrario False</span>
+<span class="sd">        :rtype res: bool        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_ruta_salida_csv</span><span class="p">,</span>
+                <span class="s2">&quot;w&quot;</span><span class="p">,</span>
+                <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+                <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">archivo</span><span class="p">:</span>
+                
+                <span class="n">tabla_final</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">archivo</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_delimitador</span><span class="p">)</span>
+                <span class="n">tabla_final</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_encabezado_tabla</span><span class="p">)</span>
+                <span class="n">tabla_final</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">registros</span><span class="p">)</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2024, errejotaeme.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
