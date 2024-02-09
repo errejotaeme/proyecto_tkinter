@@ -11,6 +11,8 @@ TEX_ES_AUX:dict = {
     "_acl_2" : "no se requiere asignar valores ni tipos de datos.\n\n",
     "_err_enc_1" : "Por favor, ingrese los campos de ",
     "_err_enc_2" : "su tabla separados por comas.",
+    "_err_long_enc_1" : "El máximo es de 100 caracteres por cada campo. ",
+    "_err_long_enc_2" : "Por favor, revise el encabezado ingresado",
     "_err_criterio_1" : "La tabla no pudo ser ordenada según el campo especificado. ",
     "_err_criterio_2" : "Por favor, verifique su selección.",
     "_err_no_val_1" : "El campo seleccionado no ha recibido ningún valor. ",
@@ -101,6 +103,8 @@ TEX_ES:dict = {
     # Gestion encabezado
     "err_encabezado" : TEX_ES_AUX['_err_enc_1'] + TEX_ES_AUX['_err_enc_2'],
     "err_vt_encabezado" : "Error: campos no ingresados",
+    "err_long_encabezado" : TEX_ES_AUX['_err_long_enc_1'] + TEX_ES_AUX['_err_long_enc_2'],
+    "err_vt_long_encabezado" : "Error: nombres de campos",
     # Gestion opciones tabla
     "err_delimitador" : "Solo se permite un único carácter como delimitador.",
     "err_vt_delimitador" : "Error: delimitador no válido",
@@ -161,6 +165,8 @@ TEX_EN_AUX:dict = {
     "_acl_0" : "\n ENTERED DATA\n\n",
     "_acl_1" : "For fields envisioned as calculated, ",
     "_acl_2" : "assigning values or data types is not required.\n\n",
+    "_err_long_enc_1" : "The maximum is 100 characters per field. ",
+    "_err_long_enc_2" : "Please review the entered header.",
     "_err_criterio_1" : "The table could not be sorted according ",
     "_err_criterio_2" : "to the specified field. Please review your choice.",
     "_err_no_val_1" : "The selected field has not received any value. ",
@@ -251,6 +257,8 @@ TEX_EN:dict = {
     # Gestion encabezado
     "err_encabezado" : "Please enter your table headers separated by commas.",
     "err_vt_encabezado" : "Error: Unentered fields",
+    "err_long_encabezado" : TEX_EN_AUX['_err_long_enc_1'] + TEX_EN_AUX['_err_long_enc_2'],
+    "err_vt_long_encabezado" : "Error: fields names",
     # Gestion opciones tabla
     "err_delimitador" : "Only a single character is allowed as a delimiter.",
     "err_vt_delimitador" : "Error: Invalid delimiter",

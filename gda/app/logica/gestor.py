@@ -273,6 +273,14 @@ class Gestor:
             return res
         else:
             lista_encabezado = self._limpiar_lista(mensaje)
+            # Limita el maximo de caracteres de un campo 
+            for campo in lista_encabezado:
+                if len(campo) > 101:
+                    self._ventana_dialogo(
+                        leng.tex['err_long_encabezado'],
+                        leng.tex['err_vt_long_encabezado']
+                    )
+                    return res
             self.tabla.establecer_encabezado(lista_encabezado)
             res = True
             
