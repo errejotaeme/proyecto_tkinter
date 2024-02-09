@@ -9,6 +9,8 @@ GDA (*Generador de Datos Aleatorios*) es una interfaz gráfica que simplifica la
 ### Variante en inglés
 ![interfaz_gda_en](imgs/gda_en.png)
 
+### Documentación
+La documentación completa del proyecto esta disponible en este [enlace](https://errejotaeme.github.io/proyecto_tkinter/).
 
 ### Licencia
 
