@@ -34,35 +34,44 @@ def main():
     raiz.title(leng.tex['titulo_app'])
 
     # Diccionarios que defienen estilos de fuente
-    gb.fuente_principal = tk.font.Font(family="Monospace",
-                                   size=9,
-                                   weight="bold",
-                                   slant="roman")
-
-    gb.fuente_titulo = tk.font.Font(family="Monospace",
-                                 size=8,
-                                 weight="bold",
-                                 slant="roman")
-
-    gb.fuente_etiqueta = tk.font.Font(family="Monospace",
-                                   size=8,
-                                   weight="bold",
-                                   slant="roman")
-
-    gb.fuente_entrada = tk.font.Font(family="Monospace",
-                                  size=8,
-                                  weight="normal",
-                                  slant="italic")
-
-    gb.fuente_boton = tk.font.Font(family="Monospace",
-                                size=7,
-                                weight="normal",
-                                slant="roman")
-
-    gb.fuente_boton_salir = tk.font.Font(family="Monospace",
-                                      size=7,
-                                      weight="normal",
-                                      slant="roman")
+    # Se repiten formatos para poder personalizar
+    # los distintos elementos a futuro
+    gb.fuente_principal = tk.font.Font(
+        family="Monospace",
+        size=9,
+        weight="bold",
+        slant="roman"
+    )
+    gb.fuente_titulo = tk.font.Font(
+        family="Monospace",
+        size=8,
+        weight="bold",
+        slant="roman"
+    )
+    gb.fuente_etiqueta = tk.font.Font(
+        family="Monospace",
+        size=8,
+        weight="bold",
+        slant="roman"
+    )    
+    gb.fuente_entrada = tk.font.Font(
+        family="Monospace",
+        size=8,
+        weight="normal",
+        slant="italic"
+    )
+    gb.fuente_boton = tk.font.Font(
+        family="Monospace",
+        size=7,
+        weight="normal",
+        slant="roman"
+    )
+    gb.fuente_boton_salir = tk.font.Font(
+        family="Monospace",
+        size=7,
+        weight="normal",
+        slant="roman"
+    )
 
     # Instancias de las clases de la parte lógica
     gestor = Gestor()
